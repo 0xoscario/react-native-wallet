@@ -10,9 +10,15 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.11.0",
+    "@types/react-redux": "^7.1.9",
     "axios": "^0.19.2",
+    "immer": "^7.0.5",
     "react": "16.13.1",
-    "react-native": "0.63.0"
+    "react-native": "0.63.0",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
@@ -33,7 +39,10 @@
   },
   "jest": {
     "preset": "react-native",
-    "moduleDirectories": ["node_modules", "."],
+    "moduleDirectories": [
+      "node_modules",
+      "."
+    ],
     "moduleFileExtensions": [
       "ts",
       "tsx",
