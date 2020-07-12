@@ -6,7 +6,7 @@ platform :ios, '10.0'
 target 'zhimakaimen' do
   config = use_native_modules!
 
-  use_react_native!(:path => config["reactNativePath"])
+  use_react_native!()
 
   target 'zhimakaimenTests' do
     inherit! :complete
