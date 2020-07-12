@@ -1,11 +1,11 @@
 /**
  * @format
  */
-import axios from 'axios';
+import Axios from 'axios';
 
-const instance = axios.create({
+const axios = Axios.create({
   timeout: 15000,
   withCredentials: true
 });
 
-export default instance;
+export default axios;
