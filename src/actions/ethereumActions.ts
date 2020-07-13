@@ -24,9 +24,7 @@ export function queryGasStation() {
 
       dispatch({
         type: UPDATE_GAS_STATION,
-        payload: {
-          gasStation
-        }
+        payload: gasStation
       });
     } catch (error) {
     }
