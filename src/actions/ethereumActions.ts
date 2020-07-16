@@ -1,14 +1,20 @@
 /**
  * @format
  */
-import { Dispatch } from 'redux';
+import { Action, Dispatch } from 'redux';
+import { ThunkAction } from 'redux-thunk';
 import { AppStorage } from 'src/utils/app-storage';
 import axios from 'src/utils/axios';
 import { EthereumGasStation } from 'src/utils/types';
 
 export const UPDATE_GAS_STATION = '@ethereum/update-gas-station';
 
-export function queryGasStation() {
+export function queryGasStation(): ThunkAction<
+  void,
+  EthereumGasStation,
+  null,
+  Action<string>
+> {
   return async (dispatch: Dispatch<any>, getState: () => any) => {
     try {
       const lastGasStation: EthereumGasStation = getState().ethereum.gasStation;

@@ -8,7 +8,7 @@ import {
 import { EthereumGasStation } from 'src/utils/types';
 
 export interface EthereumState {
-  gasStation: EthereumGasStation | null;
+  readonly gasStation: EthereumGasStation | null;
 }
 
 const initialState: EthereumState = {
