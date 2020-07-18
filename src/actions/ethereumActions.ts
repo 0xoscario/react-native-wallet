@@ -10,7 +10,7 @@ import { EthereumGasStation } from 'src/utils/types';
 export const UPDATE_GAS_STATION = '@ethereum/update-gas-station';
 
 export function queryGasStation(): ThunkAction<
-  void,
+  Promise<boolean>,
   EthereumGasStation,
   null,
   Action<string>
@@ -20,7 +20,7 @@ export function queryGasStation(): ThunkAction<
       const lastGasStation: EthereumGasStation = getState().ethereum.gasStation;
       const lastRetrievedTimestamp = lastGasStation?.retrievedTimestamp || 0;
       if (Date.now() - lastRetrievedTimestamp <= 120 * 1000) {
-        return;
+        return Promise.resolve(false);
       }
       const response = await axios.get('https://ethgasstation.info/json/ethgasAPI.json');
       const gasStation: EthereumGasStation = {
@@ -32,7 +32,9 @@ export function queryGasStation(): ThunkAction<
         type: UPDATE_GAS_STATION,
         payload: gasStation
       });
+      return Promise.resolve(true);
     } catch (error) {
+      return Promise.resolve(false);
     }
   };
 }
