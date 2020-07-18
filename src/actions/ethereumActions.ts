@@ -3,7 +3,7 @@
  */
 import { Action, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-import { BigNumber } from '@ethersproject/bignumber';
+import { BigNumber } from 'ethers';
 import { AppStorage } from 'src/utils/app-storage';
 import axios from 'src/utils/axios';
 import { EthereumGasStation } from 'src/utils/types';
