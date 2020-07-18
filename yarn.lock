@@ -728,6 +728,35 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@ethersproject/bignumber@^5.0.3":
+  version "5.0.3"
+  resolved "https://registry.npm.taobao.org/@ethersproject/bignumber/download/@ethersproject/bignumber-5.0.3.tgz#9dc556ee641c26acf9f42143b29ee89488b00488"
+  integrity sha1-ncVW7mQcJqz59CFDsp7olIiwBIg=
+  dependencies:
+    "@ethersproject/bytes" "^5.0.0"
+    "@ethersproject/logger" "^5.0.0"
+    "@ethersproject/properties" "^5.0.0"
+    bn.js "^4.4.0"
+
+"@ethersproject/bytes@^5.0.0":
+  version "5.0.1"
+  resolved "https://registry.npm.taobao.org/@ethersproject/bytes/download/@ethersproject/bytes-5.0.1.tgz#da8cd9b3e3b2800be9b46fda7036fc441b334680"
+  integrity sha1-2ozZs+OygAvptG/acDb8RBszRoA=
+  dependencies:
+    "@ethersproject/logger" "^5.0.0"
+
+"@ethersproject/logger@^5.0.0":
+  version "5.0.2"
+  resolved "https://registry.npm.taobao.org/@ethersproject/logger/download/@ethersproject/logger-5.0.2.tgz#f24aa14a738a428d711c1828b44d50114a461b8b"
+  integrity sha1-8kqhSnOKQo1xHBgotE1QEUpGG4s=
+
+"@ethersproject/properties@^5.0.0":
+  version "5.0.1"
+  resolved "https://registry.npm.taobao.org/@ethersproject/properties/download/@ethersproject/properties-5.0.1.tgz#e1fecbfcb24f23bf3b64a2ac74f2751113d116e0"
+  integrity sha1-4f7L/LJPI787ZKKsdPJ1ERPRFuA=
+  dependencies:
+    "@ethersproject/logger" "^5.0.0"
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.npm.taobao.org/@hapi/address/download/@hapi/address-2.1.4.tgz?cache=0&sync_timestamp=1593993857635&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40hapi%2Faddress%2Fdownload%2F%40hapi%2Faddress-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
@@ -1815,6 +1844,11 @@ bindings@^1.5.0:
   integrity sha1-EDU8npRTNLwFEabZCzj7x8nFBN8=
   dependencies:
     file-uri-to-path "1.0.0"
+
+bn.js@^4.4.0:
+  version "4.11.9"
+  resolved "https://registry.npm.taobao.org/bn.js/download/bn.js-4.11.9.tgz#26d556829458f9d1e81fc48952493d0ba3507828"
+  integrity sha1-JtVWgpRY+dHoH8SJUkk9C6NQeCg=
 
 bplist-creator@0.0.8:
   version "0.0.8"
