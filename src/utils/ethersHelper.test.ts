@@ -5,7 +5,21 @@ import { ethers } from 'ethers';
 import { deriveChild } from 'src/utils/ethersHelper';
 
 describe('ethers', () => {
-  test('deriveChild', () => {
+  test('wallet', async () => {
+    const walletR1 = ethers.Wallet.createRandom();
+    const walletR2 = ethers.Wallet.createRandom();
+    expect(walletR1.address).not.toBe(walletR2.address);
+    expect(walletR1.mnemonic).not.toBe(walletR2.mnemonic);
+    const encrypt = await walletR1.encrypt('1212');
+    const walletR1D = ethers.Wallet.fromEncryptedJsonSync(encrypt, '1212');
+    expect(walletR1.address).toBe(walletR1D.address);
+
+    const wallet = new ethers.Wallet('0x52388bc44e4be494f39d35dec8de04cae6243c6b6d36f29ebd3f78f692ceb96d');
+    expect(wallet.address).toBe('0xE28C9C18778217DB8059A5160f829e837A79769a');
+    expect(wallet.mnemonic).toBeNull();
+  });
+
+  test('deriveChild', async () => {
     const mnemonic = 'educate garage silly card fuel wife width model turkey filter meat drastic cross gap suit caught zone cube quiz pole chalk egg lock segment';
     const hdNode0 = ethers.utils.HDNode.fromMnemonic(mnemonic).derivePath(deriveChild(0));
     expect(hdNode0.privateKey).toBe('0x52388bc44e4be494f39d35dec8de04cae6243c6b6d36f29ebd3f78f692ceb96d');
@@ -24,10 +38,5 @@ describe('ethers', () => {
     
     const wallet = ethers.Wallet.fromMnemonic(mnemonic);
     expect(wallet.address).toBe(hdNode0.address);
-
-    const walletR1 = ethers.Wallet.createRandom();
-    const walletR2 = ethers.Wallet.createRandom();
-    expect(walletR1.address).not.toBe(walletR2.address);
-    expect(walletR1.mnemonic).not.toBe(walletR2.mnemonic);
   });
 });
