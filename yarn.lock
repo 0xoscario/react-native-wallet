@@ -6585,6 +6585,11 @@ react-native-crypto@^2.2.0:
     public-encrypt "^4.0.0"
     randomfill "^1.0.3"
 
+react-native-keychain@^6.1.1:
+  version "6.1.1"
+  resolved "https://registry.npm.taobao.org/react-native-keychain/download/react-native-keychain-6.1.1.tgz#3c14e4df9e5599f8d5a708da75d27f9d2424d7c1"
+  integrity sha1-PBTk355VmfjVpwjaddJ/nSQk18E=
+
 react-native-level-fs@^3.0.1:
   version "3.0.1"
   resolved "https://registry.npm.taobao.org/react-native-level-fs/download/react-native-level-fs-3.0.1.tgz#f3054614c2bc1a379dcb3d3ee51b6a1b66123283"

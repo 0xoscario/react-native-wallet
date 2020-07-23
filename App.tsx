@@ -6,6 +6,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { configureStore } from 'src/store';
 import { Encryptor } from 'src/utils/encryptor';
+import { SecureKeychain } from 'src/utils/secure-keychain';
 
 enableES5();
 
@@ -26,6 +27,10 @@ const App = () => {
     const encryptedData2 = await encryptor.decrypt(password2, encryptedText2);
     console.log(encryptedText2);
     console.log(encryptedData2);
+
+    await SecureKeychain.setGenericPassword('zmwallet-user', '123');
+    const credentials = await SecureKeychain.getGenericPassword();
+    console.log(credentials);
   };
   test();
 
