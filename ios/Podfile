@@ -8,6 +8,10 @@ target 'zhimakaimen' do
 
   use_react_native!()
 
+  pod 'react-native-randombytes', :path => '../node_modules/react-native-randombytes'
+
+  pod 'react-native-aes', :path => '../node_modules/react-native-aes-crypto'
+
   target 'zhimakaimenTests' do
     inherit! :complete
     # Pods for testing
