@@ -1,16 +1,24 @@
 /**
  * @format
  */
+import { BigNumber } from 'ethers';
 import { Action, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-import { BigNumber } from 'ethers';
-import { AppStorage } from 'src/utils/app-storage';
 import axios from 'src/utils/axios';
-import { EthereumGasStation } from 'src/utils/types';
 
-export const UPDATE_GAS_STATION = '@ethereum/update-gas-station';
+export const ETHEREUM_UPDATE_GAS_STATION = '@ethereum/update-gas-station';
 
-export function queryGasStation(): ThunkAction<
+export interface EthereumGasStation {
+  retrievedTimestamp: number; // Api retrieved timestamp(in ms)
+  safeLow: number; // Recommended safe(expected to be mined in < 30 minutes) gas price in Gwei
+  average: number; // Recommended average(expected to be mined in < 5 minutes) gas price in Gwei
+  fast: number; // Recommended fast(expected to be mined in < 2 minutes) gas price in Gwei
+  fastest: number; // Recommended fastest(expected to be mined in < 30 seconds) gas price in Gwei
+  blockTime: number; // Average time(in seconds) to mine one single block
+  blockNum: number; // Latest block number
+}
+
+export function queryEthereumGasStation(): ThunkAction<
   Promise<boolean>,
   EthereumGasStation,
   null,
@@ -18,7 +26,7 @@ export function queryGasStation(): ThunkAction<
 > {
   return async (dispatch: Dispatch<any>, getState: () => any) => {
     try {
-      const lastGasStation: EthereumGasStation = getState().ethereum.gasStation;
+      const lastGasStation: EthereumGasStation = getState().gas.ethereumGasStation;
       const lastRetrievedTimestamp = lastGasStation?.retrievedTimestamp || 0;
       if (Date.now() - lastRetrievedTimestamp <= 120 * 1000) {
         return Promise.resolve(false);
@@ -42,10 +50,9 @@ export function queryGasStation(): ThunkAction<
         blockTime: block_time,
         blockNum: blockNum
       };
-      AppStorage.setEthereumGasStation(gasStation);
 
       dispatch({
-        type: UPDATE_GAS_STATION,
+        type: ETHEREUM_UPDATE_GAS_STATION,
         payload: gasStation
       });
       return Promise.resolve(true);

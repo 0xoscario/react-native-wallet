@@ -2,10 +2,10 @@
  * @format
  */
 import { combineReducers } from 'redux';
-import ethereumReducer from 'src/reducers/ethereumReducer';
+import gasReducer from 'src/reducers/gasReducer';
 
 const rootReducer = combineReducers({
-  ethereum: ethereumReducer
+  gas: gasReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

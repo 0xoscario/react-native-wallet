@@ -3,6 +3,7 @@
  */
 import { enableES5 } from 'immer';
 import React from 'react';
+import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import { configureStore } from 'src/store';
 import { Encryptor } from 'src/utils/encryptor';
@@ -10,7 +11,7 @@ import { SecureKeychain } from 'src/utils/secure-keychain';
 
 enableES5();
 
-const store = configureStore();
+const { store, persistor } = configureStore();
 
 const App = () => {
   const test = async (): Promise<void> => {
@@ -37,6 +38,8 @@ const App = () => {
   return (
     <React.StrictMode>
       <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+        </PersistGate>
       </Provider>
     </React.StrictMode>
   );
