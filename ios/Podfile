@@ -8,8 +8,6 @@ target 'zhimakaimen' do
 
   use_react_native!()
 
-
-
   target 'zhimakaimenTests' do
     inherit! :complete
     # Pods for testing
