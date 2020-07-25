@@ -16,6 +16,7 @@ export function configureStore() {
     key: 'root',
     version: 1,
     storage: AsyncStorage,
+    blacklist: ['wallet'],
     tateReconciler: autoMergeLevel2
   };
   const persistedReducer = persistReducer(persistConfig, rootReducer);

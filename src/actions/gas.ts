@@ -2,11 +2,10 @@
  * @format
  */
 import { BigNumber } from 'ethers';
-import { Action, Dispatch } from 'redux';
-import { ThunkAction } from 'redux-thunk';
+import { Dispatch } from 'redux';
 import axios from 'src/utils/axios';
 
-export const ETHEREUM_UPDATE_GAS_STATION = '@ethereum/update-gas-station';
+export const UPDATE_ETHEREUM_GAS_STATION = 'UPDATE_ETHEREUM_GAS_STATION';
 
 export interface EthereumGasStation {
   retrievedTimestamp: number; // Api retrieved timestamp(in ms)
@@ -18,18 +17,13 @@ export interface EthereumGasStation {
   blockNum: number; // Latest block number
 }
 
-export function queryEthereumGasStation(): ThunkAction<
-  Promise<boolean>,
-  EthereumGasStation,
-  null,
-  Action<string>
-> {
+export function queryEthereumGasStation() {
   return async (dispatch: Dispatch<any>, getState: () => any) => {
     try {
       const lastGasStation: EthereumGasStation = getState().gas.ethereumGasStation;
       const lastRetrievedTimestamp = lastGasStation?.retrievedTimestamp || 0;
       if (Date.now() - lastRetrievedTimestamp <= 120 * 1000) {
-        return Promise.resolve(false);
+        return false;
       }
       const response = await axios.get('https://ethgasstation.info/json/ethgasAPI.json');
 
@@ -52,12 +46,12 @@ export function queryEthereumGasStation(): ThunkAction<
       };
 
       dispatch({
-        type: ETHEREUM_UPDATE_GAS_STATION,
+        type: UPDATE_ETHEREUM_GAS_STATION,
         payload: gasStation
       });
-      return Promise.resolve(true);
+      return true;
     } catch (error) {
-      return Promise.resolve(false);
+      return false;
     }
   };
 }

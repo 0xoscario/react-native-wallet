@@ -4,10 +4,10 @@
 import { Action } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import {
-  ETHEREUM_UPDATE_GAS_STATION,
   queryEthereumGasStation,
+  UPDATE_ETHEREUM_GAS_STATION,
   EthereumGasStation
-} from 'src/actions/gasActions';
+} from 'src/actions/gas';
 import { configureTestStore } from 'src/store';
 
 jest.mock('src/utils/axios');
@@ -37,7 +37,7 @@ describe('gas reducer', () => {
     // expired
     (gasStationClone as EthereumGasStation).retrievedTimestamp -= 121 * 1000;
     store.dispatch({
-      type: ETHEREUM_UPDATE_GAS_STATION,
+      type: UPDATE_ETHEREUM_GAS_STATION,
       payload: gasStationClone
     });
     const result3 = await dispatch(queryEthereumGasStation());

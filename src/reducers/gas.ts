@@ -3,9 +3,9 @@
  */
 import produce from 'immer';
 import {
-  ETHEREUM_UPDATE_GAS_STATION,
+  UPDATE_ETHEREUM_GAS_STATION,
   EthereumGasStation
-} from 'src/actions/gasActions';
+} from 'src/actions/gas';
 
 interface State {
   ethereumGasStation: EthereumGasStation | null;
@@ -17,7 +17,7 @@ const initialState: State = {
 
 const gasReducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case ETHEREUM_UPDATE_GAS_STATION: {
+    case UPDATE_ETHEREUM_GAS_STATION: {
       const gasStation: EthereumGasStation = action.payload;
 
       return produce(state, (draft) => {

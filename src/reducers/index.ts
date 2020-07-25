@@ -2,10 +2,12 @@
  * @format
  */
 import { combineReducers } from 'redux';
-import gasReducer from 'src/reducers/gasReducer';
+import gasReducer from 'src/reducers/gas';
+import walletReducer from 'src/reducers/wallet';
 
 const rootReducer = combineReducers({
-  gas: gasReducer
+  gas: gasReducer,
+  wallet: walletReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
