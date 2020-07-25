@@ -16,7 +16,8 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* zhimakaimenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* zhimakaimenTests.m */; };
 		6DE1035BF7DE317FE9E328C2 /* libPods-zhimakaimen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B32E30124374EF66F22F144 /* libPods-zhimakaimen.a */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		718B1DBE24CBEF7500CA9400 /* SplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 718B1DBC24CBEF7500CA9400 /* SplashScreen.m */; };
+		718B1DC124CBF10300CA9400 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 718B1DBF24CBF10300CA9400 /* LaunchScreen.xib */; };
 		C5A2E9E15985BB9A5A338FCD /* libPods-zhimakaimen-zhimakaimenTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F36FD6641BD6D81442298FE /* libPods-zhimakaimen-zhimakaimenTests.a */; };
 /* End PBXBuildFile section */
 
@@ -52,7 +53,9 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = zhimakaimen/main.m; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* zhimakaimen-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "zhimakaimen-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* zhimakaimen-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "zhimakaimen-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = zhimakaimen/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		718B1DBC24CBEF7500CA9400 /* SplashScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SplashScreen.m; path = Modules/Splash/SplashScreen.m; sourceTree = SOURCE_ROOT; };
+		718B1DBD24CBEF7500CA9400 /* SplashScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplashScreen.h; path = Modules/Splash/SplashScreen.h; sourceTree = SOURCE_ROOT; };
+		718B1DC024CBF10300CA9400 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = zhimakaimen/Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		920AE01196CF291853BA329C /* Pods-zhimakaimen-zhimakaimenTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zhimakaimen-zhimakaimenTests.release.xcconfig"; path = "Target Support Files/Pods-zhimakaimen-zhimakaimenTests/Pods-zhimakaimen-zhimakaimenTests.release.xcconfig"; sourceTree = "<group>"; };
 		A73D6623F5213E78782B8867 /* Pods-zhimakaimen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zhimakaimen.release.xcconfig"; path = "Target Support Files/Pods-zhimakaimen/Pods-zhimakaimen.release.xcconfig"; sourceTree = "<group>"; };
 		D5B2C53165757B8DB1E88994 /* Pods-zhimakaimen-zhimakaimenTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zhimakaimen-zhimakaimenTests.debug.xcconfig"; path = "Target Support Files/Pods-zhimakaimen-zhimakaimenTests/Pods-zhimakaimen-zhimakaimenTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -115,12 +118,12 @@
 		13B07FAE1A68108700A75B9A /* zhimakaimen */ = {
 			isa = PBXGroup;
 			children = (
+				718B1DBF24CBF10300CA9400 /* LaunchScreen.xib */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = zhimakaimen;
@@ -137,6 +140,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		718B1DBA24CBEF3900CA9400 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				718B1DBB24CBEF4B00CA9400 /* Splash */,
+			);
+			name = Modules;
+			sourceTree = "<group>";
+		};
+		718B1DBB24CBEF4B00CA9400 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				718B1DBD24CBEF7500CA9400 /* SplashScreen.h */,
+				718B1DBC24CBEF7500CA9400 /* SplashScreen.m */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +167,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				718B1DBA24CBEF3900CA9400 /* Modules */,
 				13B07FAE1A68108700A75B9A /* zhimakaimen */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* zhimakaimenTests */,
@@ -178,7 +199,6 @@
 				D5B2C53165757B8DB1E88994 /* Pods-zhimakaimen-zhimakaimenTests.debug.xcconfig */,
 				920AE01196CF291853BA329C /* Pods-zhimakaimen-zhimakaimenTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -322,7 +342,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				718B1DC124CBF10300CA9400 /* LaunchScreen.xib in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -506,6 +526,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				718B1DBE24CBEF7500CA9400 /* SplashScreen.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
@@ -542,6 +563,17 @@
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		718B1DBF24CBF10300CA9400 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				718B1DC024CBF10300CA9400 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
