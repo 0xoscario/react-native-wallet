@@ -33,7 +33,6 @@ const loadingTasks: Task[] = [
     return null;
   },
   async (dispatch: any, state: RootState) => {
-    console.log(Appearance.getColorScheme());
     if (!state.setting.themeName) {
       const colorScheme = Appearance.getColorScheme();
       dispatch(setThemeName((colorScheme === 'no-preference') ? 'light': colorScheme));
