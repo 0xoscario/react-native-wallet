@@ -79,17 +79,15 @@ const { store, persistor } = configureStore();
 
 const Application = (): React.ReactElement => {
   return (
-    <React.StrictMode>
-      <Provider store={store}>
-        <PersistGate persistor={persistor}>
-          <AppearanceProvider>
-            <AppLoading tasks={loadingTasks}>
-              {props => <App {...props}/>}
-            </AppLoading>
-          </AppearanceProvider>
-        </PersistGate>
-      </Provider>
-    </React.StrictMode>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <AppearanceProvider>
+          <AppLoading tasks={loadingTasks}>
+            {props => <App {...props}/>}
+          </AppLoading>
+        </AppearanceProvider>
+      </PersistGate>
+    </Provider>
   );
 };
 
