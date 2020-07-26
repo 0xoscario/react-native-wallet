@@ -1,7 +1,7 @@
 /**
  * @format
  */
-import './shim.js';
+import './shim.js'; // MUST FIRST!!!
 import crypto from 'crypto';
 import { enableES5 } from 'immer';
 import { AppRegistry } from 'react-native';

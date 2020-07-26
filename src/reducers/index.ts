@@ -3,10 +3,12 @@
  */
 import { combineReducers } from 'redux';
 import gasReducer from 'src/reducers/gas';
+import settingReducer from 'src/reducers/setting';
 import walletReducer from 'src/reducers/wallet';
 
 const rootReducer = combineReducers({
   gas: gasReducer,
+  setting: settingReducer,
   wallet: walletReducer
 });
 

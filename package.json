@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-native-community/async-storage": "^1.11.0",
     "@tradle/react-native-http": "^2.0.1",
+    "@types/i18n-js": "^3.0.3",
     "@types/react-redux": "^7.1.9",
     "assert": "^1.5.0",
     "axios": "^0.19.2",
@@ -24,6 +25,7 @@
     "ethers": "^5.0.4",
     "events": "^1.1.1",
     "https-browserify": "0.0.1",
+    "i18n-js": "^3.7.1",
     "immer": "^7.0.5",
     "path-browserify": "0.0.0",
     "process": "^0.11.10",
@@ -35,6 +37,7 @@
     "react-native-crypto": "^2.2.0",
     "react-native-keychain": "^6.1.1",
     "react-native-level-fs": "^3.0.1",
+    "react-native-localize": "^1.4.0",
     "react-native-os": "^1.2.6",
     "react-native-randombytes": "^3.5.3",
     "react-native-tcp": "^3.3.2",

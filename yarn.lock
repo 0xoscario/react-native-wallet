@@ -1528,6 +1528,11 @@
     "@types/react" "*"
     hoist-non-react-statics "^3.3.0"
 
+"@types/i18n-js@^3.0.3":
+  version "3.0.3"
+  resolved "https://registry.npm.taobao.org/@types/i18n-js/download/@types/i18n-js-3.0.3.tgz#84f66fb969741fecd91b854387e0682aa7fd70b7"
+  integrity sha1-hPZvuWl0H+zZG4VDh+BoKqf9cLc=
+
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0", "@types/istanbul-lib-coverage@^2.0.1":
   version "2.0.3"
   resolved "https://registry.npm.taobao.org/@types/istanbul-lib-coverage/download/@types/istanbul-lib-coverage-2.0.3.tgz?cache=0&sync_timestamp=1591718497424&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fistanbul-lib-coverage%2Fdownload%2F%40types%2Fistanbul-lib-coverage-2.0.3.tgz#4ba8ddb720221f432e443bd5f9117fd22cfd4762"
@@ -4058,6 +4063,11 @@ human-signals@^1.1.1:
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/human-signals/download/human-signals-1.1.1.tgz#c5b1cd14f50aeae09ab6c59fe63ba3395fe4dfa3"
   integrity sha1-xbHNFPUK6uCatsWf5jujOV/k36M=
+
+i18n-js@^3.7.1:
+  version "3.7.1"
+  resolved "https://registry.npm.taobao.org/i18n-js/download/i18n-js-3.7.1.tgz?cache=0&sync_timestamp=1593482556946&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fi18n-js%2Fdownload%2Fi18n-js-3.7.1.tgz#c70de6a64dc0ad5d2b6273eecfac636e5ed0421a"
+  integrity sha1-xw3mpk3ArV0rYnPuz6xjbl7QQho=
 
 iconv-lite@0.4.24, iconv-lite@^0.4.17, iconv-lite@^0.4.24:
   version "0.4.24"
@@ -6597,6 +6607,11 @@ react-native-level-fs@^3.0.1:
   dependencies:
     level-filesystem "^1.0.1"
     levelup "^0.18.2"
+
+react-native-localize@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.npm.taobao.org/react-native-localize/download/react-native-localize-1.4.0.tgz#4653596d066d0941c48f5404dc1c0d08b6950443"
+  integrity sha1-RlNZbQZtCUHEj1QE3BwNCLaVBEM=
 
 react-native-os@^1.2.6:
   version "1.2.6"

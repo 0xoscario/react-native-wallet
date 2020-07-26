@@ -6,27 +6,29 @@ import {
   BackHandler,
   NativeModules
 } from 'react-native';
+import * as RNLocalize from 'react-native-localize';
 import { PersistGate } from 'redux-persist/integration/react';
-import { Provider } from 'react-redux';
-import { loadWallet } from 'src/actions/wallet';
+import { useSelector, Provider } from 'react-redux';
+import { setLanguage } from 'src/actions/setting';
 import { AppLoading, Task } from 'src/app/app-loading.component';
+import { TRANSLATIONS, I18nProvider } from 'src/i18n';
+import { RootState } from 'src/reducers';
 import { configureStore } from 'src/store';
-import { SecureKeychain } from 'src/utils/secure-keychain';
 
 const loadingTasks: Task[] = [
-  async (dispatch: any) => {
-    const credentials = await SecureKeychain.getGenericPassword();
-    if (credentials?.password) {
-      dispatch(loadWallet(credentials.password));
+  async (dispatch: any, state: RootState) => {
+    if (!state.setting.language) {
+      const find = RNLocalize.findBestAvailableLanguage(Object.keys(TRANSLATIONS));
+      const language = find?.languageTag || 'en-US';
+      dispatch(setLanguage(language));
     }
     return null;
   }
 ];
 
-interface AppProps {
-};
-
-const App = ({}: AppProps): React.ReactElement => {
+const App = (): React.ReactElement => {
+  const language = useSelector((state: RootState) => state.setting.language!);
+  
   React.useEffect(() => {
     // see also: @react-native-community/hooks
     const backAction = (): boolean => {
@@ -39,8 +41,8 @@ const App = ({}: AppProps): React.ReactElement => {
   }, []);
 
   return (
-    <>
-    </>
+    <I18nProvider language={language}>
+    </I18nProvider>
   );
 };
 

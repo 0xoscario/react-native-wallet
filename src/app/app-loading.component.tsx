@@ -2,11 +2,12 @@
  * @format
  */
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useStore } from 'react-redux';
 import { NativeModules } from 'react-native';
+import { RootState } from 'src/reducers';
 
 type TaskResult = [string, any];
-export type Task = (dispatch: any) => Promise<TaskResult | null>;
+export type Task = (dispatch: any, state: RootState) => Promise<TaskResult | null>;
 
 export interface ApplicationLoaderProps {
   tasks?: Task[];
@@ -15,7 +16,7 @@ export interface ApplicationLoaderProps {
 };
 
 export const AppLoading = (props: ApplicationLoaderProps): React.ReactElement => {
-  const dispatch = useDispatch();
+  const store = useStore();
   const [loading, setLoading] = React.useState(true);
   const loadingResult = props.initialConfig || {};
 
@@ -36,7 +37,7 @@ export const AppLoading = (props: ApplicationLoaderProps): React.ReactElement =>
   };
 
   const createRunnableTask = async (task: Task): Promise<void> => {
-    return task(dispatch).then(saveTaskResult);
+    return task(store.dispatch, store.getState()).then(saveTaskResult);
   };
 
   const startTasks = async (): Promise<any> => {
