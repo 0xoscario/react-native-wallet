@@ -17,3 +17,6 @@ export interface Vault {
   mnemonic: string;
   accounts: Account[];
 }
+
+
+export type ThemeName = 'light' | 'dark' | 'brand';

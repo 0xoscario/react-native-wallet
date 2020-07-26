@@ -4,16 +4,20 @@
 import React from 'react';
 import {
   BackHandler,
-  NativeModules
+  NativeModules,
+  StatusBarStyle
 } from 'react-native';
 import * as RNLocalize from 'react-native-localize';
+import { Appearance } from 'react-native-appearance';
 import { PersistGate } from 'redux-persist/integration/react';
 import { useSelector, Provider } from 'react-redux';
-import { setLanguage } from 'src/actions/setting';
+import { setLanguage, setThemeName } from 'src/actions/setting';
 import { AppLoading, Task } from 'src/app/app-loading.component';
+import { StatusBar } from 'src/components/status-bar.component';
 import { TRANSLATIONS, I18nProvider } from 'src/i18n';
 import { RootState } from 'src/reducers';
 import { configureStore } from 'src/store';
+import { ThemeProvider } from 'src/theme';
 
 const loadingTasks: Task[] = [
   async (dispatch: any, state: RootState) => {
@@ -23,11 +27,23 @@ const loadingTasks: Task[] = [
       dispatch(setLanguage(language));
     }
     return null;
+  },
+  async (dispatch: any, state: RootState) => {
+    if (!state.setting.themeName) {
+      const colorScheme = Appearance.getColorScheme();
+      dispatch(setThemeName((colorScheme === 'no-preference') ? 'light': colorScheme));
+    }
+    return null;
   }
 ];
 
 const App = (): React.ReactElement => {
   const language = useSelector((state: RootState) => state.setting.language!);
+  const themeName = useSelector((state: RootState) => state.setting.themeName!);
+  let barStyle: StatusBarStyle = 'light-content';
+  if (themeName === 'light') {
+    barStyle = 'dark-content';
+  }
   
   React.useEffect(() => {
     // see also: @react-native-community/hooks
@@ -42,6 +58,9 @@ const App = (): React.ReactElement => {
 
   return (
     <I18nProvider language={language}>
+      <ThemeProvider themeName={themeName}>
+        <StatusBar translucent barStyle={barStyle}/>
+      </ThemeProvider>
     </I18nProvider>
   );
 };

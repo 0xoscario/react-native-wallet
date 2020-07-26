@@ -3,15 +3,19 @@
  */
 import produce from 'immer';
 import {
-  SET_LANGUAGE
+  SET_LANGUAGE,
+  SET_THEME_NAME
 } from 'src/actions/setting';
+import { ThemeName } from 'src/utils/types';
 
 interface State {
   language: string | null;
+  themeName: Exclude<ThemeName, 'brand'> | null;
 }
 
 const initialState: State = {
-  language: null
+  language: null,
+  themeName: null
 };
 
 const settingReducer = (state = initialState, action: any) => {
@@ -21,6 +25,15 @@ const settingReducer = (state = initialState, action: any) => {
 
       return produce(state, (draft) => {
         draft.language = language;
+      });
+    }
+    case SET_THEME_NAME: {
+      const themeName: ThemeName = action.payload;
+
+      return produce(state, (draft) => {
+        if (themeName !== 'brand') {
+          draft.themeName = themeName;
+        }
       });
     }
 
