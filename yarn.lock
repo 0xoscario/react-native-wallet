@@ -6826,10 +6826,10 @@ react-native-udp@^2.7.0:
     ip-regex "^1.0.3"
     util "^0.10.3"
 
-react-native@0.63.0:
-  version "0.63.0"
-  resolved "https://registry.npm.taobao.org/react-native/download/react-native-0.63.0.tgz?cache=0&sync_timestamp=1595464177558&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-native%2Fdownload%2Freact-native-0.63.0.tgz#1444aa04c34b65ca1dce589db166bd112e982b96"
-  integrity sha1-FESqBMNLZcodzlidsWa9ES6YK5Y=
+react-native@0.63.2:
+  version "0.63.2"
+  resolved "https://registry.npm.taobao.org/react-native/download/react-native-0.63.2.tgz#eaebf3430577b37fbd66ef228a86b3408259ef8e"
+  integrity sha1-6uvzQwV3s3+9Zu8iioazQIJZ744=
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@react-native-community/cli" "^4.7.0"
