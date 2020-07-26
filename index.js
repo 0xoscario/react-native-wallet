@@ -2,6 +2,7 @@
  * @format
  */
 import './shim.js'; // MUST FIRST!!!
+import 'react-native-gesture-handler';
 import crypto from 'crypto';
 import { enableES5 } from 'immer';
 import { AppRegistry } from 'react-native';
