@@ -15,6 +15,7 @@ import { useSelector, Provider } from 'react-redux';
 import { IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { setLanguage, setThemeName } from 'src/actions/setting';
+import { AntDesignIconsPack } from 'src/app/ant-design-icons-pack';
 import { AppLoading, Task } from 'src/app/app-loading.component';
 import { StatusBar } from 'src/components/status-bar.component';
 import { TRANSLATIONS, I18nProvider } from 'src/i18n';
@@ -62,7 +63,7 @@ const App = (): React.ReactElement => {
 
   return (
     <>
-      <IconRegistry icons={EvaIconsPack}/>
+      <IconRegistry icons={[EvaIconsPack, AntDesignIconsPack]}/>
       <I18nProvider language={language}>
         <ThemeProvider themeName={themeName}>
           <SafeAreaProvider>

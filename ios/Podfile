@@ -8,6 +8,8 @@ target 'zhimakaimen' do
 
   use_react_native!()
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'zhimakaimenTests' do
     inherit! :complete
     # Pods for testing

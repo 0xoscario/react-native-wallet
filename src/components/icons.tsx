@@ -2,9 +2,12 @@
  * @format
  */
 import React from 'react';
-import { ImageProps } from 'react-native';
 import { Icon, IconElement } from '@ui-kitten/components';
 
-export const BrowserIcon = (props?: Partial<ImageProps>): IconElement => (
+export const WalletIcon = (props?: any): IconElement => (
+  <Icon {...props} name='wallet' pack='ant-design'/>
+);
+
+export const BrowserIcon = (props?: any): IconElement => (
   <Icon {...props} name='globe-outline'/>
 );
