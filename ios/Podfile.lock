@@ -324,6 +324,8 @@ PODS:
     - React
   - RNSVG (12.1.0):
     - React
+  - RNVectorIcons (7.0.0):
+    - React
   - TcpSockets (3.3.2):
     - React
   - Yoga (1.14.0)
@@ -391,6 +393,7 @@ DEPENDENCIES:
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
+  - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - TcpSockets (from `../node_modules/react-native-tcp`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -488,6 +491,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-screens"
   RNSVG:
     :path: "../node_modules/react-native-svg"
+  RNVectorIcons:
+    :path: "../node_modules/react-native-vector-icons"
   TcpSockets:
     :path: "../node_modules/react-native-tcp"
   Yoga:
@@ -544,10 +549,11 @@ SPEC CHECKSUMS:
   RNReanimated: c2bb7438b57a3d987bb2e4e6e4bca94787e30b02
   RNScreens: c526239bbe0e957b988dacc8d75ac94ec9cb19da
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
+  RNVectorIcons: da6fe858f5a65d7bbc3379540a889b0b12aa5976
   TcpSockets: 14306fb79f9750ea7d2ddd02d8bed182abb01797
   Yoga: 7740b94929bbacbddda59bf115b5317e9a161598
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 3c24071bb788bf241d85df72fd3f5cab780510bd
+PODFILE CHECKSUM: d221dd74c99b3b0d5323fc18645a73df9a9279a7
 
 COCOAPODS: 1.9.3
