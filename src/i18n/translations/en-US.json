@@ -1,3 +1,7 @@
 {
-  "wallet": "Wallet"
+  "bottom_tab_bar": {
+    "wallet": "Wallet",
+    "market": "Market",
+    "browser": "Browser"
+  }
 }

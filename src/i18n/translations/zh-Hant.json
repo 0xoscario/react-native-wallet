@@ -1,3 +1,7 @@
 {
-  "wallet": "錢包"
+  "bottom_tab_bar": {
+    "wallet": "錢包",
+    "market": "市場",
+    "browser": "瀏覽"
+  }
 }

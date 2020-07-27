@@ -7,7 +7,7 @@ import {
 } from '@react-navigation/bottom-tabs';
 import { BottomNavigationTab, Divider } from '@ui-kitten/components';
 import { BrandBottomNavigation } from 'src/components/brand-bottom-navigation.component';
-import { BrowserIcon, WalletIcon } from 'src/components/icons';
+import { BrowserIcon, MarketIcon, WalletIcon } from 'src/components/icons';
 import { useI18n } from 'src/i18n';
 
 export const MainBottomNavigation = ({
@@ -35,15 +35,15 @@ export const MainBottomNavigation = ({
         onSelect={onSelect}
       >
         <BottomNavigationTab
-          title={i18n.t('wallet')}
+          title={i18n.t('bottom_tab_bar.wallet')}
           icon={WalletIcon}
         />
         <BottomNavigationTab
-          title={i18n.t('wallet')}
-          icon={BrowserIcon}
+          title={i18n.t('bottom_tab_bar.market')}
+          icon={MarketIcon}
         />
         <BottomNavigationTab
-          title={i18n.t('wallet')}
+          title={i18n.t('bottom_tab_bar.browser')}
           icon={BrowserIcon}
         />
       </BrandBottomNavigation>
