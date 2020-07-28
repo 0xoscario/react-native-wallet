@@ -50,11 +50,14 @@ export default ({ navigation }: any): React.ReactElement => {
             key={index}
           >
             <Text
+              style={styles.title}
               category="h4"
             >
               {carouselItem.title}
             </Text>
             <Text
+              style={styles.subtitle}
+              appearance='hint'
               category="s1"
             >
               {carouselItem.subtitle}
@@ -62,6 +65,7 @@ export default ({ navigation }: any): React.ReactElement => {
             <ImageBackground
               style={styles.image}
               source={carouselItem.imageSrc}
+              resizeMode="contain"
             />
           </Layout>
         ))}
@@ -91,18 +95,23 @@ const themedStyles = StyleService.create({
   },
   carouselContainer: {
     flex: 1,
-    marginTop: 64,
-    marginHorizontal: 24,
   },
   carousel: {
     flex: 1,
+    marginTop: 64,
+    marginHorizontal: 24,
     alignItems: 'center',
+  },
+  title: {
+    marginBottom: 12,
+  },
+  subtitle: {
+    marginBottom: 12,
   },
   image: {
     flex: 1,
     width: '100%',
     height: '100%',
-    resizeMode: 'cover',
   },
   indicator: {
 		flexDirection: 'row',
