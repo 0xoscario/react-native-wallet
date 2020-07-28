@@ -103,10 +103,12 @@ const themedStyles = StyleService.create({
     alignItems: 'center',
   },
   title: {
-    marginBottom: 12,
+    marginBottom: 24,
+    textAlign: 'center',
   },
   subtitle: {
-    marginBottom: 12,
+    marginBottom: 24,
+    textAlign: 'center',
   },
   image: {
     flex: 1,
