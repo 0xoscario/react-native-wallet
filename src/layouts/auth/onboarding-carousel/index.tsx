@@ -17,7 +17,7 @@ export default ({ navigation }: any): React.ReactElement => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const i18n = useI18n();
   const styles = useStyleSheet(themedStyles);
-  const carousels = [
+  const carouselItems = [
     {
       title: i18n.t('onboarding_carousel.title1'),
       subtitle: i18n.t('onboarding_carousel.subtitle1'),
@@ -39,38 +39,35 @@ export default ({ navigation }: any): React.ReactElement => {
     <Layout
       style={styles.container}
     >
-      <Layout style={styles.headerContainer}>
-
-      </Layout>
       <ViewPager
-        style={styles.carousel}
+        style={styles.carouselContainer}
         selectedIndex={selectedIndex}
         onSelect={index => setSelectedIndex(index)}
       >
-        {carousels.map((carousel, index) => (
+        {carouselItems.map((carouselItem, index) => (
           <Layout
+            style={styles.carousel}
             key={index}
-            style={styles.container}
           >
             <Text
-              category='h4'
+              category="h4"
             >
-              {carousel.title}
+              {carouselItem.title}
             </Text>
             <Text
-              category='s1'
+              category="s1"
             >
-              {carousel.subtitle}
+              {carouselItem.subtitle}
             </Text>
             <ImageBackground
               style={styles.image}
-              source={carousel.imageSrc}
+              source={carouselItem.imageSrc}
             />
           </Layout>
         ))}
       </ViewPager>
       <Layout style={styles.indicator}>
-        {carousels.map((carousel, index) => (
+        {carouselItems.map((carouselItem, index) => (
           <View
             key={index}
             style={[styles.inactiveCircle, selectedIndex === index ? styles.activeCircle : {}]}
@@ -92,22 +89,25 @@ const themedStyles = StyleService.create({
     flex: 1,
     backgroundColor: 'background-basic-color-1',
   },
-  headerContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: 216,
+  carouselContainer: {
+    flex: 1,
+    marginTop: 64,
+    marginHorizontal: 24,
   },
   carousel: {
-    flexGrow: 1
+    flex: 1,
+    alignItems: 'center',
   },
   image: {
     flex: 1,
-    resizeMode: "cover",
-    justifyContent: "center"
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
   },
   indicator: {
 		flexDirection: 'row',
-		alignSelf: 'center',
+    alignSelf: 'center',
+    marginVertical: 24,
 	},
   inactiveCircle: {
 		width: 8,
@@ -121,6 +121,7 @@ const themedStyles = StyleService.create({
 		opacity: 1,
   },
   startButton: {
-    margin: 24,
+    marginHorizontal: 24,
+    marginBottom: 24
   }
 });
