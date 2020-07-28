@@ -22,7 +22,7 @@ export const MainDrawer = ({ navigation }: any): React.ReactElement => {
           style={styles.profileName}
           category='h6'
         >
-          ZM Wallet
+          ZMWallet
         </Text>
       </View>
     </Layout>

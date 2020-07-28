@@ -1,4 +1,13 @@
 {
+  "onboarding_carousel": {
+    "title1": "歡迎使用 ZMWallet",
+    "subtitle1": "一款安全的多賬戶、多幣種的加密數字貨幣錢幣。",
+    "title2": "開啟你的錢包...",
+    "subtitle2": "存儲、消費、交易加密數字貨幣資產。",
+    "title3": "瀏覽去中心化應用",
+    "subtitle3": "使用 ZMWallet 登錄去中心化應用，無需註冊。",
+    "get_started": "開始吧"
+  },
   "bottom_tab_bar": {
     "wallet": "錢包",
     "market": "市場",

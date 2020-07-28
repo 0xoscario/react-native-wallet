@@ -1,4 +1,13 @@
 {
+  "onboarding_carousel": {
+    "title1": "Welcome to ZMWallet",
+    "subtitle1": "A secure multi-account & multi-asset crypto wallet.",
+    "title2": "Say hello to your wallet...",
+    "subtitle2": "Store, spend and send crypto currencies and assets.",
+    "title3": "Explore decentralized apps",
+    "subtitle3": "Use your ZMWallet to login to decentralized apps – no signup needed.",
+    "get_started": "Get started"
+  },
   "bottom_tab_bar": {
     "wallet": "Wallet",
     "market": "Market",
