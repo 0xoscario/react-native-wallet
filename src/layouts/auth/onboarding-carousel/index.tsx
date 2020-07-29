@@ -41,7 +41,6 @@ export default ({ navigation }: any): React.ReactElement => {
 
   const handleOnboarding = () => {
     dispatch(setFirstRun());
-    navigation.navigate('Onboarding');
   };
 
   return (

@@ -8,6 +8,13 @@
     "subtitle3": "Use your ZMWallet to login to decentralized apps – no signup needed.",
     "get_started": "Get started"
   },
+  "onboarding": {
+    "title": "Get started!",
+    "import_subtitle": "If you’ve already got another wallet, import it to manage your existing assets.",
+    "create_subtitle": "New to crypto? Set up your first wallet and start exploring decentralized apps.",
+    "import_wallet": "Import wallet",
+		"create_wallet": "Create wallet"
+  },
   "bottom_tab_bar": {
     "wallet": "Wallet",
     "market": "Market",

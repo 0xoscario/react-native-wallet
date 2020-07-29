@@ -12,7 +12,7 @@ export const OnboardingScreen = ({ navigation }: any): React.ReactElement => {
   return (
     <SafeAreaLayout
       style={styles.safeArea}
-      edges={['right', 'bottom', 'left']}
+      edges={['right', 'left']}
     >
       <ContentView navigation={navigation}/>
     </SafeAreaLayout>

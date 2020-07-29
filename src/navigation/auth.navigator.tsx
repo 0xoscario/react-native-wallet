@@ -12,17 +12,16 @@ const Stack = createStackNavigator();
 
 export const AuthNavigator = (): React.ReactElement => {
   const firstRun = useSelector((state: RootState) => state.setting.firstRun);
-  const initialRouteName = firstRun ? 'OnboardingCarousel' : 'Onboarding';
 
-  return (
+  return firstRun ? (
+    <OnboardingCarouselScreen/>
+  ) : (
     <Stack.Navigator
-      initialRouteName={initialRouteName}
       headerMode='none'
       screenOptions={{
         ...TransitionPresets.SlideFromRightIOS
       }}
     >
-      <Stack.Screen name='OnboardingCarousel' component={OnboardingCarouselScreen}/>
       <Stack.Screen name='Onboarding' component={OnboardingScreen}/>
     </Stack.Navigator>
   );
