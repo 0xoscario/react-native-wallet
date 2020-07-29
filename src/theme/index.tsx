@@ -40,6 +40,10 @@ export function ThemeProvider({ themeName, children }: ThemeProviderProps) {
   );
 }
 
-export function spacing(space: number) {
+export function spacingX(space: number) {
+  return space * 8;
+}
+
+export function spacingY(space: number) {
   return space * 8;
 }

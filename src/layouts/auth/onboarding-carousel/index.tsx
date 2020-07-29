@@ -2,6 +2,7 @@
  * @format
  */
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { ImageBackground, View } from 'react-native';
 import {
   useStyleSheet,
@@ -11,11 +12,13 @@ import {
   Text,
   ViewPager
 } from '@ui-kitten/components';
+import { setFirstRun } from 'src/actions/setting';
 import { useI18n } from 'src/i18n';
-import { spacing } from 'src/theme';
+import { spacingX, spacingY } from 'src/theme';
 
 export default ({ navigation }: any): React.ReactElement => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const dispatch = useDispatch();
   const i18n = useI18n();
   const styles = useStyleSheet(themedStyles);
   const carouselItems = [
@@ -35,6 +38,11 @@ export default ({ navigation }: any): React.ReactElement => {
       imageSrc: require('./assets/carousel-3.png')
     },
   ];
+
+  const handleOnboarding = () => {
+    dispatch(setFirstRun());
+    navigation.navigate('Onboarding');
+  };
 
   return (
     <Layout
@@ -82,6 +90,7 @@ export default ({ navigation }: any): React.ReactElement => {
       <Button
         style={styles.startButton}
         appearance="outline"
+        onPress={handleOnboarding}
       >
         {i18n.t('onboarding_carousel.get_started')}
       </Button>
@@ -99,16 +108,16 @@ const themedStyles = StyleService.create({
   },
   carousel: {
     flex: 1,
-    marginTop: spacing(8),
-    marginHorizontal: spacing(3),
+    marginTop: spacingY(8),
+    marginHorizontal: spacingX(3),
     alignItems: 'center',
   },
   title: {
-    marginBottom: spacing(2),
+    marginBottom: spacingY(2),
     textAlign: 'center',
   },
   subtitle: {
-    marginBottom: spacing(2),
+    marginBottom: spacingY(2),
     textAlign: 'center',
   },
   image: {
@@ -119,7 +128,7 @@ const themedStyles = StyleService.create({
   indicator: {
 		flexDirection: 'row',
     alignSelf: 'center',
-    marginVertical: spacing(3),
+    marginVertical: spacingY(3),
 	},
   inactiveCircle: {
 		width: 8,
@@ -133,7 +142,7 @@ const themedStyles = StyleService.create({
 		opacity: 1,
   },
   startButton: {
-    marginHorizontal: spacing(3),
-    marginBottom: spacing(3)
+    marginHorizontal: spacingX(3),
+    marginBottom: spacingY(3)
   }
 });
