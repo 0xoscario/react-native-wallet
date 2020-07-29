@@ -39,3 +39,7 @@ export function ThemeProvider({ themeName, children }: ThemeProviderProps) {
     </ThemeContext.Provider>
   );
 }
+
+export function spacing(space: number) {
+  return space * 8;
+}

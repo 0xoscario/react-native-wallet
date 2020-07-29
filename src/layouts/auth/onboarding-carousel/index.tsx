@@ -12,6 +12,7 @@ import {
   ViewPager
 } from '@ui-kitten/components';
 import { useI18n } from 'src/i18n';
+import { spacing } from 'src/theme';
 
 export default ({ navigation }: any): React.ReactElement => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
@@ -98,16 +99,16 @@ const themedStyles = StyleService.create({
   },
   carousel: {
     flex: 1,
-    marginTop: 64,
-    marginHorizontal: 24,
+    marginTop: spacing(8),
+    marginHorizontal: spacing(3),
     alignItems: 'center',
   },
   title: {
-    marginBottom: 24,
+    marginBottom: spacing(2),
     textAlign: 'center',
   },
   subtitle: {
-    marginBottom: 24,
+    marginBottom: spacing(2),
     textAlign: 'center',
   },
   image: {
@@ -118,7 +119,7 @@ const themedStyles = StyleService.create({
   indicator: {
 		flexDirection: 'row',
     alignSelf: 'center',
-    marginVertical: 24,
+    marginVertical: spacing(3),
 	},
   inactiveCircle: {
 		width: 8,
@@ -132,7 +133,7 @@ const themedStyles = StyleService.create({
 		opacity: 1,
   },
   startButton: {
-    marginHorizontal: 24,
-    marginBottom: 24
+    marginHorizontal: spacing(3),
+    marginBottom: spacing(3)
   }
 });
