@@ -21,13 +21,13 @@ export default ({ navigation }: any): React.ReactElement => {
   };
 
   const handleCreateWallet = () => {
-    navigation.push('ChoosePassword');
+    navigation.navigate('ChoosePassword');
   };
 
   return (
     <ImageBackground
       style={styles.container}
-      source={require('./assets/background.jpg')}
+      source={require('./assets/background.png')}
       resizeMode="stretch"
     >
       <Text

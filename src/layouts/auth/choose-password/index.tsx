@@ -36,6 +36,7 @@ export default ({ navigation }: any): React.ReactElement => {
   const [confirmPassword, setConfirmPassword] = React.useState<string>('');
   const [confirmPasswordVisible, setConfirmPasswordVisible] = React.useState<boolean>(false);
   const [creating, setCreating] = React.useState<boolean>(false);
+  const confirmPasswordRef = React.useRef<Input>(null);
   const dispatch = useDispatch();
   const i18n = useI18n();
   const styles = useStyleSheet(themedStyles);
@@ -117,8 +118,15 @@ export default ({ navigation }: any): React.ReactElement => {
     </Text>
   );
 
+  const jumpToConfirmPassword = () => {
+    confirmPasswordRef.current?.focus();
+  };
+
   const handleCreateWallet = async () => {
     Keyboard.dismiss();
+    if (getCreateDisabled()) {
+      return;
+    }
     setCreating(true);
     await SecureKeychain.setGenericPassword('zmwallet-user', newPassword);
     setTimeout(() => {
@@ -153,9 +161,11 @@ export default ({ navigation }: any): React.ReactElement => {
           value={newPassword}
           caption={renderNewPasswordCaption}
           onChangeText={setNewPassword}
+          onSubmitEditing={jumpToConfirmPassword}
         />
         <Input
           style={styles.passwordInput}
+          ref={confirmPasswordRef}
           autoCapitalize="none"
           secureTextEntry={!confirmPasswordVisible}
           placeholder={i18n.t('choose_password.confirm_password')}
@@ -164,6 +174,7 @@ export default ({ navigation }: any): React.ReactElement => {
           status={getConfirmPasswordStatus()}
           caption={renderConfirmPasswordCaption}
           onChangeText={setConfirmPassword}
+          onSubmitEditing={handleCreateWallet}
         />
       </ScrollView>
       <Button
@@ -181,7 +192,6 @@ export default ({ navigation }: any): React.ReactElement => {
 const themedStyles = StyleService.create({
   container: {
     flex: 1,
-    backgroundColor: 'background-basic-color-1',
   },
   contentContainer: {
     flex: 1,

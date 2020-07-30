@@ -100,7 +100,6 @@ export default ({ navigation }: any): React.ReactElement => {
 const themedStyles = StyleService.create({
   container: {
     flex: 1,
-    backgroundColor: 'background-basic-color-1',
   },
   carouselContainer: {
     flex: 1,

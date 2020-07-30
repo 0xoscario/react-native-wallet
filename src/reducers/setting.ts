@@ -2,6 +2,7 @@
  * @format
  */
 import produce from 'immer';
+import { LOGOUT } from 'src/actions/logout';
 import {
   SET_FIRST_RUN,
   SET_LANGUAGE,
@@ -23,6 +24,11 @@ const initialState: State = {
 
 const settingReducer = (state = initialState, action: any) => {
   switch (action.type) {
+    case LOGOUT: {
+      return produce(state, (draft) => {
+        draft.firstRun = true;
+      });
+    }
     case SET_FIRST_RUN: {
       return produce(state, (draft) => {
         draft.firstRun = false;
