@@ -27,6 +27,10 @@
     "strength_strong": "Strong",
     "must_be_at_least": "Must be at least {{number}} characters"
   },
+  "drawer": {
+    "dark_mode": "Dark mode",
+    "settings": "Settings"
+  },
   "bottom_tab_bar": {
     "wallet": "Wallet",
     "market": "Market",

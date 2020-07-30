@@ -3,15 +3,9 @@
  */
 import React from 'react';
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
+import { WalletScreen } from 'src/scenes/wallet/wallet.component';
 
 const Stack = createStackNavigator();
-
-const DummyScreen = () => {
-  return (
-    <>
-    </>
-  );
-};
 
 export const WalletNavigator = (): React.ReactElement => (
   <Stack.Navigator
@@ -20,6 +14,6 @@ export const WalletNavigator = (): React.ReactElement => (
       ...TransitionPresets.SlideFromRightIOS
     }}
   >
-    <Stack.Screen name='Wallet' component={DummyScreen} />
+    <Stack.Screen name='Wallet' component={WalletScreen} />
   </Stack.Navigator>
 );
