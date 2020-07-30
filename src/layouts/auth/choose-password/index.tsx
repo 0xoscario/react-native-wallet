@@ -16,8 +16,10 @@ import {
 import { initWallet } from 'src/actions/wallet';
 import { EyeIcon, EyeOffIcon } from 'src/components/icons';
 import { KeyboardAvoidingView } from 'src/components/keyboard-avoiding-view.component';
+import { LoadingIndicator } from 'src/components/loading-indicator.component';
 import { useI18n } from 'src/i18n';
 import { spacingX, spacingY } from 'src/theme';
+import { SecureKeychain } from 'src/utils/secure-keychain';
 
 const keyboardOffset = (height: number): number => Platform.select({
   android: 0,
@@ -29,6 +31,7 @@ export default ({ navigation }: any): React.ReactElement => {
   const [newPasswordVisible, setNewPasswordVisible] = React.useState<boolean>(false);
   const [confirmPassword, setConfirmPassword] = React.useState<string>('');
   const [confirmPasswordVisible, setConfirmPasswordVisible] = React.useState<boolean>(false);
+  const [creating, setCreating] = React.useState<boolean>(false);
   const dispatch = useDispatch();
   const i18n = useI18n();
   const styles = useStyleSheet(themedStyles);
@@ -59,7 +62,7 @@ export default ({ navigation }: any): React.ReactElement => {
     if (!confirmPassword) {
       return 'basic';
     }
-    return (confirmPassword === newPassword) ? 'basic' : 'warning';
+    return (confirmPassword === newPassword) ? 'basic' : 'danger';
   };
 
   const getCreateDisabled = () => {
@@ -110,8 +113,11 @@ export default ({ navigation }: any): React.ReactElement => {
     </Text>
   );
 
-  const handleCreateWallet = () => {
+  const handleCreateWallet = async () => {
+    setCreating(true);
     dispatch(initWallet(newPassword));
+    await SecureKeychain.setGenericPassword('zmwallet-user', newPassword);
+    setCreating(false);
   };
 
   return (
@@ -156,6 +162,7 @@ export default ({ navigation }: any): React.ReactElement => {
       </ScrollView>
       <Button
         style={styles.button}
+        accessoryLeft={creating ? LoadingIndicator : undefined}
         disabled={getCreateDisabled()}
         onPress={handleCreateWallet}
       >

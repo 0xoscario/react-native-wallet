@@ -15,6 +15,7 @@ import { useSelector, Provider } from 'react-redux';
 import { IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { setLanguage, setThemeName } from 'src/actions/setting';
+import { loadWallet } from 'src/actions/wallet';
 import { AntDesignIconsPack } from 'src/app/ant-design-icons-pack';
 import { AppLoading, Task } from 'src/app/app-loading.component';
 import { StatusBar } from 'src/components/status-bar.component';
@@ -23,6 +24,7 @@ import { AppNavigator } from 'src/navigation/app.navigator';
 import { RootState } from 'src/reducers';
 import { configureStore } from 'src/store';
 import { ThemeProvider } from 'src/theme';
+import { SecureKeychain } from 'src/utils/secure-keychain';
 
 const loadingTasks: Task[] = [
   async (dispatch: any, state: RootState) => {
@@ -39,7 +41,14 @@ const loadingTasks: Task[] = [
       dispatch(setThemeName((colorScheme === 'no-preference') ? 'light': colorScheme));
     }
     return null;
-  }
+  },
+  async (dispatch: any, state: RootState) => {
+    const credentials = await SecureKeychain.getGenericPassword();
+    if (credentials?.password) {
+      await dispatch(loadWallet(credentials.password));
+    }
+    return null;
+  },
 ];
 
 const App = (): React.ReactElement => {
