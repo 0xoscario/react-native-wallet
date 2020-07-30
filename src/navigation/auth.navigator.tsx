@@ -5,6 +5,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import { RootState } from 'src/reducers';
+import { ChoosePasswordScreen } from 'src/scenes/auth/choose-password.component';
 import { OnboardingCarouselScreen } from 'src/scenes/auth/onboarding-carousel.component';
 import { OnboardingScreen } from 'src/scenes/auth/onboarding.component';
 
@@ -23,6 +24,7 @@ export const AuthNavigator = (): React.ReactElement => {
       }}
     >
       <Stack.Screen name='Onboarding' component={OnboardingScreen}/>
+      <Stack.Screen name='ChoosePassword' component={ChoosePasswordScreen}/>
     </Stack.Navigator>
   );
 };

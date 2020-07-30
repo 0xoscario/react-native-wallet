@@ -21,7 +21,7 @@ export default ({ navigation }: any): React.ReactElement => {
   };
 
   const handleCreateWallet = () => {
-
+    navigation.push('ChoosePassword');
   };
 
   return (

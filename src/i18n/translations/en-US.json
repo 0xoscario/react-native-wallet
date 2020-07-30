@@ -15,6 +15,18 @@
     "import_wallet": "Import wallet",
 		"create_wallet": "Create wallet"
   },
+  "choose_password": {
+		"title": "Create wallet",
+		"subtitle": "You'll use this password to unlock your ZMWallet only on this device.",
+		"new_password": "New Password",
+		"confirm_password": "Confirm Password",
+		"create": "Create",
+		"password_strength": "Password strength:",
+		"strength_weak": "Weak",
+		"strength_good": "Good",
+    "strength_strong": "Strong",
+    "must_be_at_least": "Must be at least {{number}} characters"
+  },
   "bottom_tab_bar": {
     "wallet": "Wallet",
     "market": "Market",

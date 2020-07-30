@@ -4,14 +4,22 @@
 import React from 'react';
 import { Icon, IconElement } from '@ui-kitten/components';
 
-export const BrowserIcon = (props?: any): IconElement => (
-  <Icon {...props} name='appstore-o' pack='ant-design'/>
+export const BrowserIcon = (style?: any): IconElement => (
+  <Icon {...style} name='appstore-o' pack='ant-design'/>
 );
 
-export const MarketIcon = (props?: any): IconElement => (
-  <Icon {...props} name='linechart' pack='ant-design'/>
+export const EyeIcon = (style?: any): IconElement => (
+  <Icon {...style} name='eye'/>
 );
 
-export const WalletIcon = (props?: any): IconElement => (
-  <Icon {...props} name='wallet' pack='ant-design'/>
+export const EyeOffIcon = (style?: any): IconElement => (
+  <Icon {...style} name='eye-off'/>
+);
+
+export const MarketIcon = (style?: any): IconElement => (
+  <Icon {...style} name='linechart' pack='ant-design'/>
+);
+
+export const WalletIcon = (style?: any): IconElement => (
+  <Icon {...style} name='wallet' pack='ant-design'/>
 );
