@@ -6,7 +6,8 @@ import {
   Keyboard,
   Platform,
   ScrollView,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  View
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import zxcvbn from 'zxcvbn';
@@ -18,7 +19,7 @@ import {
   Text
 } from '@ui-kitten/components';
 import { initWallet } from 'src/actions/wallet';
-import { EyeIcon, EyeOffIcon } from 'src/components/icons';
+import { ArrowIosBackIcon, EyeIcon, EyeOffIcon } from 'src/components/icons';
 import { KeyboardAvoidingView } from 'src/components/keyboard-avoiding-view.component';
 import { LoadingIndicator } from 'src/components/loading-indicator.component';
 import { useI18n } from 'src/i18n';
@@ -140,6 +141,16 @@ export default ({ navigation }: any): React.ReactElement => {
       style={styles.container}
       offset={keyboardOffset}
     >
+      <View
+        style={styles.navigationContainer}
+      >
+        <Button
+          appearance='ghost'
+          status='basic'
+          accessoryLeft={ArrowIosBackIcon}
+          onPress={() => navigation.goBack()}
+        />
+      </View>
       <ScrollView style={styles.contentContainer}>
         <Text
           category="h4"
@@ -193,10 +204,13 @@ const themedStyles = StyleService.create({
   container: {
     flex: 1,
   },
+  navigationContainer: {
+    flexDirection: 'row',
+  },
   contentContainer: {
     flex: 1,
-    paddingHorizontal: spacingX(2),
-    paddingTop: spacingY(6),
+    marginHorizontal: spacingX(2),
+    marginTop: spacingY(4),
   },
   subtitle: {
     marginVertical: spacingY(2),

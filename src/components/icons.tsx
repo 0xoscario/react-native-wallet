@@ -4,6 +4,10 @@
 import React from 'react';
 import { Icon, IconElement } from '@ui-kitten/components';
 
+export const ArrowIosBackIcon = (style: any): IconElement => (
+  <Icon {...style} name='arrow-ios-back'/>
+);
+
 export const BrowserIcon = (style?: any): IconElement => (
   <Icon {...style} name="appstore-o" pack="ant-design"/>
 );
