@@ -8,7 +8,7 @@ import { Spinner } from '@ui-kitten/components';
 export const LoadingIndicator = (props?: Partial<ImageProps>): React.ReactElement => {
   return (
     <View style={[props?.style, styles.indicator]}>
-      <Spinner size="small"/>
+      <Spinner status='control' size="small"/>
     </View>
   );
 };

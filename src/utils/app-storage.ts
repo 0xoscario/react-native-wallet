@@ -10,7 +10,11 @@ export class AppStorage {
     return await AsyncStorage.getItem(VAULT_KEY);
   };
 
-  static setVault = async (encryptedVault: string) : Promise<void> => {
-    await AsyncStorage.setItem(VAULT_KEY, encryptedVault)
+  static setVault = async (encryptedVault: string | null) : Promise<void> => {
+    if (encryptedVault) {
+      await AsyncStorage.setItem(VAULT_KEY, encryptedVault);
+    } else {
+      await AsyncStorage.removeItem(VAULT_KEY);
+    }
   };
 }

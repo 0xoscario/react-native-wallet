@@ -12,6 +12,7 @@ import {
   Text,
   Toggle
 } from '@ui-kitten/components';
+import { logout } from 'src/actions/logout';
 import { setThemeName } from 'src/actions/setting';
 import { NightIcon, SettingsIcon } from 'src/components/icons';
 import { useI18n } from 'src/i18n';
@@ -58,6 +59,10 @@ export const MainDrawer = ({ navigation }: any): React.ReactElement => {
     dispatch(setThemeName((themeName === 'dark') ? 'light' : 'dark'));
   };
 
+  const handleSettings = () => {
+    dispatch(logout());
+  };
+
   return (
     <>
       <Drawer
@@ -78,6 +83,7 @@ export const MainDrawer = ({ navigation }: any): React.ReactElement => {
         <DrawerItem
           title={i18n.t('drawer.settings')}
           accessoryLeft={SettingsIcon}
+          onPress={handleSettings}
         />
       </Drawer>
     </>

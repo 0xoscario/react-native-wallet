@@ -2,14 +2,18 @@
  * @format
  */
 import React from 'react';
-import { Platform, ScrollView, TouchableWithoutFeedback } from 'react-native';
+import {
+  Keyboard,
+  Platform,
+  ScrollView,
+  TouchableWithoutFeedback
+} from 'react-native';
 import { useDispatch } from 'react-redux';
 import zxcvbn from 'zxcvbn';
 import {
   useStyleSheet,
   Button,
   Input,
-  Layout,
   StyleService,
   Text
 } from '@ui-kitten/components';
@@ -66,7 +70,7 @@ export default ({ navigation }: any): React.ReactElement => {
   };
 
   const getCreateDisabled = () => {
-    return !((newPassword.length >= 8) && (newPassword === confirmPassword));
+    return !((newPassword.length >= 8) && (newPassword === confirmPassword)) || creating;
   };
 
   const onNewPasswordIconPress = (): void => {
@@ -114,51 +118,53 @@ export default ({ navigation }: any): React.ReactElement => {
   );
 
   const handleCreateWallet = async () => {
+    Keyboard.dismiss();
     setCreating(true);
-    dispatch(initWallet(newPassword));
     await SecureKeychain.setGenericPassword('zmwallet-user', newPassword);
-    setCreating(false);
+    setTimeout(() => {
+      dispatch(initWallet(newPassword));
+      setCreating(false);
+    }, 1000);
   };
 
   return (
-    <Layout style={styles.container}>
+    <KeyboardAvoidingView
+      style={styles.container}
+      offset={keyboardOffset}
+    >
       <ScrollView style={styles.contentContainer}>
-        <KeyboardAvoidingView
-          offset={keyboardOffset}
+        <Text
+          category="h4"
         >
-          <Text
-            category="h4"
-          >
-            {i18n.t('choose_password.title')}
-          </Text>
-          <Text
-            style={styles.subtitle}
-            category="s1"
-          >
-            {i18n.t('choose_password.subtitle')}
-          </Text>
-          <Input
-            style={styles.passwordInput}
-            autoCapitalize="none"
-            secureTextEntry={!newPasswordVisible}
-            placeholder={i18n.t('choose_password.new_password')}
-            accessoryRight={renderNewPasswordIcon}
-            value={newPassword}
-            caption={renderNewPasswordCaption}
-            onChangeText={setNewPassword}
-          />
-          <Input
-            style={styles.passwordInput}
-            autoCapitalize="none"
-            secureTextEntry={!confirmPasswordVisible}
-            placeholder={i18n.t('choose_password.confirm_password')}
-            accessoryRight={renderConfirmPasswordIcon}
-            value={confirmPassword}
-            status={getConfirmPasswordStatus()}
-            caption={renderConfirmPasswordCaption}
-            onChangeText={setConfirmPassword}
-          />
-        </KeyboardAvoidingView>
+          {i18n.t('choose_password.title')}
+        </Text>
+        <Text
+          style={styles.subtitle}
+          category="s1"
+        >
+          {i18n.t('choose_password.subtitle')}
+        </Text>
+        <Input
+          style={styles.passwordInput}
+          autoCapitalize="none"
+          secureTextEntry={!newPasswordVisible}
+          placeholder={i18n.t('choose_password.new_password')}
+          accessoryRight={renderNewPasswordIcon}
+          value={newPassword}
+          caption={renderNewPasswordCaption}
+          onChangeText={setNewPassword}
+        />
+        <Input
+          style={styles.passwordInput}
+          autoCapitalize="none"
+          secureTextEntry={!confirmPasswordVisible}
+          placeholder={i18n.t('choose_password.confirm_password')}
+          accessoryRight={renderConfirmPasswordIcon}
+          value={confirmPassword}
+          status={getConfirmPasswordStatus()}
+          caption={renderConfirmPasswordCaption}
+          onChangeText={setConfirmPassword}
+        />
       </ScrollView>
       <Button
         style={styles.button}
@@ -168,7 +174,7 @@ export default ({ navigation }: any): React.ReactElement => {
       >
         {i18n.t('choose_password.create')}
       </Button>
-    </Layout>
+    </KeyboardAvoidingView>
   );
 };
 
