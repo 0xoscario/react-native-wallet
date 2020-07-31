@@ -17,7 +17,7 @@ export default ({ navigation }: any): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
   const handleImportWallet = () => {
-    
+    navigation.navigate('ImportFromSeed');
   };
 
   const handleCreateWallet = () => {
