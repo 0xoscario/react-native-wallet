@@ -141,17 +141,19 @@ export default ({ navigation }: any): React.ReactElement => {
       style={styles.container}
       offset={keyboardOffset}
     >
-      <View
-        style={styles.navigationContainer}
+      <ScrollView
+        style={styles.contentContainer}
       >
-        <Button
-          appearance='ghost'
-          status='basic'
-          accessoryLeft={ArrowIosBackIcon}
-          onPress={() => navigation.goBack()}
-        />
-      </View>
-      <ScrollView style={styles.contentContainer}>
+        <View
+          style={styles.navigationContainer}
+        >
+          <Button
+            appearance='ghost'
+            status='basic'
+            accessoryLeft={ArrowIosBackIcon}
+            onPress={() => navigation.goBack()}
+          />
+        </View>
         <Text
           category="h4"
         >
@@ -204,13 +206,13 @@ const themedStyles = StyleService.create({
   container: {
     flex: 1,
   },
-  navigationContainer: {
-    flexDirection: 'row',
-  },
   contentContainer: {
     flex: 1,
     marginHorizontal: spacingX(2),
-    marginTop: spacingY(4),
+    marginTop: spacingY(2),
+  },
+  navigationContainer: {
+    flexDirection: 'row',
   },
   subtitle: {
     marginVertical: spacingY(2),
