@@ -40,7 +40,7 @@ export const MainDrawer = ({ navigation }: any): React.ReactElement => {
   );
 
   const renderFooter = (): React.ReactElement => (
-    <Layout>
+    <Layout level='2'>
       <Divider/>
       <Text
         appearance='hint'
@@ -64,29 +64,27 @@ export const MainDrawer = ({ navigation }: any): React.ReactElement => {
   };
 
   return (
-    <>
-      <Drawer
-        appearance="noDivider"
-        header={renderHeader}
-        footer={renderFooter}
-      >
-        <DrawerItem
-          title="Share"
-        />
-        <Divider/>
-        <DrawerItem
-          title={i18n.t('drawer.dark_mode')}
-          accessoryLeft={NightIcon}
-          accessoryRight={renderDarkModeToggle}
-          onPress={toggleDarkMode}
-        />
-        <DrawerItem
-          title={i18n.t('drawer.settings')}
-          accessoryLeft={SettingsIcon}
-          onPress={handleSettings}
-        />
-      </Drawer>
-    </>
+    <Drawer
+      appearance="noDivider"
+      header={renderHeader}
+      footer={renderFooter}
+    >
+      <DrawerItem
+        title="Share"
+      />
+      <Divider/>
+      <DrawerItem
+        title={i18n.t('drawer.dark_mode')}
+        accessoryLeft={NightIcon}
+        accessoryRight={renderDarkModeToggle}
+        onPress={toggleDarkMode}
+      />
+      <DrawerItem
+        title={i18n.t('drawer.settings')}
+        accessoryLeft={SettingsIcon}
+        onPress={handleSettings}
+      />
+    </Drawer>
   );
 };
 

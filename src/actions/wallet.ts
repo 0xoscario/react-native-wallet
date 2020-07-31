@@ -34,6 +34,36 @@ export function initWallet(password: string) {
   };
 }
 
+export function importWallet(password: string, mnemonic: string) {
+  return async (dispatch: Dispatch<any>) => {
+    try {
+      const wallet = ethers.Wallet.fromMnemonic(mnemonic);
+      const vault: Vault = {
+        mnemonic: wallet.mnemonic.phrase,
+        accounts: [{
+          blockchain: 'ETH',
+          type: 'HD',
+          address: wallet.address,
+          extra: wallet.mnemonic.path
+        }]
+      };
+      const encryptedVault = await Encryptor.encrypt(password, vault);
+      await AppStorage.setVault(encryptedVault);
+
+      dispatch({
+        type: INIT_WALLET,
+        payload: {
+          password,
+          vault
+        }
+      });
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
+}
+
 export function loadWallet(password: string) {
   return async (dispatch: Dispatch<any>) => {
     const encryptedVault = await AppStorage.getVault();

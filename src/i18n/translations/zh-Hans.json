@@ -15,6 +15,18 @@
     "import_wallet": "导入钱包",
 		"create_wallet": "创建钱包"
   },
+  "import_from_seed": {
+    "title": "导入钱包",
+    "seed_phrase": "请输入助记词",
+		"new_password": "新密码",
+		"confirm_password": "确认密码",
+		"import": "导入",
+		"password_strength": "密码强度：",
+		"strength_weak": "弱",
+		"strength_good": "强",
+    "strength_strong": "极强",
+    "must_be_at_least": "至少 {{number}} 个字符"
+  },
   "choose_password": {
 		"title": "创建钱包",
 		"subtitle": "你将使用该密码解锁当前设备上的 ZMWallet 钱包。",

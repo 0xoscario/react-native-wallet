@@ -46,6 +46,7 @@ export default ({ navigation }: any): React.ReactElement => {
   return (
     <Layout
       style={styles.container}
+      level='2'
     >
       <ViewPager
         style={styles.carouselContainer}
@@ -53,7 +54,7 @@ export default ({ navigation }: any): React.ReactElement => {
         onSelect={index => setSelectedIndex(index)}
       >
         {carouselItems.map((carouselItem, index) => (
-          <Layout
+          <View
             style={styles.carousel}
             key={index}
           >
@@ -75,17 +76,17 @@ export default ({ navigation }: any): React.ReactElement => {
               source={carouselItem.imageSrc}
               resizeMode="contain"
             />
-          </Layout>
+          </View>
         ))}
       </ViewPager>
-      <Layout style={styles.indicator}>
+      <View style={styles.indicator}>
         {carouselItems.map((carouselItem, index) => (
           <View
             key={index}
             style={[styles.inactiveCircle, selectedIndex === index ? styles.activeCircle : {}]}
           />
         ))}
-      </Layout>
+      </View>
       <Button
         style={styles.startButton}
         appearance="outline"

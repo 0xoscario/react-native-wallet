@@ -9,7 +9,9 @@ import {
   TouchableWithoutFeedback,
   View
 } from 'react-native';
+import { Action } from 'redux';
 import { useDispatch } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
 import zxcvbn from 'zxcvbn';
 import {
   useStyleSheet,
@@ -38,7 +40,7 @@ export default ({ navigation }: any): React.ReactElement => {
   const [confirmPasswordVisible, setConfirmPasswordVisible] = React.useState<boolean>(false);
   const [creating, setCreating] = React.useState<boolean>(false);
   const confirmPasswordRef = React.useRef<Input>(null);
-  const dispatch = useDispatch();
+  const dispatch: ThunkDispatch<any, null, Action<string>> = useDispatch();
   const i18n = useI18n();
   const styles = useStyleSheet(themedStyles);
 
@@ -123,16 +125,15 @@ export default ({ navigation }: any): React.ReactElement => {
     confirmPasswordRef.current?.focus();
   };
 
-  const handleCreateWallet = async () => {
+  const handleCreateWallet = () => {
     Keyboard.dismiss();
     if (getCreateDisabled()) {
       return;
     }
     setCreating(true);
-    await SecureKeychain.setGenericPassword('zmwallet-user', newPassword);
-    setTimeout(() => {
-      dispatch(initWallet(newPassword));
-      setCreating(false);
+    setTimeout(async () => {
+      await SecureKeychain.setGenericPassword('zmwallet-user', newPassword);
+      await dispatch(initWallet(newPassword));
     }, 1000);
   };
 
@@ -176,6 +177,7 @@ export default ({ navigation }: any): React.ReactElement => {
           caption={renderNewPasswordCaption}
           onChangeText={setNewPassword}
           onSubmitEditing={jumpToConfirmPassword}
+          returnKeyType="next"
         />
         <Input
           style={styles.passwordInput}
@@ -192,7 +194,6 @@ export default ({ navigation }: any): React.ReactElement => {
         />
       </ScrollView>
       <Button
-        style={styles.button}
         accessoryLeft={creating ? LoadingIndicator : undefined}
         disabled={getCreateDisabled()}
         onPress={handleCreateWallet}
@@ -221,9 +222,5 @@ const themedStyles = StyleService.create({
   passwordInput: {
     marginTop: spacingY(2),
     marginBottom: spacingY(1),
-  },
-  button: {
-    marginHorizontal: spacingX(2),
-    marginBottom: spacingY(2),
   }
 });

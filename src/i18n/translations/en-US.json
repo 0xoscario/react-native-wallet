@@ -15,6 +15,18 @@
     "import_wallet": "Import wallet",
 		"create_wallet": "Create wallet"
   },
+  "import_from_seed": {
+    "title": "Import wallet",
+    "seed_phrase": "Enter your seed phrase here",
+		"new_password": "New Password",
+		"confirm_password": "Confirm Password",
+		"import": "Import",
+		"password_strength": "Password strength:",
+		"strength_weak": "Weak",
+		"strength_good": "Good",
+    "strength_strong": "Strong",
+    "must_be_at_least": "Must be at least {{number}} characters"
+  },
   "choose_password": {
 		"title": "Create wallet",
 		"subtitle": "You'll use this password to unlock your ZMWallet only on this device.",
