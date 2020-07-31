@@ -143,6 +143,7 @@ export default ({ navigation }: any): React.ReactElement => {
     >
       <ScrollView
         style={styles.contentContainer}
+        overScrollMode="never"
       >
         <View
           style={styles.navigationContainer}
