@@ -1,6 +1,7 @@
 /**
  * @format
  */
+import { ethers } from 'ethers';
 import React from 'react';
 import {
   Keyboard,
@@ -70,6 +71,17 @@ export default ({ navigation }: any): React.ReactElement => {
 
   const onSeedWordsChange = (value: string) => {
     setSeed(value.toLowerCase());
+  };
+
+  const getSeedWordsStatus = () => {
+    const enWordlists = ethers.wordlists.en;
+    const words = enWordlists.split(seed).filter((val) => !!val);
+    for (const word of words) {
+      if (enWordlists.getWordIndex(word) === -1) {
+        return 'danger';
+      }
+    }
+    return 'basic';
   };
 
   const getConfirmPasswordStatus = () => {
@@ -180,6 +192,7 @@ export default ({ navigation }: any): React.ReactElement => {
           autoCapitalize="none"
           placeholder={i18n.t('import_from_seed.seed_phrase')}
           value={seed}
+          status={getSeedWordsStatus()}
           onChangeText={onSeedWordsChange}
           blurOnSubmit={true}
           onSubmitEditing={jumpToNewPassword}
