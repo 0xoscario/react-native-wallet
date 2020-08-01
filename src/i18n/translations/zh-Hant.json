@@ -25,7 +25,11 @@
 		"strength_weak": "弱",
 		"strength_good": "強",
     "strength_strong": "極強",
-    "must_be_at_least": "至少 {{number}} 個字符"
+    "must_be_at_least": "至少 {{number}} 個字符",
+    "import_error_modal": {
+      "error": "助記詞錯誤.",
+      "got_it": "明白了"
+    }
   },
   "choose_password": {
 		"title": "創建錢包",

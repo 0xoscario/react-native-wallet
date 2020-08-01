@@ -143,7 +143,6 @@ export default ({ navigation }: any): React.ReactElement => {
       offset={keyboardOffset}
     >
       <ScrollView
-        style={styles.contentContainer}
         overScrollMode="never"
       >
         <View
@@ -155,12 +154,12 @@ export default ({ navigation }: any): React.ReactElement => {
             accessoryLeft={ArrowIosBackIcon}
             onPress={() => navigation.goBack()}
           />
+          <Text
+            category="h4"
+          >
+            {i18n.t('choose_password.title')}
+          </Text>
         </View>
-        <Text
-          category="h4"
-        >
-          {i18n.t('choose_password.title')}
-        </Text>
         <Text
           style={styles.subtitle}
           category="s1"
@@ -192,14 +191,15 @@ export default ({ navigation }: any): React.ReactElement => {
           onChangeText={setConfirmPassword}
           onSubmitEditing={handleCreateWallet}
         />
+        <Button
+          style={styles.button}
+          accessoryLeft={creating ? LoadingIndicator : undefined}
+          disabled={getCreateDisabled()}
+          onPress={handleCreateWallet}
+        >
+          {creating ? undefined : i18n.t('choose_password.create')}
+        </Button>
       </ScrollView>
-      <Button
-        accessoryLeft={creating ? LoadingIndicator : undefined}
-        disabled={getCreateDisabled()}
-        onPress={handleCreateWallet}
-      >
-        {creating ? undefined : i18n.t('choose_password.create')}
-      </Button>
     </KeyboardAvoidingView>
   );
 };
@@ -207,14 +207,12 @@ export default ({ navigation }: any): React.ReactElement => {
 const themedStyles = StyleService.create({
   container: {
     flex: 1,
-  },
-  contentContainer: {
-    flex: 1,
-    marginHorizontal: spacingX(2),
-    marginTop: spacingY(2),
+    paddingTop: spacingY(2),
+    paddingHorizontal: spacingX(2),
   },
   navigationContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
   },
   subtitle: {
     marginVertical: spacingY(2),
@@ -222,5 +220,8 @@ const themedStyles = StyleService.create({
   passwordInput: {
     marginTop: spacingY(2),
     marginBottom: spacingY(1),
+  },
+  button: {
+    marginTop: spacingY(4),
   }
 });

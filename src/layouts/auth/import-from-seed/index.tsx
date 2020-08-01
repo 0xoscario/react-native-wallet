@@ -29,6 +29,7 @@ import { useI18n } from 'src/i18n';
 import { spacingX, spacingY } from 'src/theme';
 import { SecureKeychain } from 'src/utils/secure-keychain';
 import { SeedPhraseSuggestion } from 'src/layouts/auth/import-from-seed/extra/seed-phrase-suggestion.component';
+import { ImportErrorModal } from 'src/layouts/auth/import-from-seed/extra/import-error-modal.component';
 
 const keyboardOffset = (height: number): number => Platform.select({
   android: 0,
@@ -42,6 +43,7 @@ export default ({ navigation }: any): React.ReactElement => {
   const [confirmPassword, setConfirmPassword] = React.useState<string>('');
   const [confirmPasswordVisible, setConfirmPasswordVisible] = React.useState<boolean>(false);
   const [importing, setImporting] = React.useState<boolean>(false);
+  const [errorModalVisible, setErrorModalVisible] = React.useState<boolean>(false);
   const newPasswordRef = React.useRef<Input>(null);
   const confirmPasswordRef = React.useRef<Input>(null);
   const dispatch: ThunkDispatch<any, null, Action<string>> = useDispatch();
@@ -174,9 +176,12 @@ export default ({ navigation }: any): React.ReactElement => {
     setImporting(true);
     setTimeout(async () => {
       await SecureKeychain.setGenericPassword('zmwallet-user', newPassword);
-      const result = await dispatch(importWallet(newPassword, seed));
+      const enWordlists = ethers.wordlists.en;
+      const words = enWordlists.split(seed).filter((val) => !!val);
+      const result = await dispatch(importWallet(newPassword, enWordlists.join(words)));
       if (!result) {
         setImporting(false);
+        setErrorModalVisible(true);
       }
     }, 1000);
   };
@@ -198,12 +203,12 @@ export default ({ navigation }: any): React.ReactElement => {
             accessoryLeft={ArrowIosBackIcon}
             onPress={() => navigation.goBack()}
           />
+          <Text
+            category="h4"
+          >
+            {i18n.t('import_from_seed.title')}
+          </Text>
         </View>
-        <Text
-          category="h4"
-        >
-          {i18n.t('import_from_seed.title')}
-        </Text>
         <Input
           style={styles.seedPhraseInput}
           multiline={true}
@@ -247,6 +252,7 @@ export default ({ navigation }: any): React.ReactElement => {
           onSubmitEditing={handleImportWallet}
         />
         <Button
+          style={styles.button}
           accessoryLeft={importing ? LoadingIndicator : undefined}
           disabled={getImportDisabled()}
           onPress={handleImportWallet}
@@ -258,6 +264,11 @@ export default ({ navigation }: any): React.ReactElement => {
         seedWord={getLastSeedWord()}
         onSelectSuggestion={handleSelectSuggestion}
       />
+      <ImportErrorModal
+        visible={errorModalVisible}
+        onBackdropPress={() => setErrorModalVisible(false)}
+        onGotItButtonPress={() => setErrorModalVisible(false)}
+      />
     </KeyboardAvoidingView>
   );
 };
@@ -265,18 +276,20 @@ export default ({ navigation }: any): React.ReactElement => {
 const themedStyles = StyleService.create({
   container: {
     flex: 1,
-    paddingTop: spacingY(8),
+    paddingTop: spacingY(2),
     paddingHorizontal: spacingX(2),
   },
   navigationContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
   },
   seedPhraseInput: {
     marginTop: spacingY(2),
-    marginBottom: spacingY(1),
   },
   passwordInput: {
     marginTop: spacingY(2),
-    marginBottom: spacingY(1),
+  },
+  button: {
+    marginTop: spacingY(4),
   }
 });
