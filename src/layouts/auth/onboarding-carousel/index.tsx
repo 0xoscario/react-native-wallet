@@ -46,7 +46,7 @@ export default ({ navigation }: any): React.ReactElement => {
   return (
     <Layout
       style={styles.container}
-      level='2'
+      level="2"
     >
       <ViewPager
         style={styles.carouselContainer}

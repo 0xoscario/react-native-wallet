@@ -28,6 +28,7 @@ import { LoadingIndicator } from 'src/components/loading-indicator.component';
 import { useI18n } from 'src/i18n';
 import { spacingX, spacingY } from 'src/theme';
 import { SecureKeychain } from 'src/utils/secure-keychain';
+import { SeedPhraseSuggestion } from 'src/layouts/auth/import-from-seed/extra/seed-phrase-suggestion.component';
 
 const keyboardOffset = (height: number): number => Platform.select({
   android: 0,
@@ -82,6 +83,24 @@ export default ({ navigation }: any): React.ReactElement => {
       }
     }
     return 'basic';
+  };
+
+  const getLastSeedWord = () => {
+    const enWordlists = ethers.wordlists.en;
+    const words = enWordlists.split(seed).filter((val) => !!val);
+    if (words.length > 0) {
+      return words[words.length - 1];
+    }
+    return '';
+  };
+
+  const handleSelectSuggestion = (word: string) => {
+    const enWordlists = ethers.wordlists.en;
+    const words = enWordlists.split(seed).filter((val) => !!val);
+    words.pop();
+    words.push(word);
+    const newSeed = enWordlists.join(words) + ' ';
+    setSeed(newSeed);
   };
 
   const getConfirmPasswordStatus = () => {
@@ -235,6 +254,10 @@ export default ({ navigation }: any): React.ReactElement => {
           {i18n.t('import_from_seed.import')}
         </Button>
       </ScrollView>
+      <SeedPhraseSuggestion
+        seedWord={getLastSeedWord()}
+        onSelectSuggestion={handleSelectSuggestion}
+      />
     </KeyboardAvoidingView>
   );
 };

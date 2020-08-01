@@ -26,7 +26,7 @@ export const MainDrawer = ({ navigation }: any): React.ReactElement => {
   const renderHeader = (): React.ReactElement => (
     <Layout
       style={styles.header}
-      level='2'
+      level="2"
     >
       <View style={styles.profileContainer}>
         <Text
@@ -40,7 +40,7 @@ export const MainDrawer = ({ navigation }: any): React.ReactElement => {
   );
 
   const renderFooter = (): React.ReactElement => (
-    <Layout level='2'>
+    <Layout level="2">
       <Divider/>
       <Text
         appearance='hint'
