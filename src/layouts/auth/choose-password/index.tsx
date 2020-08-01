@@ -4,6 +4,7 @@
 import React from 'react';
 import {
   Keyboard,
+  KeyboardAvoidingView,
   Platform,
   ScrollView,
   TouchableWithoutFeedback,
@@ -22,16 +23,10 @@ import {
 } from '@ui-kitten/components';
 import { initWallet } from 'src/actions/wallet';
 import { ArrowIosBackIcon, EyeIcon, EyeOffIcon } from 'src/components/icons';
-import { KeyboardAvoidingView } from 'src/components/keyboard-avoiding-view.component';
 import { LoadingIndicator } from 'src/components/loading-indicator.component';
 import { useI18n } from 'src/i18n';
 import { spacingX, spacingY } from 'src/theme';
 import { SecureKeychain } from 'src/utils/secure-keychain';
-
-const keyboardOffset = (height: number): number => Platform.select({
-  android: 0,
-  ios: height,
-})!;
 
 export default ({ navigation }: any): React.ReactElement => {
   const [newPassword, setNewPassword] = React.useState<string>('');
@@ -139,10 +134,10 @@ export default ({ navigation }: any): React.ReactElement => {
 
   return (
     <KeyboardAvoidingView
-      style={styles.container}
-      offset={keyboardOffset}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <ScrollView
+        contentContainerStyle={styles.container}
         overScrollMode="never"
       >
         <View
@@ -206,8 +201,7 @@ export default ({ navigation }: any): React.ReactElement => {
 
 const themedStyles = StyleService.create({
   container: {
-    flex: 1,
-    paddingTop: spacingY(2),
+    paddingVertical: spacingY(2),
     paddingHorizontal: spacingX(2),
   },
   navigationContainer: {
