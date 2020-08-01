@@ -42,6 +42,10 @@ yarn run android
 
 #### iOS
 
+- Fix ***Copy Pods Resources*** error. Select [zhimakaimen]->[TARGETS]->[zhimakaimen]->[Build Phases] in XCode, and remove *.ttf from [Input Files] & [Output Files] of [Copy Pods Resources] section.
+
+- Fix ***duplicate symbols*** error. Select [Pods]->[TARGETS]->[react-native-udp]->[Build Phases] in XCode, and remove GCDAsyncUdpSocket.m from [Compile Sources] section. Select [Pods]->[TARGETS]->[TcpSockets]->[Build Phases] in XCode, and remove GCDAsyncUdpSocket.m from [Compile Sources] section.
+
 - Start the emulator and run:
 ```bash
 yarn run ios
