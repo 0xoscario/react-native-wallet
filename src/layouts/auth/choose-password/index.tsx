@@ -198,7 +198,7 @@ export default ({ navigation }: any): React.ReactElement => {
         disabled={getCreateDisabled()}
         onPress={handleCreateWallet}
       >
-        {i18n.t('choose_password.create')}
+        {creating ? undefined : i18n.t('choose_password.create')}
       </Button>
     </KeyboardAvoidingView>
   );

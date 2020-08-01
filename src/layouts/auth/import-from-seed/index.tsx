@@ -251,7 +251,7 @@ export default ({ navigation }: any): React.ReactElement => {
           disabled={getImportDisabled()}
           onPress={handleImportWallet}
         >
-          {i18n.t('import_from_seed.import')}
+          {importing ? undefined : i18n.t('import_from_seed.import')}
         </Button>
       </ScrollView>
       <SeedPhraseSuggestion
