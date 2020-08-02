@@ -5,12 +5,11 @@ import { ethers } from 'ethers';
 import React from 'react';
 import {
   Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   View
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Action } from 'redux';
 import { useDispatch } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
@@ -182,23 +181,20 @@ export default ({ navigation }: any): React.ReactElement => {
   };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-    >
-      <ScrollView
+    <>
+      <KeyboardAwareScrollView
         contentContainerStyle={styles.contentContainer}
+        style={styles.container}
         overScrollMode="never"
       >
         <View
           style={styles.navigationContainer}
         >
-          <Button
-            appearance='ghost'
-            status='basic'
-            accessoryLeft={ArrowIosBackIcon}
+          <TouchableOpacity
             onPress={() => navigation.goBack()}
-          />
+          >
+            <ArrowIosBackIcon style={styles.backIcon}/>
+          </TouchableOpacity>
           <Text
             category="h4"
           >
@@ -217,7 +213,7 @@ export default ({ navigation }: any): React.ReactElement => {
           blurOnSubmit={true}
           onSubmitEditing={jumpToNewPassword}
           returnKeyType="next"
-          keyboardType={(Platform.OS === 'android') ? 'visible-password' : 'default'}
+          keyboardType="visible-password"
           autoCorrect={false}
           textAlignVertical="top"
         />
@@ -255,7 +251,7 @@ export default ({ navigation }: any): React.ReactElement => {
         >
           {importing ? undefined : i18n.t('import_from_seed.import')}
         </Button>
-      </ScrollView>
+      </KeyboardAwareScrollView>
       <SeedPhraseSuggestion
         seedWord={getLastSeedWord()}
         onSelectSuggestion={handleSelectSuggestion}
@@ -265,13 +261,12 @@ export default ({ navigation }: any): React.ReactElement => {
         onBackdropPress={() => setErrorModalVisible(false)}
         onGotItButtonPress={() => setErrorModalVisible(false)}
       />
-    </KeyboardAvoidingView>
+    </>
   );
 };
 
 const themedStyles = StyleService.create({
   container: {
-    flex: 1,
   },
   contentContainer: {
     paddingVertical: spacingY(2),
@@ -280,6 +275,11 @@ const themedStyles = StyleService.create({
   navigationContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  backIcon: {
+    width: 32,
+    height: 32,
+    tintColor: 'text-hint-color',
   },
   seedPhraseInput: {
     marginTop: spacingY(2),

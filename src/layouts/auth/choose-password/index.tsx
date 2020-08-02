@@ -4,12 +4,11 @@
 import React from 'react';
 import {
   Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   View
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Action } from 'redux';
 import { useDispatch } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
@@ -133,76 +132,70 @@ export default ({ navigation }: any): React.ReactElement => {
   };
 
   return (
-    <KeyboardAvoidingView
+    <KeyboardAwareScrollView
+      contentContainerStyle={styles.contentContainer}
       style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      overScrollMode="never"
     >
-      <ScrollView
-        contentContainerStyle={styles.contentContainer}
-        overScrollMode="never"
+      <View
+        style={styles.navigationContainer}
       >
-        <View
-          style={styles.navigationContainer}
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
         >
-          <Button
-            appearance='ghost'
-            status='basic'
-            accessoryLeft={ArrowIosBackIcon}
-            onPress={() => navigation.goBack()}
-          />
-          <Text
-            category="h4"
-          >
-            {i18n.t('choose_password.title')}
-          </Text>
-        </View>
+          <ArrowIosBackIcon style={styles.backIcon}/>
+        </TouchableOpacity>
         <Text
-          style={styles.subtitle}
-          category="s1"
+          category="h4"
         >
-          {i18n.t('choose_password.subtitle')}
+          {i18n.t('choose_password.title')}
         </Text>
-        <Input
-          style={styles.passwordInput}
-          autoCapitalize="none"
-          secureTextEntry={!newPasswordVisible}
-          placeholder={i18n.t('choose_password.new_password')}
-          accessoryRight={renderNewPasswordIcon}
-          value={newPassword}
-          caption={renderNewPasswordCaption}
-          onChangeText={setNewPassword}
-          onSubmitEditing={jumpToConfirmPassword}
-          returnKeyType="next"
-        />
-        <Input
-          style={styles.passwordInput}
-          ref={confirmPasswordRef}
-          autoCapitalize="none"
-          secureTextEntry={!confirmPasswordVisible}
-          placeholder={i18n.t('choose_password.confirm_password')}
-          accessoryRight={renderConfirmPasswordIcon}
-          value={confirmPassword}
-          status={getConfirmPasswordStatus()}
-          caption={renderConfirmPasswordCaption}
-          onChangeText={setConfirmPassword}
-          onSubmitEditing={handleCreateWallet}
-        />
-        <Button
-          style={styles.button}
-          accessoryLeft={creating ? LoadingIndicator : undefined}
-          disabled={getCreateDisabled()}
-          onPress={handleCreateWallet}
-        >
-          {creating ? undefined : i18n.t('choose_password.create')}
-        </Button>
-      </ScrollView>
-    </KeyboardAvoidingView>
+      </View>
+      <Text
+        style={styles.subtitle}
+        category="s1"
+      >
+        {i18n.t('choose_password.subtitle')}
+      </Text>
+      <Input
+        style={styles.passwordInput}
+        autoCapitalize="none"
+        secureTextEntry={!newPasswordVisible}
+        placeholder={i18n.t('choose_password.new_password')}
+        accessoryRight={renderNewPasswordIcon}
+        value={newPassword}
+        caption={renderNewPasswordCaption}
+        onChangeText={setNewPassword}
+        onSubmitEditing={jumpToConfirmPassword}
+        returnKeyType="next"
+      />
+      <Input
+        style={styles.passwordInput}
+        ref={confirmPasswordRef}
+        autoCapitalize="none"
+        secureTextEntry={!confirmPasswordVisible}
+        placeholder={i18n.t('choose_password.confirm_password')}
+        accessoryRight={renderConfirmPasswordIcon}
+        value={confirmPassword}
+        status={getConfirmPasswordStatus()}
+        caption={renderConfirmPasswordCaption}
+        onChangeText={setConfirmPassword}
+        onSubmitEditing={handleCreateWallet}
+      />
+      <Button
+        style={styles.button}
+        accessoryLeft={creating ? LoadingIndicator : undefined}
+        disabled={getCreateDisabled()}
+        onPress={handleCreateWallet}
+      >
+        {creating ? undefined : i18n.t('choose_password.create')}
+      </Button>
+    </KeyboardAwareScrollView>
   );
 };
 
 const themedStyles = StyleService.create({
   container: {
-    flex: 1,
   },
   contentContainer: {
     paddingVertical: spacingY(2),
@@ -211,6 +204,11 @@ const themedStyles = StyleService.create({
   navigationContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  backIcon: {
+    width: 32,
+    height: 32,
+    tintColor: 'text-hint-color',
   },
   subtitle: {
     marginVertical: spacingY(2),
