@@ -21,7 +21,7 @@
 		"new_password": "新密碼",
 		"confirm_password": "確認密碼",
 		"import": "匯入",
-		"password_strength": "密碼強度： ",
+		"password_strength": "密碼強度：",
 		"strength_weak": "弱",
 		"strength_good": "強",
     "strength_strong": "極強",

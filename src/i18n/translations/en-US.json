@@ -21,7 +21,7 @@
 		"new_password": "New Password",
 		"confirm_password": "Confirm Password",
 		"import": "Import",
-		"password_strength": "Password strength:",
+		"password_strength": "Password strength: ",
 		"strength_weak": "Weak",
 		"strength_good": "Good",
     "strength_strong": "Strong",
