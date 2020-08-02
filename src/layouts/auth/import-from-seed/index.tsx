@@ -5,12 +5,13 @@ import { ethers } from 'ethers';
 import React from 'react';
 import {
   Keyboard,
+  KeyboardAvoidingView,
   Platform,
+  ScrollView,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View
 } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Action } from 'redux';
 import { useDispatch } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
@@ -187,78 +188,83 @@ export default ({ navigation }: any): React.ReactElement => {
 
   return (
     <>
-      <KeyboardAwareScrollView
-        contentContainerStyle={styles.contentContainer}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.container}
-        overScrollMode="never"
       >
-        <View
-          style={styles.navigationContainer}
+        <ScrollView
+          contentContainerStyle={styles.contentContainer}
+          keyboardShouldPersistTaps="handled"
+          overScrollMode="never"
         >
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
+          <View
+            style={styles.navigationContainer}
           >
-            <ArrowIosBackIcon style={styles.backIcon}/>
-          </TouchableOpacity>
-          <Text
-            category="h4"
+            <TouchableOpacity
+              onPress={() => navigation.goBack()}
+            >
+              <ArrowIosBackIcon style={styles.backIcon}/>
+            </TouchableOpacity>
+            <Text
+              category="h4"
+            >
+              {i18n.t('import_from_seed.title')}
+            </Text>
+          </View>
+          <Input
+            style={styles.seedPhraseInput}
+            multiline={true}
+            numberOfLines={3}
+            autoCapitalize="none"
+            placeholder={i18n.t('import_from_seed.seed_phrase')}
+            value={seed}
+            status={getSeedWordsStatus()}
+            onChangeText={onSeedWordsChange}
+            blurOnSubmit={true}
+            onFocus={() => setSeedInputFocus(true)}
+            onBlur={() => setSeedInputFocus(false)}
+            onSubmitEditing={jumpToNewPassword}
+            returnKeyType="next"
+            keyboardType={Platform.OS === 'android' ? 'visible-password' : 'default'}
+            autoCorrect={false}
+            textAlignVertical="top"
+          />
+          <Input
+            style={styles.passwordInput}
+            ref={newPasswordRef}
+            autoCapitalize="none"
+            secureTextEntry={!newPasswordVisible}
+            placeholder={i18n.t('import_from_seed.new_password')}
+            accessoryRight={renderNewPasswordIcon}
+            value={newPassword}
+            caption={renderNewPasswordCaption}
+            onChangeText={setNewPassword}
+            onSubmitEditing={jumpToConfirmPassword}
+            returnKeyType="next"
+          />
+          <Input
+            style={styles.passwordInput}
+            ref={confirmPasswordRef}
+            autoCapitalize="none"
+            secureTextEntry={!confirmPasswordVisible}
+            placeholder={i18n.t('import_from_seed.confirm_password')}
+            accessoryRight={renderConfirmPasswordIcon}
+            value={confirmPassword}
+            status={getConfirmPasswordStatus()}
+            caption={renderConfirmPasswordCaption}
+            onChangeText={setConfirmPassword}
+            onSubmitEditing={handleImportWallet}
+          />
+          <Button
+            style={styles.button}
+            accessoryLeft={importing ? LoadingIndicator : undefined}
+            disabled={getImportDisabled()}
+            onPress={handleImportWallet}
           >
-            {i18n.t('import_from_seed.title')}
-          </Text>
-        </View>
-        <Input
-          style={styles.seedPhraseInput}
-          multiline={true}
-          numberOfLines={3}
-          autoCapitalize="none"
-          placeholder={i18n.t('import_from_seed.seed_phrase')}
-          value={seed}
-          status={getSeedWordsStatus()}
-          onChangeText={onSeedWordsChange}
-          blurOnSubmit={true}
-          onFocus={() => setSeedInputFocus(true)}
-          onBlur={() => setSeedInputFocus(false)}
-          onSubmitEditing={jumpToNewPassword}
-          returnKeyType="next"
-          keyboardType={Platform.OS === 'android' ? 'visible-password' : 'default'}
-          autoCorrect={false}
-          textAlignVertical="top"
-        />
-        <Input
-          style={styles.passwordInput}
-          ref={newPasswordRef}
-          autoCapitalize="none"
-          secureTextEntry={!newPasswordVisible}
-          placeholder={i18n.t('import_from_seed.new_password')}
-          accessoryRight={renderNewPasswordIcon}
-          value={newPassword}
-          caption={renderNewPasswordCaption}
-          onChangeText={setNewPassword}
-          onSubmitEditing={jumpToConfirmPassword}
-          returnKeyType="next"
-        />
-        <Input
-          style={styles.passwordInput}
-          ref={confirmPasswordRef}
-          autoCapitalize="none"
-          secureTextEntry={!confirmPasswordVisible}
-          placeholder={i18n.t('import_from_seed.confirm_password')}
-          accessoryRight={renderConfirmPasswordIcon}
-          value={confirmPassword}
-          status={getConfirmPasswordStatus()}
-          caption={renderConfirmPasswordCaption}
-          onChangeText={setConfirmPassword}
-          onSubmitEditing={handleImportWallet}
-        />
-        <Button
-          style={styles.button}
-          accessoryLeft={importing ? LoadingIndicator : undefined}
-          disabled={getImportDisabled()}
-          onPress={handleImportWallet}
-        >
-          {importing ? undefined : i18n.t('import_from_seed.import')}
-        </Button>
-      </KeyboardAwareScrollView>
+            {importing ? undefined : i18n.t('import_from_seed.import')}
+          </Button>
+        </ScrollView>
+      </KeyboardAvoidingView>
       <SeedPhraseSuggestion
         seedWord={getLastSeedWord()}
         onSelectSuggestion={handleSelectSuggestion}
@@ -274,6 +280,7 @@ export default ({ navigation }: any): React.ReactElement => {
 
 const themedStyles = StyleService.create({
   container: {
+    flex: 1,
   },
   contentContainer: {
     paddingHorizontal: spacingX(2),
