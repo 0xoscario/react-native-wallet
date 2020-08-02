@@ -87,7 +87,7 @@ export const SeedPhraseSuggestion = (props: SeedPhraseSuggestionProps) => {
 
   return visible ? (
     <Layout
-      style={[styles.container, { bottom: keyboard.height }]}
+      style={[styles.container, (Platform.OS === 'ios') ? { bottom: keyboard.height } : {}]}
     >
       <ScrollView
         overScrollMode="never"
