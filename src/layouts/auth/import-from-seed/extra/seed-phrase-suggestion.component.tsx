@@ -20,7 +20,7 @@ import { spacingX, spacingY } from 'src/theme';
 
 const showEvent: KeyboardEventName = Platform.select({
   android: 'keyboardDidShow',
-  default: 'keyboardWillShow',
+  default: 'keyboardDidShow',
 });
 
 const hideEvent: KeyboardEventName = Platform.select({
@@ -34,7 +34,7 @@ export interface SeedPhraseSuggestionProps {
 }
 
 export const SeedPhraseSuggestion = (props: SeedPhraseSuggestionProps) => {
-  const [keyboardShowing, setKeyboardShowing] = React.useState<boolean>(false);
+  const [keyboard, setKeyboard] = React.useState({ showing: false, height: 0 });
   const styles = useStyleSheet(themedStyles);
   let wordlist: string[] = [];
 
@@ -54,11 +54,11 @@ export const SeedPhraseSuggestion = (props: SeedPhraseSuggestionProps) => {
   });
 
   const onKeyboardShow = (event: KeyboardEvent): void => {
-    setKeyboardShowing(true);
+    setKeyboard({ showing: true, height: event.endCoordinates.height });
   };
 
   const onKeyboardHide = (event: KeyboardEvent): void => {
-    setKeyboardShowing(false);
+    setKeyboard({ showing: false, height: 0 });
   };
 
   const getSuggestion = (seedWord: string) => {
@@ -81,13 +81,13 @@ export const SeedPhraseSuggestion = (props: SeedPhraseSuggestionProps) => {
   };
 
   const suggestionWords = getSuggestion(props.seedWord);
-  const visible = keyboardShowing &&
+  const visible = keyboard.showing &&
                   (suggestionWords.length > 0) &&
                   (!suggestionWords.includes(props.seedWord));
 
   return visible ? (
     <Layout
-      style={styles.container}
+      style={[styles.container, { bottom: keyboard.height }]}
     >
       <ScrollView
         overScrollMode="never"

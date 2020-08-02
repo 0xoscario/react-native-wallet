@@ -208,7 +208,9 @@ const themedStyles = StyleService.create({
   backIcon: {
     width: 32,
     height: 32,
-    tintColor: 'text-hint-color',
+    tintColor: 'text-basic-color',
+    marginHorizontal: spacingX(1),
+    marginVertical: spacingX(1),
   },
   subtitle: {
     marginVertical: spacingY(2),

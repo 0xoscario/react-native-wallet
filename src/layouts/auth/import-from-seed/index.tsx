@@ -5,6 +5,7 @@ import { ethers } from 'ethers';
 import React from 'react';
 import {
   Keyboard,
+  Platform,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View
@@ -31,6 +32,7 @@ import { SeedPhraseSuggestion } from 'src/layouts/auth/import-from-seed/extra/se
 import { ImportErrorModal } from 'src/layouts/auth/import-from-seed/extra/import-error-modal.component';
 
 export default ({ navigation }: any): React.ReactElement => {
+  const [seedInputFocus, setSeedInputFocus] = React.useState<boolean>(false);
   const [seed, setSeed] = React.useState<string>('');
   const [newPassword, setNewPassword] = React.useState<string>('');
   const [newPasswordVisible, setNewPasswordVisible] = React.useState<boolean>(false);
@@ -82,6 +84,9 @@ export default ({ navigation }: any): React.ReactElement => {
   };
 
   const getLastSeedWord = () => {
+    if (!seedInputFocus) {
+      return '';
+    }
     const enWordlists = ethers.wordlists.en;
     const words = enWordlists.split(seed).filter((val) => !!val);
     if (words.length > 0) {
@@ -211,9 +216,11 @@ export default ({ navigation }: any): React.ReactElement => {
           status={getSeedWordsStatus()}
           onChangeText={onSeedWordsChange}
           blurOnSubmit={true}
+          onFocus={() => setSeedInputFocus(true)}
+          onBlur={() => setSeedInputFocus(false)}
           onSubmitEditing={jumpToNewPassword}
           returnKeyType="next"
-          keyboardType="visible-password"
+          keyboardType={Platform.OS === 'android' ? 'visible-password' : 'default'}
           autoCorrect={false}
           textAlignVertical="top"
         />
@@ -269,8 +276,8 @@ const themedStyles = StyleService.create({
   container: {
   },
   contentContainer: {
-    paddingVertical: spacingY(2),
     paddingHorizontal: spacingX(2),
+    paddingVertical: spacingY(2),
   },
   navigationContainer: {
     flexDirection: 'row',
@@ -279,7 +286,9 @@ const themedStyles = StyleService.create({
   backIcon: {
     width: 32,
     height: 32,
-    tintColor: 'text-hint-color',
+    tintColor: 'text-basic-color',
+    marginHorizontal: spacingX(1),
+    marginVertical: spacingX(1),
   },
   seedPhraseInput: {
     marginTop: spacingY(2),
