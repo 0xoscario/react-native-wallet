@@ -213,6 +213,7 @@ export default ({ navigation }: any): React.ReactElement => {
           </View>
           <Input
             style={styles.seedPhraseInput}
+            textStyle={styles.seedPhraseTextInput}
             multiline={true}
             numberOfLines={3}
             autoCapitalize="none"
@@ -299,6 +300,9 @@ const themedStyles = StyleService.create({
   },
   seedPhraseInput: {
     marginTop: spacingY(2),
+  },
+  seedPhraseTextInput: {
+    height: 80,
   },
   passwordInput: {
     marginTop: spacingY(2),
