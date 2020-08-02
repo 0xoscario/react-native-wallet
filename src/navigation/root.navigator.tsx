@@ -51,6 +51,7 @@ const MainNavigator= (): React.ReactElement => (
     style={styles.safeArea}
   >
     <Drawer.Navigator
+      openByDefault={false}
       screenOptions={{ swipeEnabled: false }}
       drawerContent={props => <MainDrawer {...props}/>}
     >

@@ -302,7 +302,7 @@ const themedStyles = StyleService.create({
     marginTop: spacingY(2),
   },
   seedPhraseTextInput: {
-    height: 54,
+    height: 51,
   },
   passwordInput: {
     marginTop: spacingY(2),
