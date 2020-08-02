@@ -116,7 +116,7 @@ const themedStyles = StyleService.create({
     right: 0,
   },
   text: {
-    marginLeft: spacingX(1.5),
+    marginHorizontal: spacingX(1),
     marginVertical: spacingY(1.5),
     paddingHorizontal: spacingX(1),
     paddingVertical: spacingX(0.5),
