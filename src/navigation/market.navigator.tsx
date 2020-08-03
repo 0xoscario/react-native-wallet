@@ -3,15 +3,9 @@
  */
 import React from 'react';
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
+import { MarketScreen } from 'src/scenes/market/market.component';
 
 const Stack = createStackNavigator();
-
-const DummyScreen = () => {
-  return (
-    <>
-    </>
-  );
-};
 
 export const MarketNavigator = (): React.ReactElement => (
   <Stack.Navigator
@@ -20,6 +14,6 @@ export const MarketNavigator = (): React.ReactElement => (
       ...TransitionPresets.SlideFromRightIOS
     }}
   >
-    <Stack.Screen name='Market' component={DummyScreen} />
+    <Stack.Screen name='Market' component={MarketScreen} />
   </Stack.Navigator>
 );

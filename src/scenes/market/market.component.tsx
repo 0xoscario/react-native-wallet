@@ -16,7 +16,7 @@ import { MenuIcon } from 'src/components/icons';
 import { useEthereumNetwork } from 'src/hooks/useEthereumNetwork';
 import { useI18n } from 'src/i18n';
 
-export const WalletScreen = (props: any): React.ReactElement => {
+export const MarketScreen = (props: any): React.ReactElement => {
   const dispatch = useDispatch();
   const ethereumNetwork = useEthereumNetwork();
   const i18n = useI18n();
@@ -34,7 +34,7 @@ export const WalletScreen = (props: any): React.ReactElement => {
         onPress={() => dispatch(showNetworkListModal(true))}
       >
          <Text style={styles.title}>
-          {i18n.t('bottom_tab_bar.wallet')}
+          {i18n.t('bottom_tab_bar.market')}
         </Text>
         <View style={styles.network}>
           <View style={[styles.networkIcon, { backgroundColor: ethereumNetwork.color }]}/>

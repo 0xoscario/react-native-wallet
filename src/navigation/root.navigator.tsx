@@ -3,13 +3,15 @@
  */
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   createBottomTabNavigator,
   BottomTabNavigationOptions
 } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { createStackNavigator } from '@react-navigation/stack';
+import { setNetwork } from 'src/actions/setting';
+import { showNetworkListModal } from 'src/actions/ui';
+import { NetworkListModal } from 'src/components/network-list-modal.component';
 import { SafeAreaLayout } from 'src/components/safe-area-layout.component';
 import { AuthNavigator } from 'src/navigation/auth.navigator';
 import { BrowserNavigator } from 'src/navigation/browser.navigator';
@@ -18,10 +20,10 @@ import { WalletNavigator } from 'src/navigation/wallet.navigator';
 import { MainBottomNavigation } from 'src/scenes/main/main-bottom-navigation.component';
 import { MainDrawer } from 'src/scenes/main/main-drawer.component';
 import { RootState } from 'src/reducers';
+import { EthereumChainId } from 'src/utils/constants';
 
 const BottomTab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
-const Stack = createStackNavigator();
 
 const ROOT_ROUTES: string[] = ['Wallet', 'Market', 'Browser'];
 
@@ -46,18 +48,34 @@ const MainTabsNavigator = (): React.ReactElement => (
   </BottomTab.Navigator>
 );
 
-const MainNavigator= (): React.ReactElement => (
-  <SafeAreaLayout
-    style={styles.safeArea}
-  >
-    <Drawer.Navigator
-      screenOptions={{ swipeEnabled: false }}
-      drawerContent={props => <MainDrawer {...props}/>}
+const MainNavigator= (): React.ReactElement => {
+  const uiState = useSelector((state: RootState) => state.ui);
+  const dispatch = useDispatch();
+
+  const handleNetworkChange = (chainId: EthereumChainId) => {
+    dispatch(showNetworkListModal(false));
+    dispatch(setNetwork(chainId));
+  };
+
+  return (
+    <SafeAreaLayout
+      style={styles.safeArea}
     >
-      <Drawer.Screen name='MainTabs' component={MainTabsNavigator}/>
-    </Drawer.Navigator>
-  </SafeAreaLayout>
-);
+      <Drawer.Navigator
+        screenOptions={{ swipeEnabled: false }}
+        drawerContent={props => <MainDrawer {...props}/>}
+      >
+        <Drawer.Screen name='MainTabs' component={MainTabsNavigator}/>
+      </Drawer.Navigator>
+      <NetworkListModal
+        visible={uiState.networkListModalVisible}
+        onBackdropPress={() => dispatch(showNetworkListModal(false))}
+        onCloseButtonPress={() => dispatch(showNetworkListModal(false))}
+        onNetworkChange={handleNetworkChange}
+      />
+    </SafeAreaLayout>
+  )
+};
 
 export const RootNavigator = (): React.ReactElement => {
   const wallet = useSelector((state: RootState) => state.wallet);
