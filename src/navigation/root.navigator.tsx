@@ -49,7 +49,7 @@ const MainTabsNavigator = (): React.ReactElement => (
 );
 
 const MainNavigator= (): React.ReactElement => {
-  const uiState = useSelector((state: RootState) => state.ui);
+  const networkListModalVisible = useSelector((state: RootState) => state.ui.networkListModalVisible);
   const dispatch = useDispatch();
 
   const handleNetworkChange = (chainId: EthereumChainId) => {
@@ -68,7 +68,7 @@ const MainNavigator= (): React.ReactElement => {
         <Drawer.Screen name='MainTabs' component={MainTabsNavigator}/>
       </Drawer.Navigator>
       <NetworkListModal
-        visible={uiState.networkListModalVisible}
+        visible={networkListModalVisible}
         onBackdropPress={() => dispatch(showNetworkListModal(false))}
         onCloseButtonPress={() => dispatch(showNetworkListModal(false))}
         onNetworkChange={handleNetworkChange}

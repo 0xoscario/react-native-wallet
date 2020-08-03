@@ -18,6 +18,7 @@ import { setLanguage, setThemeName } from 'src/actions/setting';
 import { loadWallet } from 'src/actions/wallet';
 import { AntDesignIconsPack } from 'src/app/ant-design-icons-pack';
 import { AppLoading, Task } from 'src/app/app-loading.component';
+import { AlertModal } from 'src/components/alert.component';
 import { StatusBar } from 'src/components/status-bar.component';
 import { TRANSLATIONS, I18nProvider } from 'src/i18n';
 import { AppNavigator } from 'src/navigation/app.navigator';
@@ -54,6 +55,8 @@ const loadingTasks: Task[] = [
 const App = (): React.ReactElement => {
   const language = useSelector((state: RootState) => state.setting.language!);
   const themeName = useSelector((state: RootState) => state.setting.themeName!);
+  const alertInfo = useSelector((state: RootState) => state.ui.alertInfo);
+
   let barStyle: StatusBarStyle = 'light-content';
   if (themeName === 'light') {
     barStyle = 'dark-content';
@@ -81,6 +84,9 @@ const App = (): React.ReactElement => {
           </SafeAreaProvider>
         </ThemeProvider>
       </I18nProvider>
+      <AlertModal
+        alertInfo={alertInfo}
+      />
     </>
   );
 };
