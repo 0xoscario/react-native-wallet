@@ -6,7 +6,8 @@ import { LOGOUT } from 'src/actions/logout';
 import {
   SET_FIRST_RUN,
   SET_LANGUAGE,
-  SET_THEME_NAME
+  SET_THEME_NAME,
+  SET_NETWORK
 } from 'src/actions/setting';
 import { EthereumChainId } from 'src/utils/constants';
 import { ThemeName } from 'src/utils/types';
@@ -51,6 +52,13 @@ const settingReducer = (state = initialState, action: any) => {
         if (themeName !== 'brand') {
           draft.themeName = themeName;
         }
+      });
+    }
+    case SET_NETWORK: {
+      const chainId: EthereumChainId = action.payload;
+
+      return produce(state, (draft) => {
+        draft.ethereumChainId = chainId;
       });
     }
 

@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
+import { useDispatch } from 'react-redux'
 import {
   Divider,
   Text,
@@ -10,12 +11,16 @@ import {
   TopNavigation,
   TopNavigationAction
 } from '@ui-kitten/components';
+import { setNetwork } from 'src/actions/setting';
 import { MenuIcon } from 'src/components/icons';
+import { NetworkListModal } from 'src/components/network-list-modal.component';
 import { useEthereumNetwork } from 'src/hooks/useEthereumNetwork';
 import { useI18n } from 'src/i18n';
-import { spacingX } from 'src/theme';
+import { EthereumChainId } from 'src/utils/constants';
 
 export const WalletScreen = (props: any): React.ReactElement => {
+  const [networkModalVisible, setNetworkModalVisible] = React.useState<boolean>(false);
+  const dispatch = useDispatch();
   const ethereumNetwork = useEthereumNetwork();
   const i18n = useI18n();
 
@@ -28,7 +33,9 @@ export const WalletScreen = (props: any): React.ReactElement => {
 
   const renderSubtitle = (props?: TextProps) => {
     return (
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => setNetworkModalVisible(true)}
+      >
          <Text style={styles.title}>
           {i18n.t('bottom_tab_bar.wallet')}
         </Text>
@@ -42,6 +49,11 @@ export const WalletScreen = (props: any): React.ReactElement => {
     );
   };
 
+  const handleNetworkChange = (chainId: EthereumChainId) => {
+    setNetworkModalVisible(false);
+    dispatch(setNetwork(chainId));
+  };
+
   return (
     <>
       <TopNavigation
@@ -49,6 +61,12 @@ export const WalletScreen = (props: any): React.ReactElement => {
         subtitle={renderSubtitle}
       />
       <Divider/>
+      <NetworkListModal
+        visible={networkModalVisible}
+        onBackdropPress={() => setNetworkModalVisible(false)}
+        onCloseButtonPress={() => setNetworkModalVisible(false)}
+        onNetworkChange={handleNetworkChange}
+      />
     </>
   );
 };

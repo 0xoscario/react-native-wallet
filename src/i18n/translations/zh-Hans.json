@@ -51,5 +51,9 @@
     "wallet": "钱包",
     "market": "市场",
     "browser": "浏览"
-  }
+  },
+  "networks": {
+		"title": "网络",
+		"close": "关闭"
+	}
 }

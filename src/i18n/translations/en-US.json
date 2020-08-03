@@ -51,5 +51,9 @@
     "wallet": "Wallet",
     "market": "Market",
     "browser": "Browser"
-  }
+  },
+  "networks": {
+		"title": "Networks",
+		"close": "Close"
+	}
 }

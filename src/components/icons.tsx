@@ -12,6 +12,10 @@ export const BrowserIcon = (style?: any): IconElement => (
   <Icon {...style} name="appstore-o" pack="ant-design"/>
 );
 
+export const CheckIcon = (style?: any): IconElement => (
+  <Icon {...style} name="checkmark-outline"/>
+);
+
 export const EyeIcon = (style?: any): IconElement => (
   <Icon {...style} name="eye"/>
 );

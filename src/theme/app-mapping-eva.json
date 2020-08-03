@@ -63,6 +63,16 @@
           }
         }
       }
+    },
+    "Card": {
+      "appearances": {
+        "outline": {
+          "mapping": {
+              "bodyPaddingHorizontal": 0,
+              "bodyPaddingVertical": 0
+          }
+        }
+      }
     }
   }
 }
