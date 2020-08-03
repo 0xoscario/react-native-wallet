@@ -25,3 +25,43 @@ export const ETHERSCAN_NETWORK_PREFIXS: { [chainId in EthereumChainId]: string }
   [EthereumChainId.GOERLI]: 'goerli.',
   [EthereumChainId.KOVAN]: 'kovan.'
 };
+
+export interface EthereumNetwork {
+  name: string;
+  shortName: string;
+  chainId: EthereumChainId;
+  color: string;
+}
+
+export const allEthereumNetworks: EthereumNetwork[] = [
+	{
+		name: 'Ethereum Main Network',
+		shortName: 'Ethereum',
+		chainId: EthereumChainId.MAINNET,
+		color: '#2ecc71'
+	},
+	{
+		name: 'Ropsten Test Network',
+		shortName: 'Ropsten',
+		chainId: EthereumChainId.ROPSTEN,
+		color: '#d35400'
+	},
+	{
+		name: 'Rinkeby Test Network',
+		shortName: 'Rinkeby',
+		chainId: EthereumChainId.RINKEBY,
+		color: '#f1c40f'
+	},
+	{
+		name: 'Goerli Test Network',
+		shortName: 'Goerli',
+		chainId: EthereumChainId.GOERLI,
+		color: '#3498db'
+  },
+  {
+		name: 'Kovan Test Network',
+		shortName: 'Kovan',
+		chainId: EthereumChainId.KOVAN,
+		color: '#9b59b6'
+	},
+];

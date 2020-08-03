@@ -23,7 +23,7 @@ import {
   Text
 } from '@ui-kitten/components';
 import { initWallet } from 'src/actions/wallet';
-import { ArrowIosBackIcon, EyeIcon, EyeOffIcon } from 'src/components/icons';
+import { ArrowBackIcon, EyeIcon, EyeOffIcon } from 'src/components/icons';
 import { LoadingIndicator } from 'src/components/loading-indicator.component';
 import { useI18n } from 'src/i18n';
 import { spacingX, spacingY } from 'src/theme';
@@ -149,7 +149,7 @@ export default ({ navigation }: any): React.ReactElement => {
           <TouchableOpacity
             onPress={() => navigation.goBack()}
           >
-            <ArrowIosBackIcon style={styles.backIcon}/>
+            <ArrowBackIcon style={styles.backIcon}/>
           </TouchableOpacity>
           <Text
             category="h4"

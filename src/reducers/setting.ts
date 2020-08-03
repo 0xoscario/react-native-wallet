@@ -8,18 +8,21 @@ import {
   SET_LANGUAGE,
   SET_THEME_NAME
 } from 'src/actions/setting';
+import { EthereumChainId } from 'src/utils/constants';
 import { ThemeName } from 'src/utils/types';
 
 interface State {
   firstRun: boolean;
   language: string | null;
   themeName: Exclude<ThemeName, 'brand'> | null;
+  ethereumChainId: EthereumChainId;
 }
 
 const initialState: State = {
   firstRun: true,
   language: null,
-  themeName: null
+  themeName: null,
+  ethereumChainId: EthereumChainId.MAINNET
 };
 
 const settingReducer = (state = initialState, action: any) => {
