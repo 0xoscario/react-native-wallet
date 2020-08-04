@@ -1,4 +1,7 @@
 {
+  "global": {
+    "new_account": "Account {{number}}"
+  },
   "onboarding_carousel": {
     "title1": "Welcome to ZMWallet",
     "subtitle1": "A secure multi-account & multi-asset crypto wallet.",

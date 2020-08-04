@@ -10,6 +10,7 @@ export interface Account {
   blockchain: Blockchain;
   type: AccountType;
   address: string;
+  name: string;
   extra: string; // Path | Private key | Keystore
 }
 

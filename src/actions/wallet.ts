@@ -2,6 +2,7 @@
  * @format
  */
 import { ethers } from 'ethers';
+import I18n from 'i18n-js';
 import { Dispatch } from 'redux';
 import { AppStorage } from 'src/utils/app-storage';
 import { Encryptor } from 'src/utils/encryptor';
@@ -9,7 +10,7 @@ import { Vault } from 'src/utils/types';
 
 export const INIT_WALLET = 'INIT_WALLET';
 
-export function initWallet(password: string) {
+export function initWallet(password: string, i18n: typeof I18n) {
   return async (dispatch: Dispatch<any>) => {
     const wallet = ethers.Wallet.createRandom();
     const vault: Vault = {
@@ -18,6 +19,7 @@ export function initWallet(password: string) {
         blockchain: 'ETH',
         type: 'HD',
         address: wallet.address,
+        name: i18n.t('global.new_account', { number: 1 }),
         extra: wallet.mnemonic.path
       }]
     };
@@ -34,7 +36,7 @@ export function initWallet(password: string) {
   };
 }
 
-export function importWallet(password: string, mnemonic: string) {
+export function importWallet(password: string, mnemonic: string, i18n: typeof I18n) {
   return async (dispatch: Dispatch<any>) => {
     try {
       const wallet = ethers.Wallet.fromMnemonic(mnemonic);
@@ -44,6 +46,7 @@ export function importWallet(password: string, mnemonic: string) {
           blockchain: 'ETH',
           type: 'HD',
           address: wallet.address,
+          name: i18n.t('global.new_account', { number: 1 }),
           extra: wallet.mnemonic.path
         }]
       };

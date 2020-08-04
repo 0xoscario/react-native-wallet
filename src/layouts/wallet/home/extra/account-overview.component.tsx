@@ -48,9 +48,9 @@ export const AccountOverview = () => {
         onPress={() => {}}
       >
         <Text
-          category="h4"
+          category="h6"
         >
-          d
+          {account.name}
         </Text>
       </TouchableOpacity>
       <Text

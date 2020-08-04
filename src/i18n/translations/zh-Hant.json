@@ -1,4 +1,7 @@
 {
+  "global": {
+    "new_account": "帳戶 {{number}}"
+  },
   "onboarding_carousel": {
     "title1": "歡迎使用 ZMWallet",
     "subtitle1": "一款安全的多賬戶、多幣種加密錢包。",
