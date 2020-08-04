@@ -2,28 +2,15 @@
  * @format
  */
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import {
   Layout
 } from '@ui-kitten/components';
-import { Identicon } from 'src/components/identicon.component';
+import { AccountOverview } from 'src/layouts/wallet/home/extra/account-overview.component';
 
 export default (): React.ReactElement => {
   return (
-    <Layout
-      style={styles.container}
-      level="2"
-    >
-      <Identicon
-        address="0x0"
-        size="giant"
-      />
+    <Layout level="1">
+      <AccountOverview/>
     </Layout>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

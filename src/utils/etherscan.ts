@@ -3,11 +3,11 @@
  */
 import { EthereumChainId, ETHERSCAN_NETWORK_PREFIXS } from 'src/utils/constants';
 
-export const getEtherscanLink = function(
+export const getEtherscanLink = (
   chainId: EthereumChainId,
   data: string,
   type: 'transaction' | 'token' | 'address'
-): string {
+): string => {
   const prefix = `https://${ETHERSCAN_NETWORK_PREFIXS[chainId]}etherscan.io`;
   switch (type) {
     case 'transaction': {

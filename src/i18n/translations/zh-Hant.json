@@ -52,5 +52,8 @@
   "networks": {
 		"title": "網路",
 		"close": "關閉"
-	}
+	},
+  "account_overview": {
+    "account_copied_to_clipboard": "地址已複製！"
+  }
 }

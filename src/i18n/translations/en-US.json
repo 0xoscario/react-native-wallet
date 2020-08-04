@@ -52,5 +52,8 @@
   "networks": {
 		"title": "Networks",
 		"close": "Close"
-	}
+  },
+  "account_overview": {
+    "account_copied_to_clipboard": "Address copied to clipboard!"
+  }
 }

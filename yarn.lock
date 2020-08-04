@@ -1469,6 +1469,11 @@
     sudo-prompt "^9.0.0"
     wcwidth "^1.0.1"
 
+"@react-native-community/clipboard@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.npm.taobao.org/@react-native-community/clipboard/download/@react-native-community/clipboard-1.2.3.tgz#1590f6849d9c8a3bc14bbd1aa0f1f3945e4e60ca"
+  integrity sha1-FZD2hJ2cijvBS70aoPHzlF5OYMo=
+
 "@react-native-community/eslint-config@^1.1.0":
   version "1.1.0"
   resolved "https://registry.npm.taobao.org/@react-native-community/eslint-config/download/@react-native-community/eslint-config-1.1.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40react-native-community%2Feslint-config%2Fdownload%2F%40react-native-community%2Feslint-config-1.1.0.tgz#2dacad06dd44d13e778510864473fc6091f080c0"

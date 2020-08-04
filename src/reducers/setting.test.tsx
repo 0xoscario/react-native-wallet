@@ -33,7 +33,7 @@ describe('setting reducer', () => {
 
       return (
         <>
-          {i18n.t('wallet')}
+          {i18n.t('bottom_tab_bar.wallet')}
         </>
       );
     };
