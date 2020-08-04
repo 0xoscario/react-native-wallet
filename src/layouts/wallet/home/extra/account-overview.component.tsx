@@ -137,6 +137,8 @@ const themedStyles = StyleService.create({
   },
   inputAccountName: {
     padding: 0,
+    fontSize: 18,
+    color: 'text-basic-color'
   },
   addressContainer: {
     borderRadius: 40,
