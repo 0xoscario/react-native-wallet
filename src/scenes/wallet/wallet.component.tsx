@@ -15,6 +15,7 @@ import { showNetworkListModal } from 'src/actions/ui';
 import { MenuIcon } from 'src/components/icons';
 import { useEthereumNetwork } from 'src/hooks/useEthereumNetwork';
 import { useI18n } from 'src/i18n';
+import ContentView from 'src/layouts/wallet/home';
 
 export const WalletScreen = (props: any): React.ReactElement => {
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ export const WalletScreen = (props: any): React.ReactElement => {
         subtitle={renderSubtitle}
       />
       <Divider/>
+      <ContentView/>
     </>
   );
 };
