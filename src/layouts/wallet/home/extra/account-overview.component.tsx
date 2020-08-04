@@ -27,12 +27,26 @@ export const AccountOverview = () => {
     editing: false,
     name: ''
   });
+  const editInputRef = React.useRef<TextInput>(null);
   const dispatch = useDispatch();
   const i18n = useI18n();
   const account = useAccount();
   const styles = useStyleSheet(themedStyles);
 
+  const handleEditAccountName = () => {
+    setEditAccount({
+      editing: true,
+      name: account.name
+    });
+    setTimeout(() => {
+			editInputRef.current && editInputRef.current.focus();
+		}, 100);
+  };
+
   const handleChangeAccountName = () => {
+    if (editAccount.name) {
+
+    }
     setEditAccount({
       editing: false,
       name: ''
@@ -48,9 +62,7 @@ export const AccountOverview = () => {
   };
 
   return (
-    <ScrollView
-      keyboardShouldPersistTaps={false}
-    >
+    <ScrollView>
       <View
         style={styles.container}
       >
@@ -64,7 +76,10 @@ export const AccountOverview = () => {
         </TouchableOpacity>
         {editAccount.editing ? (
           <TextInput
+            ref={editInputRef}
+            style={[styles.inputAccountName, styles.field]}
             editable={editAccount.editing}
+            blurOnSubmit={true}
             onChangeText={(value: string) => setEditAccount({
               editing: true,
               name: value
@@ -76,14 +91,12 @@ export const AccountOverview = () => {
             returnKeyType="done"
             autoCapitalize="none"
             autoCorrect={false}
+            maxLength={16}
           />
         ) : (
           <TouchableOpacity
             style={styles.field}
-            onLongPress={() => setEditAccount({
-              editing: true,
-              name: account.name
-            })}
+            onLongPress={handleEditAccountName}
           >
             <Text
               category="h6"
@@ -121,6 +134,9 @@ const themedStyles = StyleService.create({
   },
   field: {
     marginTop: spacingY(1),
+  },
+  inputAccountName: {
+    padding: 0,
   },
   addressContainer: {
     borderRadius: 40,
