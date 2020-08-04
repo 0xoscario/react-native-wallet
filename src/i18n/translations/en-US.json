@@ -26,10 +26,7 @@
 		"strength_good": "Good",
     "strength_strong": "Strong",
     "must_be_at_least": "Must be at least {{number}} characters",
-    "import_error_modal": {
-      "error": "Seed phrase is invalid.",
-      "got_it": "GOT IT"
-    }
+    "import_error": "Seed phrase is invalid."
   },
   "choose_password": {
 		"title": "Create wallet",

@@ -23,6 +23,7 @@ import {
   StyleService,
   Text
 } from '@ui-kitten/components';
+import { showAlertModal } from 'src/actions/ui';
 import { importWallet } from 'src/actions/wallet';
 import { ArrowBackIcon, EyeIcon, EyeOffIcon } from 'src/components/icons';
 import { LoadingIndicator } from 'src/components/loading-indicator.component';
@@ -30,7 +31,6 @@ import { useI18n } from 'src/i18n';
 import { spacingX, spacingY } from 'src/theme';
 import { SecureKeychain } from 'src/utils/secure-keychain';
 import { SeedPhraseSuggestion } from 'src/layouts/auth/import-from-seed/extra/seed-phrase-suggestion.component';
-import { ImportErrorModal } from 'src/layouts/auth/import-from-seed/extra/import-error-modal.component';
 
 export default ({ navigation }: any): React.ReactElement => {
   const [seedInputFocus, setSeedInputFocus] = React.useState<boolean>(false);
@@ -40,7 +40,6 @@ export default ({ navigation }: any): React.ReactElement => {
   const [confirmPassword, setConfirmPassword] = React.useState<string>('');
   const [confirmPasswordVisible, setConfirmPasswordVisible] = React.useState<boolean>(false);
   const [importing, setImporting] = React.useState<boolean>(false);
-  const [errorModalVisible, setErrorModalVisible] = React.useState<boolean>(false);
   const newPasswordRef = React.useRef<Input>(null);
   const confirmPasswordRef = React.useRef<Input>(null);
   const dispatch: ThunkDispatch<any, null, Action<string>> = useDispatch();
@@ -181,7 +180,10 @@ export default ({ navigation }: any): React.ReactElement => {
       const result = await dispatch(importWallet(newPassword, enWordlists.join(words)));
       if (!result) {
         setImporting(false);
-        setErrorModalVisible(true);
+        dispatch(showAlertModal({
+          message: i18n.t('import_from_seed.import_error'),
+          duration: 1500
+        }));
       }
     }, 1000);
   };
@@ -269,11 +271,6 @@ export default ({ navigation }: any): React.ReactElement => {
       <SeedPhraseSuggestion
         seedWord={getLastSeedWord()}
         onSelectSuggestion={handleSelectSuggestion}
-      />
-      <ImportErrorModal
-        visible={errorModalVisible}
-        onBackdropPress={() => setErrorModalVisible(false)}
-        onGotItButtonPress={() => setErrorModalVisible(false)}
       />
     </>
   );

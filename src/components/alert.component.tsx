@@ -2,22 +2,21 @@
  * @format
  */
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   useStyleSheet,
   Modal,
+  Text,
   StyleService,
 } from '@ui-kitten/components';
-import { hideAlertModal, AlertInfo } from 'src/actions/ui';
+import { hideAlertModal } from 'src/actions/ui';
+import { RootState } from 'src/reducers';
+import { spacingX, spacingY } from 'src/theme';
 
-interface AlertModalProps {
-  alertInfo: AlertInfo | null;
-}
-
-export const AlertModal = (props: AlertModalProps): React.ReactElement => {
+export const AlertModal = () => {
+  const alertInfo = useSelector((state: RootState) => state.ui.alertInfo);
   const dispatch = useDispatch();
   const styles = useStyleSheet(themedStyles);
-  const { alertInfo } = props;
 
   const autoDismiss = React.useCallback(() => {
     if (alertInfo === null) {
@@ -25,7 +24,7 @@ export const AlertModal = (props: AlertModalProps): React.ReactElement => {
     }
     return setTimeout(() => {
       dispatch(hideAlertModal());
-    }, 1500);
+    }, alertInfo.duration);
   }, [alertInfo]);
 
   React.useEffect(() => {
@@ -41,13 +40,24 @@ export const AlertModal = (props: AlertModalProps): React.ReactElement => {
     <Modal
       style={styles.container}
       visible={alertInfo !== null}
+      onBackdropPress={() => dispatch(hideAlertModal())}
     >
-
+      <Text
+        appearance='hint'
+        category='s1'
+      >
+        {alertInfo?.message}
+      </Text>
     </Modal>
-    );
+  );
 };
 
 const themedStyles = StyleService.create({
   container: {
+    borderRadius: 6,
+    paddingHorizontal: spacingX(2),
+    paddingVertical: spacingY(2),
+    width: '60%',
+    backgroundColor: 'background-basic-color-1'
   },
 });

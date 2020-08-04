@@ -31,6 +31,7 @@ const settingReducer = (state = initialState, action: any) => {
     case LOGOUT: {
       return produce(state, (draft) => {
         draft.firstRun = true;
+        draft.ethereumChainId = EthereumChainId.MAINNET;
       });
     }
     case SET_FIRST_RUN: {

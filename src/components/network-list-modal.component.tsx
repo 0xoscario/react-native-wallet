@@ -92,9 +92,6 @@ const themedStyles = StyleService.create({
     paddingVertical: spacingY(2),
     textAlign: 'center'
   },
-  list: {
-    height: 190,
-  },
   listItem: {
     height: 48,
     paddingHorizontal: spacingX(3),

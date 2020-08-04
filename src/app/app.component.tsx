@@ -55,7 +55,6 @@ const loadingTasks: Task[] = [
 const App = (): React.ReactElement => {
   const language = useSelector((state: RootState) => state.setting.language!);
   const themeName = useSelector((state: RootState) => state.setting.themeName!);
-  const alertInfo = useSelector((state: RootState) => state.ui.alertInfo);
 
   let barStyle: StatusBarStyle = 'light-content';
   if (themeName === 'light') {
@@ -81,12 +80,10 @@ const App = (): React.ReactElement => {
           <SafeAreaProvider>
             <StatusBar translucent barStyle={barStyle}/>
             <AppNavigator/>
+            <AlertModal/>
           </SafeAreaProvider>
         </ThemeProvider>
       </I18nProvider>
-      <AlertModal
-        alertInfo={alertInfo}
-      />
     </>
   );
 };
