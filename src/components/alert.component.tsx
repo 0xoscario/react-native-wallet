@@ -58,6 +58,6 @@ const themedStyles = StyleService.create({
     paddingHorizontal: spacingX(2),
     paddingVertical: spacingY(2),
     width: '60%',
-    backgroundColor: 'background-basic-color-1'
+    backgroundColor: '#222B45'
   },
 });
