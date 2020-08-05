@@ -137,7 +137,6 @@ export default ({ navigation }: any): React.ReactElement => {
     <KeyboardAwareScrollView
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
-      enableOnAndroid={true}
       overScrollMode="never"
     >
       <View
