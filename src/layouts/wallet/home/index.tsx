@@ -29,7 +29,7 @@ export default (): React.ReactElement => {
 const themedStyles = StyleService.create({
   container: {
     flex: 1,
-    backgroundColor: 'background-basic-color-1'
+    backgroundColor: 'background-basic-color-2'
   },
   contentContainer: {
   },
