@@ -10,7 +10,7 @@ import {
 } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { setNetwork } from 'src/actions/settings';
-import { showNetworkListModal } from 'src/actions/ui';
+import { AccountListModal } from 'src/components/account-list-modal.component';
 import { NetworkListModal } from 'src/components/network-list-modal.component';
 import { SafeAreaLayout } from 'src/components/safe-area-layout.component';
 import { AuthNavigator } from 'src/navigation/auth.navigator';
@@ -49,11 +49,9 @@ const MainTabsNavigator = (): React.ReactElement => (
 );
 
 const MainNavigator= (): React.ReactElement => {
-  const networkListModalVisible = useSelector((state: RootState) => state.ui.networkListModalVisible);
   const dispatch = useDispatch();
 
   const handleNetworkChange = (chainId: EthereumChainId) => {
-    dispatch(showNetworkListModal(false));
     dispatch(setNetwork(chainId));
   };
 
@@ -67,19 +65,15 @@ const MainNavigator= (): React.ReactElement => {
       >
         <Drawer.Screen name='MainTabs' component={MainTabsNavigator}/>
       </Drawer.Navigator>
-      <NetworkListModal
-        visible={networkListModalVisible}
-        onBackdropPress={() => dispatch(showNetworkListModal(false))}
-        onCloseButtonPress={() => dispatch(showNetworkListModal(false))}
-        onNetworkChange={handleNetworkChange}
-      />
+      <NetworkListModal onNetworkChange={handleNetworkChange}/>
+      <AccountListModal onAccountChange={() => {}}/>
     </SafeAreaLayout>
   )
 };
 
 export const RootNavigator = (): React.ReactElement => {
-  const wallet = useSelector((state: RootState) => state.wallet);
-  return wallet.vault ? <MainNavigator/> : <AuthNavigator/>;
+  const vault = useSelector((state: RootState) => state.wallet.vault);
+  return vault ? <MainNavigator/> : <AuthNavigator/>;
 };
 
 const styles = StyleSheet.create({

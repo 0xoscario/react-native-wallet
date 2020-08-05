@@ -5,6 +5,7 @@
 export const SHOW_ALERT_MODAL = 'SHOW_ALERT_MODAL';
 export const HIDE_ALERT_MODAL = 'HIDE_ALERT_MODAL';
 export const SHOW_NETWORK_LIST_MODAL = 'SHOW_NETWORK_LIST_MODAL';
+export const SHOW_ACCOUNT_LIST_MODAL = 'SHOW_ACCOUNT_LIST_MODAL';
 
 export interface AlertInfo {
   message: string;
@@ -28,6 +29,13 @@ export function hideAlertModal() {
 export function showNetworkListModal(visible: boolean) {
   return {
     type: SHOW_NETWORK_LIST_MODAL,
+    payload: visible
+  };
+}
+
+export function showAccountListModal(visible: boolean) {
+  return {
+    type: SHOW_ACCOUNT_LIST_MODAL,
     payload: visible
   };
 }

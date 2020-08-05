@@ -14,7 +14,7 @@ import {
   StyleService,
   Text
 } from '@ui-kitten/components';
-import { showAlertModal } from 'src/actions/ui';
+import { showAccountListModal, showAlertModal } from 'src/actions/ui';
 import { setAccountName } from 'src/actions/wallet';
 import { EthereumAddress } from 'src/components/ethereum-address.component';
 import { Identicon } from 'src/components/identicon.component';
@@ -67,7 +67,7 @@ export const AccountOverview = () => {
       style={styles.container}
     >
       <TouchableOpacity
-        onPress={() => {}}
+        onPress={() => dispatch(showAccountListModal(true))}
       >
         <Identicon
           address={account.address}

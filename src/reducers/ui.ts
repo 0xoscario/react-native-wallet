@@ -7,17 +7,20 @@ import {
   SHOW_ALERT_MODAL,
   HIDE_ALERT_MODAL,
   SHOW_NETWORK_LIST_MODAL,
+  SHOW_ACCOUNT_LIST_MODAL,
   AlertInfo
 } from 'src/actions/ui';
 
 interface State {
   alertInfo: AlertInfo | null;
   networkListModalVisible: boolean;
+  accountListModalVisible: boolean;
 }
 
 const initialState: State = {
   alertInfo: null,
-  networkListModalVisible: false
+  networkListModalVisible: false,
+  accountListModalVisible: false
 };
 
 const uiReducer = (state = initialState, action: any) => {
@@ -42,6 +45,13 @@ const uiReducer = (state = initialState, action: any) => {
 
       return produce(state, (draft) => {
         draft.networkListModalVisible = visible;
+      });
+    }
+    case SHOW_ACCOUNT_LIST_MODAL: {
+      const visible: boolean = action.payload;
+
+      return produce(state, (draft) => {
+        draft.accountListModalVisible = visible;
       });
     }
 

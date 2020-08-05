@@ -7,6 +7,7 @@ import {
   ListRenderItemInfo,
   View
 } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   useStyleSheet,
   Button,
@@ -14,13 +15,14 @@ import {
   List,
   ListItem,
   Modal,
-  ModalProps,
   StyleService,
   Text
 } from '@ui-kitten/components';
+import { showNetworkListModal } from 'src/actions/ui';
 import { CheckIcon } from 'src/components/icons';
 import { useEthereumNetwork } from 'src/hooks/useEthereumNetwork';
 import { useI18n } from 'src/i18n';
+import { RootState } from 'src/reducers';
 import { spacingX, spacingY } from 'src/theme';
 import {
   allEthereumNetworks,
@@ -28,16 +30,16 @@ import {
   EthereumNetwork
 } from 'src/utils/constants';
 
-interface NetworkListModalProps extends Omit<ModalProps, 'children'> {
-  onCloseButtonPress: () => void;
+interface NetworkListModalProps {
   onNetworkChange: (chainId: EthereumChainId) => void;
 }
 
 export const NetworkListModal = (props: NetworkListModalProps): React.ReactElement => {
+  const visible = useSelector((state: RootState) => state.ui.networkListModalVisible);
+  const dispatch = useDispatch();
   const i18n = useI18n();
   const ethereumNetwork = useEthereumNetwork();
   const styles = useStyleSheet(themedStyles);
-  const { onCloseButtonPress, onNetworkChange, ...modalProps } = props;
 
   const renderItem = (info?: ListRenderItemInfo<EthereumNetwork>) => (
     <ListItem
@@ -47,15 +49,19 @@ export const NetworkListModal = (props: NetworkListModalProps): React.ReactEleme
         return <View {...props} style={[styles.networkIcon, { backgroundColor: info!.item.color }]}/>;
       }}
       accessoryRight={ethereumNetwork.chainId === info!.item.chainId ? CheckIcon : undefined}
-      onPress={() => onNetworkChange(info!.item.chainId)}
+      onPress={() => {
+        dispatch(showNetworkListModal(false));
+        props.onNetworkChange(info!.item.chainId);
+      }}
     />
   );
 
   return (
     <Modal
+      visible={visible}
       style={styles.container}
       backdropStyle={styles.backdrop}
-      {...modalProps}
+      onBackdropPress={() => dispatch(showNetworkListModal(false))}
     >
       <Text style={styles.title}>
         {i18n.t('networks.title')}
@@ -72,7 +78,7 @@ export const NetworkListModal = (props: NetworkListModalProps): React.ReactEleme
       <Button
         style={styles.button}
         appearance="outline"
-        onPress={onCloseButtonPress}
+        onPress={() => dispatch(showNetworkListModal(false))}
       >
         {i18n.t('networks.close')}
       </Button>
@@ -94,7 +100,7 @@ const themedStyles = StyleService.create({
     textAlign: 'center'
   },
   list: {
-    height: 244
+    height: 245
   },
   listItem: {
     height: 48,
