@@ -8,7 +8,7 @@ import {
   UPDATE_ETHEREUM_GAS_STATION,
   EthereumGasStation
 } from 'src/actions/gas';
-import { configureTestStore } from 'src/store';
+import { configureTestStore } from 'src/store/testStore';
 
 jest.mock('src/utils/axios');
 

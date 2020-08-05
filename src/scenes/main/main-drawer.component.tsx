@@ -17,6 +17,7 @@ import { setThemeName } from 'src/actions/settings';
 import { NightIcon, SettingsIcon } from 'src/components/icons';
 import { useI18n } from 'src/i18n';
 import { RootState } from 'src/reducers';
+import { SecureKeychain } from 'src/utils/secure-keychain';
 
 export const MainDrawer = ({ navigation }: any): React.ReactElement => {
   const dispatch = useDispatch();
@@ -59,7 +60,8 @@ export const MainDrawer = ({ navigation }: any): React.ReactElement => {
     dispatch(setThemeName((themeName === 'dark') ? 'light' : 'dark'));
   };
 
-  const handleSettings = () => {
+  const handleSettings = async () => {
+    await SecureKeychain.resetGenericPassword();
     dispatch(logout());
   };
 

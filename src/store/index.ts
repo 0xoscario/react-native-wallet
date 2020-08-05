@@ -24,11 +24,3 @@ export function configureStore() {
   const persistor = persistStore(store);
   return { store, persistor };
 }
-
-export function configureTestStore() {
-  const middlewares = [thunkMiddleware];
-  const middlewareEnhancer = applyMiddleware(...middlewares)
-
-  const store = createStore(rootReducer, middlewareEnhancer);
-  return store;
-}

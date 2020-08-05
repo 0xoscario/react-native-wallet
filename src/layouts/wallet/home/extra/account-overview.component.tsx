@@ -16,6 +16,7 @@ import {
   Text
 } from '@ui-kitten/components';
 import { showAlertModal } from 'src/actions/ui';
+import { setAccountName } from 'src/actions/wallet';
 import { EthereumAddress } from 'src/components/ethereum-address.component';
 import { Identicon } from 'src/components/identicon.component';
 import { useAccount } from 'src/hooks/useAccount';
@@ -45,7 +46,7 @@ export const AccountOverview = () => {
 
   const handleChangeAccountName = () => {
     if (editAccount.name) {
-
+      dispatch(setAccountName(account.address, editAccount.name));
     }
     setEditAccount({
       editing: false,

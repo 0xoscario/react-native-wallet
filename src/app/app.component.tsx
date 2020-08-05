@@ -25,7 +25,6 @@ import { AppNavigator } from 'src/navigation/app.navigator';
 import { RootState } from 'src/reducers';
 import { configureStore } from 'src/store';
 import { ThemeProvider } from 'src/theme';
-import { SecureKeychain } from 'src/utils/secure-keychain';
 
 const loadingTasks: Task[] = [
   async (dispatch: any, state: RootState) => {
@@ -44,10 +43,7 @@ const loadingTasks: Task[] = [
     return null;
   },
   async (dispatch: any, state: RootState) => {
-    const credentials = await SecureKeychain.getGenericPassword();
-    if (credentials?.password) {
-      await dispatch(loadWallet(credentials.password));
-    }
+    await dispatch(loadWallet());
     return null;
   },
 ];

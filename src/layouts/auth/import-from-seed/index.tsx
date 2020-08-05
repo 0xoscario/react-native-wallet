@@ -177,7 +177,7 @@ export default ({ navigation }: any): React.ReactElement => {
       await SecureKeychain.setGenericPassword('zmwallet-user', newPassword);
       const enWordlists = ethers.wordlists.en;
       const words = enWordlists.split(seed).filter((val) => !!val);
-      const result = await dispatch(importWallet(newPassword, enWordlists.join(words), i18n));
+      const result = await dispatch(importWallet(enWordlists.join(words), i18n));
       if (!result) {
         setImporting(false);
         dispatch(showAlertModal({

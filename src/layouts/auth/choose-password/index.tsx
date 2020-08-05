@@ -129,7 +129,7 @@ export default ({ navigation }: any): React.ReactElement => {
     setCreating(true);
     setTimeout(async () => {
       await SecureKeychain.setGenericPassword('zmwallet-user', newPassword);
-      await dispatch(initWallet(newPassword, i18n));
+      await dispatch(initWallet(i18n));
     }, 1000);
   };
 

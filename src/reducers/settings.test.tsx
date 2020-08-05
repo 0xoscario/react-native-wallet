@@ -7,7 +7,7 @@ import renderer from 'react-test-renderer';
 import {
   setLanguage
 } from 'src/actions/settings';
-import { configureTestStore } from 'src/store';
+import { configureTestStore } from 'src/store/testStore';
 import { I18nProvider, useI18n } from 'src/i18n';
 
 jest.mock('src/utils/axios');
