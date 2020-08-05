@@ -13,7 +13,7 @@ import { OnboardingScreen } from 'src/scenes/auth/onboarding.component';
 const Stack = createStackNavigator();
 
 export const AuthNavigator = (): React.ReactElement => {
-  const firstRun = useSelector((state: RootState) => state.setting.firstRun);
+  const firstRun = useSelector((state: RootState) => state.settings.firstRun);
 
   return firstRun ? (
     <OnboardingCarouselScreen/>

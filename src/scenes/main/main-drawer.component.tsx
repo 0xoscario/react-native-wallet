@@ -13,14 +13,14 @@ import {
   Toggle
 } from '@ui-kitten/components';
 import { logout } from 'src/actions/logout';
-import { setThemeName } from 'src/actions/setting';
+import { setThemeName } from 'src/actions/settings';
 import { NightIcon, SettingsIcon } from 'src/components/icons';
 import { useI18n } from 'src/i18n';
 import { RootState } from 'src/reducers';
 
 export const MainDrawer = ({ navigation }: any): React.ReactElement => {
   const dispatch = useDispatch();
-  const themeName = useSelector((state: RootState) => state.setting.themeName);
+  const themeName = useSelector((state: RootState) => state.settings.themeName);
   const i18n = useI18n();
 
   const renderHeader = (): React.ReactElement => (

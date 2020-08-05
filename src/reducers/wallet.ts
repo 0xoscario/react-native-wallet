@@ -9,12 +9,10 @@ import {
 import { Vault } from 'src/utils/types';
 
 interface State {
-  password: string | null;
   vault: Vault | null;
 }
 
 const initialState: State = {
-  password: null,
   vault: null
 };
 
@@ -24,11 +22,9 @@ const walletReducer = (state = initialState, action: any) => {
       return initialState;
     }
     case INIT_WALLET: {
-      const password: string = action.payload.password;
-      const vault: Vault = action.payload.vault;
+      const vault: Vault = action.payload;
 
       return produce(state, (draft) => {
-        draft.password = password;
         draft.vault = vault;
       });
     }

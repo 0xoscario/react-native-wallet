@@ -12,7 +12,7 @@ import {
   Text,
   ViewPager
 } from '@ui-kitten/components';
-import { setFirstRun } from 'src/actions/setting';
+import { setFirstRun } from 'src/actions/settings';
 import { useI18n } from 'src/i18n';
 import { spacingX, spacingY } from 'src/theme';
 

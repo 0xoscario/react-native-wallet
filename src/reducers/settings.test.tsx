@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import renderer from 'react-test-renderer';
 import {
   setLanguage
-} from 'src/actions/setting';
+} from 'src/actions/settings';
 import { configureTestStore } from 'src/store';
 import { I18nProvider, useI18n } from 'src/i18n';
 
@@ -20,11 +20,11 @@ describe('setting reducer', () => {
   });
 
   test('language', () => {
-    expect(store.getState().setting.language).toBeNull();
+    expect(store.getState().settings.language).toBeNull();
     store.dispatch(setLanguage('en-US'));
-    expect(store.getState().setting.language).toBe('en-US');
+    expect(store.getState().settings.language).toBe('en-US');
     store.dispatch(setLanguage('zh-Hant'));
-    expect(store.getState().setting.language).toBe('zh-Hant');
+    expect(store.getState().settings.language).toBe('zh-Hant');
   });
 
   test('i18n', () => {

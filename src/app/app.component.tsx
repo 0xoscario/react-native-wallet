@@ -14,7 +14,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { useSelector, Provider } from 'react-redux';
 import { IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import { setLanguage, setThemeName } from 'src/actions/setting';
+import { setLanguage, setThemeName } from 'src/actions/settings';
 import { loadWallet } from 'src/actions/wallet';
 import { AntDesignIconsPack } from 'src/app/ant-design-icons-pack';
 import { AppLoading, Task } from 'src/app/app-loading.component';
@@ -29,7 +29,7 @@ import { SecureKeychain } from 'src/utils/secure-keychain';
 
 const loadingTasks: Task[] = [
   async (dispatch: any, state: RootState) => {
-    if (!state.setting.language) {
+    if (!state.settings.language) {
       const find = RNLocalize.findBestAvailableLanguage(Object.keys(TRANSLATIONS));
       const language = find?.languageTag || 'en-US';
       dispatch(setLanguage(language));
@@ -37,7 +37,7 @@ const loadingTasks: Task[] = [
     return null;
   },
   async (dispatch: any, state: RootState) => {
-    if (!state.setting.themeName) {
+    if (!state.settings.themeName) {
       const colorScheme = Appearance.getColorScheme();
       dispatch(setThemeName((colorScheme === 'no-preference') ? 'light': colorScheme));
     }
@@ -53,8 +53,8 @@ const loadingTasks: Task[] = [
 ];
 
 const App = (): React.ReactElement => {
-  const language = useSelector((state: RootState) => state.setting.language!);
-  const themeName = useSelector((state: RootState) => state.setting.themeName!);
+  const language = useSelector((state: RootState) => state.settings.language!);
+  const themeName = useSelector((state: RootState) => state.settings.themeName!);
 
   let barStyle: StatusBarStyle = 'light-content';
   if (themeName === 'light') {

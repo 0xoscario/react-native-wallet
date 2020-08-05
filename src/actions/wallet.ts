@@ -28,10 +28,7 @@ export function initWallet(password: string, i18n: typeof I18n) {
 
     dispatch({
       type: INIT_WALLET,
-      payload: {
-        password,
-        vault
-      }
+      payload: vault
     });
   };
 }
@@ -55,10 +52,7 @@ export function importWallet(password: string, mnemonic: string, i18n: typeof I1
 
       dispatch({
         type: INIT_WALLET,
-        payload: {
-          password,
-          vault
-        }
+        payload: vault
       });
       return true;
     } catch (error) {
@@ -78,10 +72,7 @@ export function loadWallet(password: string) {
       const vault: Vault = await Encryptor.decrypt(password, encryptedVault);
       dispatch({
         type: INIT_WALLET,
-        payload: {
-          password,
-          vault
-        }
+        payload: vault
       });
       return true;
     } catch (error) {

@@ -9,7 +9,7 @@ import {
   BottomTabNavigationOptions
 } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { setNetwork } from 'src/actions/setting';
+import { setNetwork } from 'src/actions/settings';
 import { showNetworkListModal } from 'src/actions/ui';
 import { NetworkListModal } from 'src/components/network-list-modal.component';
 import { SafeAreaLayout } from 'src/components/safe-area-layout.component';
@@ -79,7 +79,7 @@ const MainNavigator= (): React.ReactElement => {
 
 export const RootNavigator = (): React.ReactElement => {
   const wallet = useSelector((state: RootState) => state.wallet);
-  return (wallet.password && wallet.vault) ? <MainNavigator/> : <AuthNavigator/>;
+  return wallet.vault ? <MainNavigator/> : <AuthNavigator/>;
 };
 
 const styles = StyleSheet.create({

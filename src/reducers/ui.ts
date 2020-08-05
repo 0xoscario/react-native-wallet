@@ -2,6 +2,7 @@
  * @format
  */
 import produce from 'immer';
+import { LOGOUT } from 'src/actions/logout';
 import {
   SHOW_ALERT_MODAL,
   HIDE_ALERT_MODAL,
@@ -21,6 +22,9 @@ const initialState: State = {
 
 const uiReducer = (state = initialState, action: any) => {
   switch (action.type) {
+    case LOGOUT: {
+      return initialState;
+    }
     case SHOW_ALERT_MODAL: {
       const alertInfo: AlertInfo = action.payload;
 

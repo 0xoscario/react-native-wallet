@@ -8,7 +8,7 @@ import {
   SET_LANGUAGE,
   SET_THEME_NAME,
   SET_NETWORK
-} from 'src/actions/setting';
+} from 'src/actions/settings';
 import { EthereumChainId } from 'src/utils/constants';
 import { ThemeName } from 'src/utils/types';
 
@@ -26,7 +26,7 @@ const initialState: State = {
   ethereumChainId: EthereumChainId.MAINNET
 };
 
-const settingReducer = (state = initialState, action: any) => {
+const settingsReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case LOGOUT: {
       return produce(state, (draft) => {
@@ -69,4 +69,4 @@ const settingReducer = (state = initialState, action: any) => {
   }
 };
 
-export default settingReducer;
+export default settingsReducer;
