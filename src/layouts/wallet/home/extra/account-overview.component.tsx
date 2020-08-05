@@ -3,7 +3,6 @@
  */
 import React from 'react';
 import {
-  ScrollView,
   TextInput,
   TouchableOpacity,
   View
@@ -64,68 +63,66 @@ export const AccountOverview = () => {
   };
 
   return (
-    <ScrollView>
-      <View
-        style={styles.container}
+    <View
+      style={styles.container}
+    >
+      <TouchableOpacity
+        onPress={() => {}}
       >
+        <Identicon
+          address={account.address}
+          size="large"
+        />
+      </TouchableOpacity>
+      {editAccount.editing ? (
+        <TextInput
+          ref={editInputRef}
+          style={[styles.inputAccountName, styles.field]}
+          editable={editAccount.editing}
+          blurOnSubmit={true}
+          onChangeText={(value: string) => setEditAccount({
+            editing: true,
+            name: value
+          })}
+          onSubmitEditing={handleChangeAccountName}
+          onBlur={handleChangeAccountName}
+          value={editAccount.name}
+          selectTextOnFocus
+          returnKeyType="done"
+          autoCapitalize="none"
+          autoCorrect={false}
+          maxLength={16}
+        />
+      ) : (
         <TouchableOpacity
-          onPress={() => {}}
-        >
-          <Identicon
-            address={account.address}
-            size="large"
-          />
-        </TouchableOpacity>
-        {editAccount.editing ? (
-          <TextInput
-            ref={editInputRef}
-            style={[styles.inputAccountName, styles.field]}
-            editable={editAccount.editing}
-            blurOnSubmit={true}
-            onChangeText={(value: string) => setEditAccount({
-              editing: true,
-              name: value
-            })}
-            onSubmitEditing={handleChangeAccountName}
-            onBlur={handleChangeAccountName}
-            value={editAccount.name}
-            selectTextOnFocus
-            returnKeyType="done"
-            autoCapitalize="none"
-            autoCorrect={false}
-            maxLength={16}
-          />
-        ) : (
-          <TouchableOpacity
-            style={styles.field}
-            onLongPress={handleEditAccountName}
-          >
-            <Text
-              category="h6"
-            >
-              {account.name}
-            </Text>
-          </TouchableOpacity>
-        )}
-        <Text
           style={styles.field}
-          category="label"
+          onLongPress={handleEditAccountName}
         >
-          $0
-        </Text>
-        <TouchableOpacity
-          style={[styles.field, styles.addressContainer]}
-          onPress={handleCopyAddress}
-        >
-          <EthereumAddress
-            style={styles.address}
-            appearance="hint"
-            category="label"
-            address={account.address}
-          />
+          <Text
+            category="h6"
+          >
+            {account.name}
+          </Text>
         </TouchableOpacity>
-      </View>
-    </ScrollView>
+      )}
+      <Text
+        style={styles.field}
+        category="label"
+      >
+        $0
+      </Text>
+      <TouchableOpacity
+        style={[styles.field, styles.addressContainer]}
+        onPress={handleCopyAddress}
+      >
+        <EthereumAddress
+          style={styles.address}
+          appearance="hint"
+          category="label"
+          address={account.address}
+        />
+      </TouchableOpacity>
+    </View>
   );
 };
 
