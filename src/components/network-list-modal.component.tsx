@@ -94,7 +94,7 @@ const themedStyles = StyleService.create({
     textAlign: 'center'
   },
   list: {
-    height: 245
+    height: 244
   },
   listItem: {
     height: 48,
