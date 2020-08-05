@@ -58,7 +58,8 @@ export const AccountOverview = () => {
     Clipboard.setString(account.address);
     dispatch(showAlertModal({
       message: i18n.t('account_overview.account_copied_to_clipboard'),
-      duration: 1500
+      duration: 1500,
+      status: 'success'
     }));
   };
 

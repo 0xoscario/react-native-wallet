@@ -24,6 +24,10 @@ export const EyeOffIcon = (style?: any): IconElement => (
   <Icon {...style} name="eye-off"/>
 );
 
+export const InfoIcon = (style: any): IconElement => (
+  <Icon {...style} name="info-outline"/>
+);
+
 export const MarketIcon = (style?: any): IconElement => (
   <Icon {...style} name="linechart" pack="ant-design"/>
 );
@@ -38,6 +42,10 @@ export const NightIcon = (style: any): IconElement => (
 
 export const SettingsIcon = (style: any): IconElement => (
   <Icon {...style} name="settings-outline"/>
+);
+
+export const SuccessIcon = (style: any): IconElement => (
+  <Icon {...style} name="checkmark-circle-2-outline"/>
 );
 
 export const WalletIcon = (style?: any): IconElement => (

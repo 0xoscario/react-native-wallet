@@ -183,7 +183,8 @@ export default ({ navigation }: any): React.ReactElement => {
         setImporting(false);
         dispatch(showAlertModal({
           message: i18n.t('import_from_seed.import_error'),
-          duration: 1500
+          duration: 1500,
+          status: 'info'
         }));
       }
     }, 1000);
