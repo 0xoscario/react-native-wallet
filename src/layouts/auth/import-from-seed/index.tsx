@@ -5,9 +5,7 @@ import { ethers } from 'ethers';
 import React from 'react';
 import {
   Keyboard,
-  KeyboardAvoidingView,
   Platform,
-  ScrollView,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View
@@ -16,6 +14,9 @@ import { Action } from 'redux';
 import { useDispatch } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import zxcvbn from 'zxcvbn';
+import {
+  KeyboardAwareScrollView
+} from '@codler/react-native-keyboard-aware-scroll-view';
 import {
   useStyleSheet,
   Button,
@@ -190,84 +191,80 @@ export default ({ navigation }: any): React.ReactElement => {
 
   return (
     <>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      <KeyboardAwareScrollView
         style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+        enableOnAndroid={true}
+        overScrollMode="never"
       >
-        <ScrollView
-          contentContainerStyle={styles.contentContainer}
-          keyboardShouldPersistTaps="handled"
-          overScrollMode="never"
+        <View
+          style={styles.navigationContainer}
         >
-          <View
-            style={styles.navigationContainer}
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
           >
-            <TouchableOpacity
-              onPress={() => navigation.goBack()}
-            >
-              <ArrowBackIcon style={styles.backIcon}/>
-            </TouchableOpacity>
-            <Text
-              category="h4"
-            >
-              {i18n.t('import_from_seed.title')}
-            </Text>
-          </View>
-          <Input
-            style={styles.seedPhraseInput}
-            textStyle={Platform.OS === 'ios' ? styles.seedPhraseTextInput : {}}
-            multiline={true}
-            numberOfLines={3}
-            autoCapitalize="none"
-            placeholder={i18n.t('import_from_seed.seed_phrase')}
-            value={seed}
-            status={getSeedWordsStatus()}
-            onChangeText={onSeedWordsChange}
-            blurOnSubmit={true}
-            onFocus={() => setSeedInputFocus(true)}
-            onBlur={() => setSeedInputFocus(false)}
-            onSubmitEditing={jumpToNewPassword}
-            returnKeyType="next"
-            keyboardType={Platform.OS === 'android' ? 'visible-password' : 'default'}
-            autoCorrect={false}
-            textAlignVertical="top"
-          />
-          <Input
-            style={styles.passwordInput}
-            ref={newPasswordRef}
-            autoCapitalize="none"
-            secureTextEntry={!newPasswordVisible}
-            placeholder={i18n.t('import_from_seed.new_password')}
-            accessoryRight={renderNewPasswordIcon}
-            value={newPassword}
-            caption={renderNewPasswordCaption}
-            onChangeText={setNewPassword}
-            onSubmitEditing={jumpToConfirmPassword}
-            returnKeyType="next"
-          />
-          <Input
-            style={styles.passwordInput}
-            ref={confirmPasswordRef}
-            autoCapitalize="none"
-            secureTextEntry={!confirmPasswordVisible}
-            placeholder={i18n.t('import_from_seed.confirm_password')}
-            accessoryRight={renderConfirmPasswordIcon}
-            value={confirmPassword}
-            status={getConfirmPasswordStatus()}
-            caption={renderConfirmPasswordCaption}
-            onChangeText={setConfirmPassword}
-            onSubmitEditing={handleImportWallet}
-          />
-          <Button
-            style={styles.button}
-            accessoryLeft={importing ? LoadingIndicator : undefined}
-            disabled={getImportDisabled()}
-            onPress={handleImportWallet}
+            <ArrowBackIcon style={styles.backIcon}/>
+          </TouchableOpacity>
+          <Text
+            category="h4"
           >
-            {importing ? undefined : i18n.t('import_from_seed.import')}
-          </Button>
-        </ScrollView>
-      </KeyboardAvoidingView>
+            {i18n.t('import_from_seed.title')}
+          </Text>
+        </View>
+        <Input
+          style={styles.seedPhraseInput}
+          textStyle={Platform.OS === 'ios' ? styles.seedPhraseTextInput : {}}
+          multiline={true}
+          numberOfLines={3}
+          autoCapitalize="none"
+          placeholder={i18n.t('import_from_seed.seed_phrase')}
+          value={seed}
+          status={getSeedWordsStatus()}
+          onChangeText={onSeedWordsChange}
+          blurOnSubmit={true}
+          onFocus={() => setSeedInputFocus(true)}
+          onBlur={() => setSeedInputFocus(false)}
+          onSubmitEditing={jumpToNewPassword}
+          returnKeyType="next"
+          keyboardType={Platform.OS === 'android' ? 'visible-password' : 'default'}
+          autoCorrect={false}
+          textAlignVertical="top"
+        />
+        <Input
+          style={styles.passwordInput}
+          ref={newPasswordRef}
+          autoCapitalize="none"
+          secureTextEntry={!newPasswordVisible}
+          placeholder={i18n.t('import_from_seed.new_password')}
+          accessoryRight={renderNewPasswordIcon}
+          value={newPassword}
+          caption={renderNewPasswordCaption}
+          onChangeText={setNewPassword}
+          onSubmitEditing={jumpToConfirmPassword}
+          returnKeyType="next"
+        />
+        <Input
+          style={styles.passwordInput}
+          ref={confirmPasswordRef}
+          autoCapitalize="none"
+          secureTextEntry={!confirmPasswordVisible}
+          placeholder={i18n.t('import_from_seed.confirm_password')}
+          accessoryRight={renderConfirmPasswordIcon}
+          value={confirmPassword}
+          status={getConfirmPasswordStatus()}
+          caption={renderConfirmPasswordCaption}
+          onChangeText={setConfirmPassword}
+          onSubmitEditing={handleImportWallet}
+        />
+        <Button
+          style={styles.button}
+          accessoryLeft={importing ? LoadingIndicator : undefined}
+          disabled={getImportDisabled()}
+          onPress={handleImportWallet}
+        >
+          {importing ? undefined : i18n.t('import_from_seed.import')}
+        </Button>
+      </KeyboardAwareScrollView>
       <SeedPhraseSuggestion
         seedWord={getLastSeedWord()}
         onSelectSuggestion={handleSelectSuggestion}

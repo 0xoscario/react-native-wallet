@@ -10,6 +10,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@codler/react-native-keyboard-aware-scroll-view": "^1.0.1",
     "@eva-design/eva": "^2.0.0",
     "@react-native-community/async-storage": "^1.11.0",
     "@react-native-community/clipboard": "^1.2.3",
