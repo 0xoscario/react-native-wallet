@@ -16,7 +16,6 @@ import {
 } from '@ui-kitten/components';
 import { showAccountListModal } from 'src/actions/ui';
 import { CheckIcon } from 'src/components/icons';
-import { SafeAreaLayout } from 'src/components/safe-area-layout.component';
 import { useAllAccounts, useCurrentAccount } from 'src/hooks/useAccount';
 import { useI18n } from 'src/i18n';
 import { RootState } from 'src/reducers';
@@ -66,44 +65,40 @@ export const AccountListModal = (props: AccountListModalProps): React.ReactEleme
       onBackButtonPress={() => dispatch(showAccountListModal(false))}
       onSwipeComplete={() => dispatch(showAccountListModal(false))}
     >
-      <SafeAreaLayout
-        edges={['bottom']}
-      >
-        <View style={styles.container}>
-          <View style={styles.header}>
-            <View style={styles.dragger}></View>
-          </View>
-          <Divider/>
-          <List
-            style={styles.list}
-            data={allAccounts}
-            ItemSeparatorComponent={Divider}
-            renderItem={renderItem}
-            overScrollMode="never"
-          />
-          <Divider/>
-          <Button
-            appearance="ghost"
-            onPress={() => {
-              dispatch(showAccountListModal(false));
-              props.onCreateAccount();
-            }}
-          >
-            {i18n.t('accounts.create_new_account')}
-          </Button>
-          <Divider/>
-          <Button
-            appearance="ghost"
-            onPress={() => {
-              dispatch(showAccountListModal(false));
-              props.onImportAccount();
-            }}
-          >
-            {i18n.t('accounts.import_account')}
-          </Button>
-          <Divider/>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <View style={styles.dragger}></View>
         </View>
-      </SafeAreaLayout>
+        <Divider/>
+        <List
+          style={styles.list}
+          data={allAccounts}
+          ItemSeparatorComponent={Divider}
+          renderItem={renderItem}
+          overScrollMode="never"
+        />
+        <Divider/>
+        <Button
+          appearance="ghost"
+          onPress={() => {
+            dispatch(showAccountListModal(false));
+            props.onCreateAccount();
+          }}
+        >
+          {i18n.t('accounts.create_new_account')}
+        </Button>
+        <Divider/>
+        <Button
+          appearance="ghost"
+          onPress={() => {
+            dispatch(showAccountListModal(false));
+            props.onImportAccount();
+          }}
+        >
+          {i18n.t('accounts.import_account')}
+        </Button>
+        <Divider/>
+      </View>
     </Modal>
   );
 };
