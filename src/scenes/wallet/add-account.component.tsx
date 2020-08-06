@@ -28,7 +28,7 @@ export const AddAccountScreen = (props: any): React.ReactElement => {
         title={i18n.t('accounts.create_new_account')}
       />
       <Divider/>
-      <ContentView/>
+      <ContentView navigation={props.navigation}/>
     </>
   );
 };

@@ -68,5 +68,9 @@
   "wallet": {
     "tokens": "資產",
     "collectibles": "收藏"
+  },
+  "add_account": {
+    "name": "帳戶名稱",
+    "create": "創建"
   }
 }

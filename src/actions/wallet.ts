@@ -4,8 +4,10 @@
 import { ethers } from 'ethers';
 import I18n from 'i18n-js';
 import { Dispatch } from 'redux';
+import { setAccount } from 'src/actions/settings';
 import { AppStorage } from 'src/utils/app-storage';
 import { Encryptor } from 'src/utils/encryptor';
+import { deriveChild } from 'src/utils/ethersHelper';
 import { SecureKeychain } from 'src/utils/secure-keychain';
 import { Vault } from 'src/utils/types';
 
@@ -114,6 +116,43 @@ export function setAccountName(address: string, name: string) {
         type: INIT_WALLET,
         payload: vault
       });
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
+}
+
+export function addAccount(name: string) {
+  return async (dispatch: Dispatch<any>) => {
+    const credentials = await SecureKeychain.getGenericPassword();
+    if (!credentials) {
+      return false;
+    }
+    const encryptedVault = await AppStorage.getVault();
+    if (!encryptedVault) {
+      return false;
+    }
+
+    try {
+      const vault: Vault = await Encryptor.decrypt(credentials.password, encryptedVault);
+      const deriveIndex = vault.accounts.filter(account => account.type === 'HD').length;
+      const derivePath = deriveChild(deriveIndex);
+      const hdNode = ethers.utils.HDNode.fromMnemonic(vault.mnemonic).derivePath(derivePath);
+      vault.accounts.push({
+        blockchain: 'ETH',
+        type: 'HD',
+        address: hdNode.address,
+        name: name,
+        extra: hdNode.path
+      });
+      const newEncryptedVault = await Encryptor.encrypt(credentials.password, vault);
+      await AppStorage.setVault(newEncryptedVault);
+      dispatch({
+        type: INIT_WALLET,
+        payload: vault
+      });
+      dispatch(setAccount(hdNode.address));
       return true;
     } catch (error) {
       return false;

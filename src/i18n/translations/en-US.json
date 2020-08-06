@@ -68,5 +68,9 @@
   "wallet": {
     "tokens": "TOKENS",
     "collectibles": "COLLECTIBLES"
+  },
+  "add_account": {
+    "name": "Account name",
+    "create": "Create"
   }
 }
