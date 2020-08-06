@@ -73,7 +73,6 @@ export const NetworkListModal = (props: NetworkListModalProps): React.ReactEleme
         </Text>
         <Divider/>
         <List
-          style={styles.list}
           data={allEthereumNetworks}
           ItemSeparatorComponent={Divider}
           renderItem={renderItem}
@@ -100,8 +99,6 @@ const themedStyles = StyleService.create({
   title: {
     paddingVertical: spacingY(2),
     textAlign: 'center'
-  },
-  list: {
   },
   listItem: {
     height: 48,

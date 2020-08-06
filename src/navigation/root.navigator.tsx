@@ -9,7 +9,7 @@ import {
   BottomTabNavigationOptions
 } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { setNetwork } from 'src/actions/settings';
+import { setAccount, setNetwork } from 'src/actions/settings';
 import { AccountListModal } from 'src/components/account-list-modal.component';
 import { NetworkListModal } from 'src/components/network-list-modal.component';
 import { SafeAreaLayout } from 'src/components/safe-area-layout.component';
@@ -55,6 +55,10 @@ const MainNavigator= (): React.ReactElement => {
     dispatch(setNetwork(chainId));
   };
 
+  const handleAccountChange = (address: string) => {
+    dispatch(setAccount(address));
+  };
+
   return (
     <SafeAreaLayout
       style={styles.safeArea}
@@ -66,7 +70,7 @@ const MainNavigator= (): React.ReactElement => {
         <Drawer.Screen name='MainTabs' component={MainTabsNavigator}/>
       </Drawer.Navigator>
       <NetworkListModal onNetworkChange={handleNetworkChange}/>
-      <AccountListModal onAccountChange={() => {}}/>
+      <AccountListModal onAccountChange={handleAccountChange}/>
     </SafeAreaLayout>
   )
 };

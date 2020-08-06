@@ -55,7 +55,11 @@
   "networks": {
 		"title": "网络",
 		"close": "关闭"
-	},
+  },
+  "accounts": {
+    "create_new_account": "创建账户",
+		"import_account": "导入账户"
+  },
   "account_overview": {
     "account_copied_to_clipboard": "地址已复制！"
   }

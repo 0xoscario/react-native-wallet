@@ -7,7 +7,8 @@ import {
   SET_FIRST_RUN,
   SET_LANGUAGE,
   SET_THEME_NAME,
-  SET_NETWORK
+  SET_NETWORK,
+  SET_ACCOUNT
 } from 'src/actions/settings';
 import { EthereumChainId } from 'src/utils/constants';
 import { ThemeName } from 'src/utils/types';
@@ -17,13 +18,15 @@ interface State {
   language: string | null;
   themeName: Exclude<ThemeName, 'brand'> | null;
   ethereumChainId: EthereumChainId;
+  address: string | null;
 }
 
 const initialState: State = {
   firstRun: true,
   language: null,
   themeName: null,
-  ethereumChainId: EthereumChainId.MAINNET
+  ethereumChainId: EthereumChainId.MAINNET,
+  address: null
 };
 
 const settingsReducer = (state = initialState, action: any) => {
@@ -60,6 +63,13 @@ const settingsReducer = (state = initialState, action: any) => {
 
       return produce(state, (draft) => {
         draft.ethereumChainId = chainId;
+      });
+    }
+    case SET_ACCOUNT: {
+      const address: string = action.payload;
+
+      return produce(state, (draft) => {
+        draft.address = address;
       });
     }
 

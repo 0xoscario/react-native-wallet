@@ -18,7 +18,7 @@ import { showAccountListModal, showAlertModal } from 'src/actions/ui';
 import { setAccountName } from 'src/actions/wallet';
 import { EthereumAddress } from 'src/components/ethereum-address.component';
 import { Identicon } from 'src/components/identicon.component';
-import { useAccount } from 'src/hooks/useAccount';
+import { useCurrentAccount } from 'src/hooks/useAccount';
 import { useI18n } from 'src/i18n';
 import { spacingX, spacingY } from 'src/theme';
 
@@ -30,13 +30,13 @@ export const AccountOverview = () => {
   const editInputRef = React.useRef<TextInput>(null);
   const dispatch = useDispatch();
   const i18n = useI18n();
-  const account = useAccount();
+  const currentAccount = useCurrentAccount();
   const styles = useStyleSheet(themedStyles);
 
   const handleEditAccountName = () => {
     setEditAccount({
       editing: true,
-      name: account.name
+      name: currentAccount.name
     });
     setTimeout(() => {
 			editInputRef.current && editInputRef.current.focus();
@@ -45,7 +45,7 @@ export const AccountOverview = () => {
 
   const handleChangeAccountName = () => {
     if (editAccount.name) {
-      dispatch(setAccountName(account.address, editAccount.name));
+      dispatch(setAccountName(currentAccount.address, editAccount.name));
     }
     setEditAccount({
       editing: false,
@@ -54,7 +54,7 @@ export const AccountOverview = () => {
   };
 
   const handleCopyAddress = () => {
-    Clipboard.setString(account.address);
+    Clipboard.setString(currentAccount.address);
     dispatch(showAlertModal({
       message: i18n.t('account_overview.account_copied_to_clipboard'),
       duration: 1500,
@@ -70,7 +70,7 @@ export const AccountOverview = () => {
         onPress={() => dispatch(showAccountListModal(true))}
       >
         <Identicon
-          address={account.address}
+          address={currentAccount.address}
           size="large"
         />
       </TouchableOpacity>
@@ -101,7 +101,7 @@ export const AccountOverview = () => {
           <Text
             category="h6"
           >
-            {account.name}
+            {currentAccount.name}
           </Text>
         </TouchableOpacity>
       )}
@@ -119,7 +119,7 @@ export const AccountOverview = () => {
           style={styles.address}
           appearance="hint"
           category="label"
-          address={account.address}
+          address={currentAccount.address}
         />
       </TouchableOpacity>
     </View>

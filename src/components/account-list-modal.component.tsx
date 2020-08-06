@@ -2,16 +2,26 @@
  * @format
  */
 import React from 'react';
-import { View } from 'react-native';
+import { ImageProps, ListRenderItemInfo, View } from 'react-native';
 import Modal from 'react-native-modal';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   useStyleSheet,
+  Avatar,
+  Divider,
+  List,
+  ListItem,
+  Button,
   StyleService,
 } from '@ui-kitten/components';
 import { showAccountListModal } from 'src/actions/ui';
+import { CheckIcon } from 'src/components/icons';
+import { useAllAccounts, useCurrentAccount } from 'src/hooks/useAccount';
 import { useI18n } from 'src/i18n';
 import { RootState } from 'src/reducers';
+import { spacingX } from 'src/theme';
+import { toDataUrl } from 'src/utils/blockies';
+import { Account } from 'src/utils/types';
 
 interface AccountListModalProps {
   onAccountChange: (address: string) => void;
@@ -20,8 +30,26 @@ interface AccountListModalProps {
 export const AccountListModal = (props: AccountListModalProps): React.ReactElement => {
   const visible = useSelector((state: RootState) => state.ui.accountListModalVisible);
   const dispatch = useDispatch();
+  const allAccounts = useAllAccounts();
+  const currentAccount = useCurrentAccount();
   const i18n = useI18n();
   const styles = useStyleSheet(themedStyles);
+
+  const renderItem = (info?: ListRenderItemInfo<Account>) => (
+    <ListItem
+      style={styles.listItem}
+      title={info!.item.name}
+      description="0 ETH"
+      accessoryLeft={(props?: Partial<ImageProps>) => {
+        return <Avatar source={{ uri: toDataUrl(info!.item.address) }}/>;
+      }}
+      accessoryRight={currentAccount.address === info!.item.address ? CheckIcon : undefined}
+      onPress={() => {
+        dispatch(showAccountListModal(false));
+        props.onAccountChange(info!.item.address);
+      }}
+    />
+  );
 
   return (
     <Modal
@@ -36,6 +64,31 @@ export const AccountListModal = (props: AccountListModalProps): React.ReactEleme
       onSwipeComplete={() => dispatch(showAccountListModal(false))}
     >
       <View style={styles.container}>
+        <View style={styles.header}>
+          <View style={styles.dragger}></View>
+        </View>
+        <Divider/>
+        <List
+          style={styles.list}
+          data={allAccounts}
+          ItemSeparatorComponent={Divider}
+          renderItem={renderItem}
+          overScrollMode="never"
+        />
+        <Divider/>
+        <Button
+          appearance="ghost"
+          onPress={() => {}}
+        >
+          {i18n.t('accounts.create_new_account')}
+        </Button>
+        <Divider/>
+        <Button
+          appearance="ghost"
+          onPress={() => {}}
+        >
+          {i18n.t('accounts.import_account')}
+        </Button>
       </View>
     </Modal>
   );
@@ -47,7 +100,27 @@ const themedStyles = StyleService.create({
     margin: 0,
   },
   container: {
-    borderRadius: 6,
+    borderTopLeftRadius: 6,
+    borderTopRightRadius: 6,
+    minHeight: 400,
     backgroundColor: 'background-basic-color-1'
+  },
+  header: {
+    height: 28,
+    alignItems: 'center',
+		justifyContent: 'center',
+  },
+  dragger: {
+    width: 48,
+    height: 4,
+    borderRadius: 4,
+    backgroundColor: 'background-alternative-color-1',
+    opacity: 0.5
+  },
+  list: {
+    flex: 1,
+  },
+  listItem: {
+    paddingHorizontal: spacingX(1),
   },
 });

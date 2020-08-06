@@ -56,6 +56,10 @@
 		"title": "Networks",
 		"close": "Close"
   },
+  "accounts": {
+    "create_new_account": "Create New Account",
+		"import_account": "Import an Account"
+  },
   "account_overview": {
     "account_copied_to_clipboard": "Address copied to clipboard!"
   }
