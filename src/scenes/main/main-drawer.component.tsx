@@ -48,7 +48,10 @@ export const MainDrawer = ({ navigation }: any): React.ReactElement => {
       </Text>
       <TouchableOpacity
         style={styles.group}
-        onPress={() => dispatch(showAccountListModal(true))}
+        onPress={() => {
+          navigation.toggleDrawer();
+          dispatch(showAccountListModal(true));
+        }}
       >
         <Identicon
           address={currentAccount.address}
