@@ -25,7 +25,6 @@ export default (): React.ReactElement => {
   );
 };
 
-
 const themedStyles = StyleService.create({
   container: {
     flex: 1,
