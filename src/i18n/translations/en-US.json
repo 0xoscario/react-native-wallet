@@ -62,5 +62,9 @@
   },
   "account_overview": {
     "account_copied_to_clipboard": "Address copied to clipboard!"
+  },
+  "wallet": {
+    "tokens": "TOKENS",
+    "collectibles": "COLLECTIBLES"
   }
 }

@@ -74,7 +74,7 @@ const themedStyles = StyleService.create({
     maxWidth: 320,
     paddingHorizontal: spacingX(2),
     paddingVertical: spacingY(2),
-    backgroundColor: '#222B45'
+    backgroundColor: 'background-alternative-color-1'
   },
   iconContainer: {
     alignItems: 'center',
