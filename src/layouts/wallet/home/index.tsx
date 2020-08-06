@@ -67,7 +67,7 @@ const themedStyles = StyleService.create({
     height: 1,
   },
   tab: {
-    paddingVertical: spacingY(1.5),
+    paddingVertical: spacingY(1),
   },
   tabContainer: {
     minHeight: 400,
