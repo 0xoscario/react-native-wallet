@@ -14,6 +14,7 @@ import {
 } from '@ui-kitten/components';
 import { logout } from 'src/actions/logout';
 import { setThemeName } from 'src/actions/settings';
+import { showAccountListModal } from 'src/actions/ui';
 import { Identicon } from 'src/components/identicon.component';
 import { NightIcon, SettingsIcon } from 'src/components/icons';
 import { useCurrentAccount } from 'src/hooks/useAccount';
@@ -40,14 +41,16 @@ export const MainDrawer = ({ navigation }: any): React.ReactElement => {
       >
         ZMWALLET
       </Text>
-      <TouchableOpacity style={styles.group}>
+      <TouchableOpacity
+        style={styles.group}
+        onPress={() => dispatch(showAccountListModal(true))}
+      >
         <Identicon
           address={currentAccount.address}
           size="large"
         />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.group}>
         <Text
+          style={styles.group}
           category="h6"
         >
           {currentAccount.name}
