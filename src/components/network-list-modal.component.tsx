@@ -7,6 +7,7 @@ import {
   ListRenderItemInfo,
   View
 } from 'react-native';
+import Modal from 'react-native-modal';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   useStyleSheet,
@@ -14,7 +15,6 @@ import {
   Divider,
   List,
   ListItem,
-  Modal,
   StyleService,
   Text
 } from '@ui-kitten/components';
@@ -58,49 +58,50 @@ export const NetworkListModal = (props: NetworkListModalProps): React.ReactEleme
 
   return (
     <Modal
-      visible={visible}
-      style={styles.container}
-      backdropStyle={styles.backdrop}
+      isVisible={visible}
+      backdropOpacity={0.5}
+      swipeDirection="down"
+      coverScreen={false}
+      propagateSwipe
       onBackdropPress={() => dispatch(showNetworkListModal(false))}
+      onBackButtonPress={() => dispatch(showNetworkListModal(false))}
+      onSwipeComplete={() => dispatch(showNetworkListModal(false))}
     >
-      <Text style={styles.title}>
-        {i18n.t('networks.title')}
-      </Text>
-      <Divider/>
-      <List
-        style={styles.list}
-        data={allEthereumNetworks}
-        ItemSeparatorComponent={Divider}
-        renderItem={renderItem}
-        overScrollMode="never"
-      />
-      <Divider/>
-      <Button
-        style={styles.button}
-        appearance="outline"
-        onPress={() => dispatch(showNetworkListModal(false))}
-      >
-        {i18n.t('networks.close')}
-      </Button>
+      <View style={styles.container}>
+        <Text style={styles.title}>
+          {i18n.t('networks.title')}
+        </Text>
+        <Divider/>
+        <List
+          style={styles.list}
+          data={allEthereumNetworks}
+          ItemSeparatorComponent={Divider}
+          renderItem={renderItem}
+          overScrollMode="never"
+        />
+        <Divider/>
+        <Button
+          style={styles.button}
+          appearance="outline"
+          onPress={() => dispatch(showNetworkListModal(false))}
+        >
+          {i18n.t('networks.close')}
+        </Button>
+      </View>
     </Modal>
   );
 };
 
 const themedStyles = StyleService.create({
   container: {
-    width: '90%',
     borderRadius: 6,
     backgroundColor: 'background-basic-color-1'
-  },
-  backdrop: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   title: {
     paddingVertical: spacingY(2),
     textAlign: 'center'
   },
   list: {
-    height: 245
   },
   listItem: {
     height: 48,

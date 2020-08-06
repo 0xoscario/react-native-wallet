@@ -2,6 +2,7 @@
  * @format
  */
 import React from 'react';
+import { View } from 'react-native';
 import Modal from 'react-native-modal';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -25,7 +26,7 @@ export const AccountListModal = (props: AccountListModalProps): React.ReactEleme
   return (
     <Modal
       isVisible={visible}
-      style={styles.container}
+      style={styles.modal}
       backdropOpacity={0.5}
       swipeDirection="down"
       coverScreen={false}
@@ -34,15 +35,19 @@ export const AccountListModal = (props: AccountListModalProps): React.ReactEleme
       onBackButtonPress={() => dispatch(showAccountListModal(false))}
       onSwipeComplete={() => dispatch(showAccountListModal(false))}
     >
-      <>
-      </>
+      <View style={styles.container}>
+      </View>
     </Modal>
   );
 };
 
 const themedStyles = StyleService.create({
-  container: {
+  modal: {
     justifyContent: 'flex-end',
     margin: 0,
+  },
+  container: {
+    borderRadius: 6,
+    backgroundColor: 'background-basic-color-1'
   },
 });
