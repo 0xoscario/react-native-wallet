@@ -36,19 +36,7 @@ const getTabBarVisibleOnRootScreenOptions = ({ route }: any): BottomTabNavigatio
   return { tabBarVisible: currentRoute && isOneOfRootRoutes(currentRoute) };
 };
 
-const MainTabsNavigator = (): React.ReactElement => (
-  <BottomTab.Navigator
-    backBehavior='none'
-    screenOptions={getTabBarVisibleOnRootScreenOptions}
-    tabBar={props => <MainBottomNavigation {...props}/>}
-  >
-    <BottomTab.Screen name='Wallet' component={WalletNavigator}/>
-    <BottomTab.Screen name='Market' component={MarketNavigator}/>
-    <BottomTab.Screen name='Browser' component={BrowserNavigator}/>
-  </BottomTab.Navigator>
-);
-
-const MainNavigator= (): React.ReactElement => {
+const MainTabsNavigator = ({ navigation }: any): React.ReactElement => {
   const dispatch = useDispatch();
 
   const handleNetworkChange = (chainId: EthereumChainId) => {
@@ -59,21 +47,51 @@ const MainNavigator= (): React.ReactElement => {
     dispatch(setAccount(address));
   };
 
+  const handleCreateAccount = () => {
+    navigation.navigate('Wallet', {
+      screen: 'AddAccount'
+    });
+  };
+
+  const handleImportAccount = () => {
+    navigation.navigate('Wallet', {
+      screen: 'ImportAccount'
+    });
+  };
+
   return (
-    <SafeAreaLayout
-      style={styles.safeArea}
-    >
-      <Drawer.Navigator
-        screenOptions={{ swipeEnabled: false }}
-        drawerContent={props => <MainDrawer {...props}/>}
+    <>
+      <BottomTab.Navigator
+        backBehavior='none'
+        screenOptions={getTabBarVisibleOnRootScreenOptions}
+        tabBar={props => <MainBottomNavigation {...props}/>}
       >
-        <Drawer.Screen name='MainTabs' component={MainTabsNavigator}/>
-      </Drawer.Navigator>
+        <BottomTab.Screen name='Wallet' component={WalletNavigator}/>
+        <BottomTab.Screen name='Market' component={MarketNavigator}/>
+        <BottomTab.Screen name='Browser' component={BrowserNavigator}/>
+      </BottomTab.Navigator>
       <NetworkListModal onNetworkChange={handleNetworkChange}/>
-      <AccountListModal onAccountChange={handleAccountChange}/>
-    </SafeAreaLayout>
-  )
+      <AccountListModal
+        onAccountChange={handleAccountChange}
+        onCreateAccount={handleCreateAccount}
+        onImportAccount={handleImportAccount}
+      />
+    </>
+  );
 };
+
+const MainNavigator= (): React.ReactElement => (
+  <SafeAreaLayout
+    style={styles.safeArea}
+  >
+    <Drawer.Navigator
+      screenOptions={{ swipeEnabled: false }}
+      drawerContent={props => <MainDrawer {...props}/>}
+    >
+      <Drawer.Screen name='MainTabs' component={MainTabsNavigator}/>
+    </Drawer.Navigator>
+  </SafeAreaLayout>
+);
 
 export const RootNavigator = (): React.ReactElement => {
   const vault = useSelector((state: RootState) => state.wallet.vault);

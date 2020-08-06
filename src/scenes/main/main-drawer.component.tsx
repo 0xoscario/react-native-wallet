@@ -15,13 +15,13 @@ import {
 import { logout } from 'src/actions/logout';
 import { setThemeName } from 'src/actions/settings';
 import { showAccountListModal } from 'src/actions/ui';
-import { Identicon } from 'src/components/identicon.component';
 import {
   AddIcon,
   ImportIcon,
   NightIcon,
   SettingsIcon
 } from 'src/components/icons';
+import { Identicon } from 'src/components/identicon.component';
 import { useCurrentAccount } from 'src/hooks/useAccount';
 import { useI18n } from 'src/i18n';
 import { RootState } from 'src/reducers';
@@ -83,9 +83,15 @@ export const MainDrawer = ({ navigation }: any): React.ReactElement => {
   );
 
   const handleCreateAccount = () => {
+    navigation.navigate('Wallet', {
+      screen: 'AddAccount'
+    });
   };
 
   const handleImportAccount = () => {
+    navigation.navigate('Wallet', {
+      screen: 'ImportAccount'
+    });
   };
 
   const renderDarkModeToggle = () => (

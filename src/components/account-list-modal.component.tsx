@@ -26,6 +26,8 @@ import { Account } from 'src/utils/types';
 
 interface AccountListModalProps {
   onAccountChange: (address: string) => void;
+  onCreateAccount: () => void;
+  onImportAccount: () => void;
 }
 
 export const AccountListModal = (props: AccountListModalProps): React.ReactElement => {
@@ -82,14 +84,20 @@ export const AccountListModal = (props: AccountListModalProps): React.ReactEleme
           <Divider/>
           <Button
             appearance="ghost"
-            onPress={() => {}}
+            onPress={() => {
+              dispatch(showAccountListModal(false));
+              props.onCreateAccount();
+            }}
           >
             {i18n.t('accounts.create_new_account')}
           </Button>
           <Divider/>
           <Button
             appearance="ghost"
-            onPress={() => {}}
+            onPress={() => {
+              dispatch(showAccountListModal(false));
+              props.onImportAccount();
+            }}
           >
             {i18n.t('accounts.import_account')}
           </Button>
