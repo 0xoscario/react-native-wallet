@@ -44,8 +44,9 @@ export const AccountOverview = () => {
   };
 
   const handleChangeAccountName = () => {
-    if (editAccount.name) {
-      dispatch(setAccountName(currentAccount.address, editAccount.name));
+    const name = editAccount.name.trim();
+    if (name) {
+      dispatch(setAccountName(currentAccount.address, name));
     }
     setEditAccount({
       editing: false,
