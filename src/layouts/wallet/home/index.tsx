@@ -15,7 +15,7 @@ import {
 } from '@ui-kitten/components';
 import { useI18n } from 'src/i18n';
 import { AccountOverview } from 'src/layouts/wallet/home/extra/account-overview.component';
-import { useBrandTheme } from 'src/theme';
+import { useBrandTheme, spacingY } from 'src/theme';
 
 export default (): React.ReactElement => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
@@ -36,12 +36,18 @@ export default (): React.ReactElement => {
           selectedIndex={selectedIndex}
           onSelect={(index) => setSelectedIndex(index)}
         >
-          <Tab title={i18n.t('wallet.tokens')}>
-            <Layout style={styles.tabContainer}>
+          <Tab
+            style={styles.tab}
+            title={i18n.t('wallet.tokens')}
+          >
+            <Layout style={styles.tabContainer} level="2">
             </Layout>
           </Tab>
-          <Tab title={i18n.t('wallet.collectibles')}>
-            <Layout style={styles.tabContainer}>
+          <Tab
+            style={styles.tab}
+            title={i18n.t('wallet.collectibles')}
+          >
+            <Layout style={styles.tabContainer} level="2">
             </Layout>
           </Tab>
         </TabView>
@@ -59,6 +65,9 @@ const themedStyles = StyleService.create({
   },
   indicator: {
     height: 1,
+  },
+  tab: {
+    paddingVertical: spacingY(1.5),
   },
   tabContainer: {
     minHeight: 400,
