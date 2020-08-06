@@ -2,7 +2,7 @@
  * @format
  */
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Divider,
@@ -14,13 +14,18 @@ import {
 } from '@ui-kitten/components';
 import { logout } from 'src/actions/logout';
 import { setThemeName } from 'src/actions/settings';
+import { Identicon } from 'src/components/identicon.component';
 import { NightIcon, SettingsIcon } from 'src/components/icons';
+import { useCurrentAccount } from 'src/hooks/useAccount';
 import { useI18n } from 'src/i18n';
 import { RootState } from 'src/reducers';
+import { spacingX, spacingY } from 'src/theme';
+import { getEthereumShortAddress } from 'src/utils/address';
 import { SecureKeychain } from 'src/utils/secure-keychain';
 
 export const MainDrawer = ({ navigation }: any): React.ReactElement => {
   const dispatch = useDispatch();
+  const currentAccount = useCurrentAccount();
   const themeName = useSelector((state: RootState) => state.settings.themeName);
   const i18n = useI18n();
 
@@ -29,27 +34,44 @@ export const MainDrawer = ({ navigation }: any): React.ReactElement => {
       style={styles.header}
       level="2"
     >
-      <View style={styles.profileContainer}>
+      <Text
+        style={styles.logo}
+        category='h6'
+      >
+        ZMWALLET
+      </Text>
+      <TouchableOpacity style={styles.group}>
+        <Identicon
+          address={currentAccount.address}
+          size="large"
+        />
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.group}>
         <Text
-          style={styles.profileName}
-          category='h6'
+          category="h6"
         >
-          ZMWallet
+          {currentAccount.name}
         </Text>
-      </View>
+        <Text
+          style={styles.field}
+          category="label"
+        >
+          $0
+        </Text>
+        <Text
+          style={styles.field}
+          appearance="hint"
+          category="label"
+        >
+          {getEthereumShortAddress(currentAccount.address)}
+        </Text>
+      </TouchableOpacity>
     </Layout>
   );
 
   const renderFooter = (): React.ReactElement => (
-    <Layout level="2">
-      <Divider/>
-      <Text
-        appearance='hint'
-        style={styles.footer}
-      >
-        Version 1.0.0
-      </Text>
-    </Layout>
+    <>
+    </>
   );
 
   const renderDarkModeToggle = () => (
@@ -71,9 +93,6 @@ export const MainDrawer = ({ navigation }: any): React.ReactElement => {
       header={renderHeader}
       footer={renderFooter}
     >
-      <DrawerItem
-        title="Share"
-      />
       <Divider/>
       <DrawerItem
         title={i18n.t('drawer.dark_mode')}
@@ -92,18 +111,16 @@ export const MainDrawer = ({ navigation }: any): React.ReactElement => {
 
 const styles = StyleSheet.create({
   header: {
-    height: 128,
-    paddingHorizontal: 16,
-    justifyContent: 'center',
+    paddingHorizontal: spacingX(2),
+    paddingVertical: spacingY(2),
   },
-  footer: {
-    padding: 16,
+  logo: {
+    letterSpacing: 1,
   },
-  profileContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  group: {
+    marginTop: spacingY(2),
   },
-  profileName: {
-    marginHorizontal: 16,
-  },
+  field: {
+    marginTop: spacingY(1),
+  }
 });
