@@ -16,7 +16,12 @@ import { logout } from 'src/actions/logout';
 import { setThemeName } from 'src/actions/settings';
 import { showAccountListModal } from 'src/actions/ui';
 import { Identicon } from 'src/components/identicon.component';
-import { NightIcon, SettingsIcon } from 'src/components/icons';
+import {
+  AddIcon,
+  ImportIcon,
+  NightIcon,
+  SettingsIcon
+} from 'src/components/icons';
 import { useCurrentAccount } from 'src/hooks/useAccount';
 import { useI18n } from 'src/i18n';
 import { RootState } from 'src/reducers';
@@ -77,6 +82,12 @@ export const MainDrawer = ({ navigation }: any): React.ReactElement => {
     </>
   );
 
+  const handleCreateAccount = () => {
+  };
+
+  const handleImportAccount = () => {
+  };
+
   const renderDarkModeToggle = () => (
     <Toggle checked={themeName === 'dark'} onChange={toggleDarkMode}/>
   );
@@ -96,6 +107,17 @@ export const MainDrawer = ({ navigation }: any): React.ReactElement => {
       header={renderHeader}
       footer={renderFooter}
     >
+      <Divider/>
+      <DrawerItem
+        title={i18n.t('drawer.create_new_account')}
+        accessoryLeft={AddIcon}
+        onPress={handleCreateAccount}
+      />
+      <DrawerItem
+        title={i18n.t('drawer.import_account')}
+        accessoryLeft={ImportIcon}
+        onPress={handleImportAccount}
+      />
       <Divider/>
       <DrawerItem
         title={i18n.t('drawer.dark_mode')}

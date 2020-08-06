@@ -44,6 +44,8 @@
     "must_be_at_least": "至少 {{number}} 个字符"
   },
   "drawer": {
+    "create_new_account": "创建账户",
+		"import_account": "导入账户",
     "dark_mode": "深色模式",
     "settings": "设置"
   },

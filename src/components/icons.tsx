@@ -4,6 +4,10 @@
 import React from 'react';
 import { Icon, IconElement } from '@ui-kitten/components';
 
+export const AddIcon = (style?: any): IconElement => (
+  <Icon {...style} name="plus-outline"/>
+);
+
 export const ArrowBackIcon = (style: any): IconElement => (
   <Icon {...style} name='arrow-back-outline'/>
 );
@@ -22,6 +26,10 @@ export const EyeIcon = (style?: any): IconElement => (
 
 export const EyeOffIcon = (style?: any): IconElement => (
   <Icon {...style} name="eye-off"/>
+);
+
+export const ImportIcon = (style?: any): IconElement => (
+  <Icon {...style} name="download-outline"/>
 );
 
 export const InfoIcon = (style: any): IconElement => (

@@ -44,6 +44,8 @@
     "must_be_at_least": "Must be at least {{number}} characters"
   },
   "drawer": {
+    "create_new_account": "Create New Account",
+		"import_account": "Import an Account",
     "dark_mode": "Dark mode",
     "settings": "Settings"
   },
