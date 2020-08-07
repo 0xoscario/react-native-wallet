@@ -2,7 +2,7 @@
  * @format
  */
 import React from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView } from 'react-native';
 import {
   useStyleSheet,
   StyleService,
@@ -11,7 +11,9 @@ import {
   ThemeProvider
 } from '@ui-kitten/components';
 import { useI18n } from 'src/i18n';
-import { useBrandTheme, spacingX, spacingY } from 'src/theme';
+import { ImportKeystore } from 'src/layouts/wallet/import-account/extra/import-keystore.component';
+import { ImportPrivateKey } from 'src/layouts/wallet/import-account/extra/import-private-key.component';
+import { useBrandTheme, spacingY } from 'src/theme';
 
 export default (): React.ReactElement => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
@@ -33,12 +35,10 @@ export default (): React.ReactElement => {
           onSelect={(index) => setSelectedIndex(index)}
         >
           <Tab title={i18n.t('import_account.private_key')}>
-            <View style={styles.grow}>
-            </View>
+            <ImportPrivateKey/>
           </Tab>
           <Tab title={i18n.t('import_account.keystore')}>
-            <View style={styles.grow}>
-            </View>
+            <ImportKeystore/>
           </Tab>
         </TabView>
       </ThemeProvider>

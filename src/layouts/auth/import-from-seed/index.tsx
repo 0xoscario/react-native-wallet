@@ -69,7 +69,7 @@ export default ({ navigation }: any): React.ReactElement => {
     }
   };
 
-  const onSeedWordsChange = (value: string) => {
+  const handleSeedWordsChange = (value: string) => {
     setSeed(value.toLowerCase());
   };
 
@@ -220,7 +220,7 @@ export default ({ navigation }: any): React.ReactElement => {
           placeholder={i18n.t('import_from_seed.seed_phrase')}
           value={seed}
           status={getSeedWordsStatus()}
-          onChangeText={onSeedWordsChange}
+          onChangeText={handleSeedWordsChange}
           blurOnSubmit={true}
           onFocus={() => setSeedInputFocus(true)}
           onBlur={() => setSeedInputFocus(false)}

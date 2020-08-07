@@ -12,6 +12,11 @@ interface ContextType {
 
 const ThemeContext = React.createContext<ContextType | null>(null);
 
+export function useTheme() {
+  const context = React.useContext(ThemeContext)!;
+  return appThemes.eva[context.themeName];
+}
+
 export function useBrandTheme() {
   const context = React.useContext(ThemeContext)!;
   return {
