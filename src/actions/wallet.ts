@@ -140,7 +140,9 @@ export function addAccount(name: string) {
       const derivePath = deriveChild(deriveIndex);
       const hdNode = ethers.utils.HDNode.fromMnemonic(vault.mnemonic).derivePath(derivePath);
       // remove duplicate account
-      vault.accounts = vault.accounts.filter(account => account.address === hdNode.address);
+      console.log(vault.accounts);
+      vault.accounts = vault.accounts.filter(account => account.address !== hdNode.address);
+      console.log(vault.accounts);
       vault.accounts.push({
         blockchain: 'ETH',
         type: 'HD',
