@@ -10,7 +10,6 @@ import {
   useStyleSheet,
   Button,
   Input,
-  Layout,
   StyleService
 } from '@ui-kitten/components';
 import { addAccount } from 'src/actions/wallet';
@@ -46,36 +45,41 @@ export default ({ navigation }: any): React.ReactElement => {
   };
 
   return (
-    <Layout style={styles.container} level="2">
-      <ScrollView>
-        <Input
-          autoCapitalize="none"
-          autoCorrect={false}
-          label={i18n.t('add_account.name')}
-          value={accountName}
-          onChangeText={setAccountName}
-          onSubmitEditing={handleAddAccount}
-        />
-        <Button
-          style={styles.button}
-          accessoryLeft={creating ? LoadingIndicator : undefined}
-          disabled={getCreateDisabled()}
-          onPress={handleAddAccount}
-        >
-          {creating ? undefined : i18n.t('add_account.create')}
-        </Button>
-      </ScrollView>
-    </Layout>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.contentContainer}
+      bounces={false}
+    >
+      <Input
+        autoCapitalize="none"
+        autoCorrect={false}
+        label={i18n.t('add_account.name')}
+        value={accountName}
+        onChangeText={setAccountName}
+        onSubmitEditing={handleAddAccount}
+      />
+      <Button
+        style={styles.button}
+        accessoryLeft={creating ? LoadingIndicator : undefined}
+        disabled={getCreateDisabled()}
+        onPress={handleAddAccount}
+      >
+        {creating ? undefined : i18n.t('add_account.create')}
+      </Button>
+    </ScrollView>
   );
 };
 
 const themedStyles = StyleService.create({
   container: {
+    backgroundColor: 'background-basic-color-2'
+  },
+  contentContainer: {
     flex: 1,
     paddingVertical: spacingY(2),
     paddingHorizontal: spacingX(2),
   },
   button: {
-    marginTop: spacingY(4),
+    marginTop: spacingY(3),
   }
 });

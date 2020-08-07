@@ -72,5 +72,11 @@
   "add_account": {
     "name": "账户名称",
     "create": "创建"
+  },
+  "import_account": {
+    "private_key": "私钥",
+    "keystore": "Keystore",
+    "name": "账户名称",
+    "import": "导入"
   }
 }

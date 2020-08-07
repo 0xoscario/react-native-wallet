@@ -72,5 +72,11 @@
   "add_account": {
     "name": "Account name",
     "create": "Create"
+  },
+  "import_account": {
+    "private_key": "Private key",
+    "keystore": "Keystore",
+    "name": "Account name",
+    "import": "Import"
   }
 }
