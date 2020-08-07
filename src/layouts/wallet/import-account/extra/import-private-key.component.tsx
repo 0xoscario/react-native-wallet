@@ -57,6 +57,7 @@ export const ImportPrivateKey = () => {
           multiline={true}
           numberOfLines={3}
           autoCapitalize="none"
+          label={i18n.t('import_account.paste_private_key')}
           placeholder="TBD"
           value={privateKey}
           onChangeText={setPrivateKey}

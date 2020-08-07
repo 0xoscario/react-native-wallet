@@ -77,6 +77,9 @@
     "private_key": "私钥",
     "keystore": "Keystore",
     "name": "账户名称",
+    "paste_private_key": "请粘贴你的私钥字串",
+    "paste_keystore": "请粘贴你的 keystore 文件内容",
+    "input_keystore_password": "请输入 keystore 密码",
     "import": "导入"
   }
 }
