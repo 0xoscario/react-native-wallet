@@ -2,12 +2,12 @@
  * @format
  */
 import React from 'react';
+import { View } from 'react-native';
 import {
   KeyboardAwareScrollView
 } from '@codler/react-native-keyboard-aware-scroll-view';
 import {
   useStyleSheet,
-  Layout,
   StyleService,
   Tab,
   TabView,
@@ -25,30 +25,25 @@ export default (): React.ReactElement => {
 
   return (
     <KeyboardAwareScrollView
-      style={styles.container}
-      contentContainerStyle={styles.contentContainer}
+      bounces={false}
       overScrollMode="never"
     >
       <AccountOverview/>
       <ThemeProvider theme={brandTheme}>
         <TabView
+          style={styles.tabView}
+          tabBarStyle={styles.tabBar}
           indicatorStyle={styles.indicator}
           selectedIndex={selectedIndex}
           onSelect={(index) => setSelectedIndex(index)}
         >
-          <Tab
-            style={styles.tab}
-            title={i18n.t('wallet.tokens')}
-          >
-            <Layout style={styles.tabContainer} level="2">
-            </Layout>
+          <Tab title={i18n.t('wallet.tokens')}>
+            <View style={styles.grow}>
+            </View>
           </Tab>
-          <Tab
-            style={styles.tab}
-            title={i18n.t('wallet.collectibles')}
-          >
-            <Layout style={styles.tabContainer} level="2">
-            </Layout>
+          <Tab title={i18n.t('wallet.collectibles')}>
+            <View style={styles.grow}>
+            </View>
           </Tab>
         </TabView>
       </ThemeProvider>
@@ -57,19 +52,16 @@ export default (): React.ReactElement => {
 };
 
 const themedStyles = StyleService.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'background-basic-color-2'
+  tabView: {
+    minHeight: 400
   },
-  contentContainer: {
+  tabBar: {
+    paddingVertical: spacingY(1),
   },
   indicator: {
     height: 1,
   },
-  tab: {
-    paddingVertical: spacingY(1),
-  },
-  tabContainer: {
-    minHeight: 400,
-  },
+  grow: {
+    flex: 1,
+  }
 });

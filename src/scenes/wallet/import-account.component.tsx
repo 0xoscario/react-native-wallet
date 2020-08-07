@@ -3,7 +3,6 @@
  */
 import React from 'react';
 import {
-  Divider,
   TopNavigation,
   TopNavigationAction
 } from '@ui-kitten/components';
@@ -27,7 +26,6 @@ export const ImportAccountScreen = (props: any): React.ReactElement => {
         accessoryLeft={renderBackAction}
         title={i18n.t('accounts.import_account')}
       />
-      <Divider/>
       <ContentView/>
     </>
   );
