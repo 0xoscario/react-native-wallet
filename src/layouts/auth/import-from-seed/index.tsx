@@ -193,8 +193,8 @@ export default ({ navigation }: any): React.ReactElement => {
   return (
     <>
       <KeyboardAwareScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}
+        contentContainerStyle={styles.container}
+        bounces={false}
         overScrollMode="never"
       >
         <View
@@ -275,9 +275,6 @@ export default ({ navigation }: any): React.ReactElement => {
 
 const themedStyles = StyleService.create({
   container: {
-    flex: 1,
-  },
-  contentContainer: {
     paddingHorizontal: spacingX(2),
     paddingVertical: spacingY(2),
   },

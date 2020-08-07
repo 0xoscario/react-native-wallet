@@ -2,15 +2,13 @@
  * @format
  */
 import React from 'react';
+import { ScrollView } from 'react-native';
 import {
   Keyboard,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View
 } from 'react-native';
-import {
-  KeyboardAwareScrollView
-} from '@codler/react-native-keyboard-aware-scroll-view';
 import { Action } from 'redux';
 import { useDispatch } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
@@ -134,9 +132,9 @@ export default ({ navigation }: any): React.ReactElement => {
   };
 
   return (
-    <KeyboardAwareScrollView
-      style={styles.container}
-      contentContainerStyle={styles.contentContainer}
+    <ScrollView
+      contentContainerStyle={styles.container}
+      bounces={false}
       overScrollMode="never"
     >
       <View
@@ -192,15 +190,12 @@ export default ({ navigation }: any): React.ReactElement => {
       >
         {creating ? undefined : i18n.t('choose_password.create')}
       </Button>
-    </KeyboardAwareScrollView>
+    </ScrollView>
   );
 };
 
 const themedStyles = StyleService.create({
   container: {
-    flex: 1,
-  },
-  contentContainer: {
     paddingVertical: spacingY(2),
     paddingHorizontal: spacingX(2),
   },
