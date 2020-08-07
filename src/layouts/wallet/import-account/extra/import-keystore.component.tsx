@@ -5,9 +5,11 @@ import React from 'react';
 import {
   Keyboard,
   Platform,
-  TouchableWithoutFeedback,
-  View
+  TouchableWithoutFeedback
 } from 'react-native';
+import {
+  KeyboardAwareScrollView
+} from '@codler/react-native-keyboard-aware-scroll-view';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import { Action } from 'redux';
@@ -85,7 +87,12 @@ export const ImportKeystore = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <View style={styles.container}>
+      <KeyboardAwareScrollView 
+        contentContainerStyle={styles.container}
+        enableOnAndroid={true}
+        bounces={false}
+        overScrollMode="never"
+      >
         <Input
           autoCapitalize="none"
           autoCorrect={false}
@@ -131,14 +138,13 @@ export const ImportKeystore = () => {
         >
           {importing ? undefined : i18n.t('import_account.import')}
         </Button>
-      </View>
+      </KeyboardAwareScrollView>
     </ThemeProvider>
   );
 };
 
 const themedStyles = StyleService.create({
   container: {
-    flex: 1,
     paddingVertical: spacingY(2),
     paddingHorizontal: spacingX(2),
   },
