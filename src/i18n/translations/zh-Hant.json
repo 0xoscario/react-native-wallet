@@ -78,8 +78,11 @@
     "keystore": "Keystore",
     "name": "帳戶名稱",
     "paste_private_key": "請貼上您的私鑰字串",
+    "private_key_placeholder": "例如 0xb1206e662debbf6568b9ade579f2ead52f2a0db30fcd90da1151c3971a93e5d0",
     "paste_keystore": "請貼上 keystore 文件內容",
     "input_keystore_password": "請輸入 keystore 密碼",
-    "import": "匯入"
+    "import": "匯入",
+    "invalid_private_key": "私鑰錯誤.",
+    "invalid_keystore": "Keystore 或密碼錯誤."
   }
 }

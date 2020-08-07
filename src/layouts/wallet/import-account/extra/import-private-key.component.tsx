@@ -2,7 +2,11 @@
  * @format
  */
 import React from 'react';
-import { Platform, View } from 'react-native';
+import { Keyboard, Platform, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { Action } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
 import {
   useStyleSheet,
   Button,
@@ -10,6 +14,8 @@ import {
   StyleService,
   ThemeProvider
 } from '@ui-kitten/components';
+import { showAlertModal } from 'src/actions/ui';
+import { importPrivateKey } from 'src/actions/wallet';
 import { LoadingIndicator } from 'src/components/loading-indicator.component';
 import { useAllAccounts } from 'src/hooks/useAccount';
 import { useI18n } from 'src/i18n';
@@ -18,6 +24,8 @@ import { spacingX, spacingY, useTheme } from 'src/theme';
 export const ImportPrivateKey = () => {
   const [privateKey, setPrivateKey] = React.useState<string>('');
   const privateKeyRef = React.useRef<Input>(null);
+  const navigation = useNavigation();
+  const dispatch: ThunkDispatch<any, null, Action<string>> = useDispatch();
   const theme = useTheme();
   const i18n = useI18n();
   const allAccounts = useAllAccounts();
@@ -30,12 +38,30 @@ export const ImportPrivateKey = () => {
     privateKeyRef.current?.focus();
   };
 
-  const getImportingDisabled = () => {
+  const getImportDisabled = () => {
     const name = accountName.trim();
     return name.length === 0 || importing;
   };
 
   const handleImportAccount = () => {
+    Keyboard.dismiss();
+    if (getImportDisabled()) {
+      return;
+    }
+    setImporting(true);
+    setTimeout(async () => {
+      const result = await dispatch(importPrivateKey(privateKey, accountName));
+      if (!result) {
+        setImporting(false);
+        dispatch(showAlertModal({
+          message: i18n.t('import_account.invalid_private_key'),
+          duration: 1500,
+          status: 'info'
+        }));
+      } else {
+        navigation.goBack();
+      }
+    }, 1000);
   };
 
   return (
@@ -58,7 +84,7 @@ export const ImportPrivateKey = () => {
           numberOfLines={3}
           autoCapitalize="none"
           label={i18n.t('import_account.paste_private_key')}
-          placeholder="TBD"
+          placeholder={i18n.t('import_account.private_key_placeholder')}
           value={privateKey}
           onChangeText={setPrivateKey}
           blurOnSubmit={true}
@@ -70,7 +96,7 @@ export const ImportPrivateKey = () => {
         <Button
           style={styles.button}
           accessoryLeft={importing ? LoadingIndicator : undefined}
-          disabled={getImportingDisabled()}
+          disabled={getImportDisabled()}
           onPress={handleImportAccount}
         >
           {importing ? undefined : i18n.t('import_account.import')}

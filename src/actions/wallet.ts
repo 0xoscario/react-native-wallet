@@ -139,6 +139,8 @@ export function addAccount(name: string) {
       const deriveIndex = vault.accounts.filter(account => account.type === 'HD').length;
       const derivePath = deriveChild(deriveIndex);
       const hdNode = ethers.utils.HDNode.fromMnemonic(vault.mnemonic).derivePath(derivePath);
+      // remove duplicate account
+      vault.accounts = vault.accounts.filter(account => account.address === hdNode.address);
       vault.accounts.push({
         blockchain: 'ETH',
         type: 'HD',
@@ -153,6 +155,91 @@ export function addAccount(name: string) {
         payload: vault
       });
       dispatch(setAccount(hdNode.address));
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
+}
+
+export function importPrivateKey(privateKey: string, accountName: string) {
+  return async (dispatch: Dispatch<any>) => {
+    const credentials = await SecureKeychain.getGenericPassword();
+    if (!credentials) {
+      return false;
+    }
+    const encryptedVault = await AppStorage.getVault();
+    if (!encryptedVault) {
+      return false;
+    }
+
+    try {
+      const wallet = new ethers.Wallet(privateKey);
+      const vault: Vault = await Encryptor.decrypt(credentials.password, encryptedVault);
+      const account = vault.accounts.find((account) => {
+        return account.address === wallet.address;
+      });
+      if (!account) {
+        vault.accounts.push({
+          blockchain: 'ETH',
+          type: 'PRIVATE KEY',
+          address: wallet.address,
+          name: accountName,
+          extra: privateKey
+        });
+        const newEncryptedVault = await Encryptor.encrypt(credentials.password, vault);
+        await AppStorage.setVault(newEncryptedVault);
+        dispatch({
+          type: INIT_WALLET,
+          payload: vault
+        });
+      }
+      dispatch(setAccount(wallet.address));
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
+}
+
+export function importKeystore(json: string, password: string, accountName: string) {
+  return async (dispatch: Dispatch<any>) => {
+    const credentials = await SecureKeychain.getGenericPassword();
+    if (!credentials) {
+      return false;
+    }
+    const encryptedVault = await AppStorage.getVault();
+    if (!encryptedVault) {
+      return false;
+    }
+
+    try {
+      const wallet = await ethers.Wallet.fromEncryptedJson(json, password);
+      if (!wallet) {
+        return false;
+      }
+      // regenerate keystore using password in keychain
+      json = await wallet.encrypt(credentials.password);
+      const vault: Vault = await Encryptor.decrypt(credentials.password, encryptedVault);
+      const account = vault.accounts.find((account) => {
+        return account.address === wallet.address;
+      });
+      if (!account) {
+        vault.accounts.push({
+          blockchain: 'ETH',
+          type: 'PRIVATE KEY',
+          address: wallet.address,
+          name: accountName,
+          extra: json
+        });
+        const newEncryptedVault = await Encryptor.encrypt(credentials.password, vault);
+        await AppStorage.setVault(newEncryptedVault);
+        dispatch({
+          type: INIT_WALLET,
+          payload: vault
+        });
+      }
+      dispatch(setAccount(wallet.address));
       return true;
     } catch (error) {
       return false;

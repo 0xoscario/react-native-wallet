@@ -78,8 +78,11 @@
     "keystore": "Keystore",
     "name": "Account name",
     "paste_private_key": "Paste your private key string",
+    "private_key_placeholder": "e.g. 0xb1206e662debbf6568b9ade579f2ead52f2a0db30fcd90da1151c3971a93e5d0",
     "paste_keystore": "Paste your keystore file content",
     "input_keystore_password": "Input keystore password",
-    "import": "Import"
+    "import": "Import",
+    "invalid_private_key": "Invalid private key.",
+    "invalid_keystore": "Invalid keystore or incorrect password."
   }
 }

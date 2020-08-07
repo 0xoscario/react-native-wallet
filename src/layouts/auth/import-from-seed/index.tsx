@@ -10,8 +10,8 @@ import {
   TouchableWithoutFeedback,
   View
 } from 'react-native';
-import { Action } from 'redux';
 import { useDispatch } from 'react-redux';
+import { Action } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import zxcvbn from 'zxcvbn';
 import {

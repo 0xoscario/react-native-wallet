@@ -2,7 +2,16 @@
  * @format
  */
 import React from 'react';
-import { Platform, TouchableWithoutFeedback, View } from 'react-native';
+import {
+  Keyboard,
+  Platform,
+  TouchableWithoutFeedback,
+  View
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { Action } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
 import {
   useStyleSheet,
   Button,
@@ -10,6 +19,8 @@ import {
   StyleService,
   ThemeProvider
 } from '@ui-kitten/components';
+import { showAlertModal } from 'src/actions/ui';
+import { importKeystore } from 'src/actions/wallet';
 import { EyeIcon, EyeOffIcon } from 'src/components/icons';
 import { LoadingIndicator } from 'src/components/loading-indicator.component';
 import { useAllAccounts } from 'src/hooks/useAccount';
@@ -22,6 +33,8 @@ export const ImportKeystore = () => {
   const [password, setPassword] = React.useState<string>('');
   const [passwordVisible, setPasswordVisible] = React.useState<boolean>(false);
   const passwordRef = React.useRef<Input>(null);
+  const navigation = useNavigation();
+  const dispatch: ThunkDispatch<any, null, Action<string>> = useDispatch();
   const theme = useTheme();
   const i18n = useI18n();
   const allAccounts = useAllAccounts();
@@ -44,12 +57,30 @@ export const ImportKeystore = () => {
     passwordRef.current?.focus();
   };
 
-  const getImportingDisabled = () => {
+  const getImportDisabled = () => {
     const name = accountName.trim();
     return name.length === 0 || importing;
   };
 
   const handleImportAccount = () => {
+    Keyboard.dismiss();
+    if (getImportDisabled()) {
+      return;
+    }
+    setImporting(true);
+    setTimeout(async () => {
+      const result = await dispatch(importKeystore(keystore, password, accountName));
+      if (!result) {
+        setImporting(false);
+        dispatch(showAlertModal({
+          message: i18n.t('import_account.invalid_keystore'),
+          duration: 1500,
+          status: 'info'
+        }));
+      } else {
+        navigation.goBack();
+      }
+    }, 1000);
   };
 
   return (
@@ -69,10 +100,9 @@ export const ImportKeystore = () => {
           style={styles.group}
           textStyle={Platform.OS === 'ios' ? styles.keystoreTextInput : {}}
           multiline={true}
-          numberOfLines={3}
+          numberOfLines={6}
           autoCapitalize="none"
           label={i18n.t('import_account.paste_keystore')}
-          placeholder="TBD"
           value={keystore}
           returnKeyType="next"
           onChangeText={setKeystore}
@@ -96,7 +126,7 @@ export const ImportKeystore = () => {
         <Button
           style={styles.button}
           accessoryLeft={importing ? LoadingIndicator : undefined}
-          disabled={getImportingDisabled()}
+          disabled={getImportDisabled()}
           onPress={handleImportAccount}
         >
           {importing ? undefined : i18n.t('import_account.import')}
@@ -116,7 +146,7 @@ const themedStyles = StyleService.create({
     marginTop: spacingY(2),
   },
   keystoreTextInput: {
-    height: 51,
+    height: 102,
   },
   button: {
     marginTop: spacingY(3),

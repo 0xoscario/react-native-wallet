@@ -78,8 +78,11 @@
     "keystore": "Keystore",
     "name": "账户名称",
     "paste_private_key": "请粘贴你的私钥字串",
+    "private_key_placeholder": "例如 0xb1206e662debbf6568b9ade579f2ead52f2a0db30fcd90da1151c3971a93e5d0",
     "paste_keystore": "请粘贴你的 keystore 文件内容",
     "input_keystore_password": "请输入 keystore 密码",
-    "import": "导入"
+    "import": "导入",
+    "invalid_private_key": "私钥不合法.",
+    "invalid_keystore": "Keystore 不合法或密码错误."
   }
 }
