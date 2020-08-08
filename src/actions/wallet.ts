@@ -227,7 +227,7 @@ export function importKeystore(json: string, password: string, accountName: stri
       if (!account) {
         vault.accounts.push({
           blockchain: 'ETH',
-          type: 'PRIVATE KEY',
+          type: 'KEYSTORE',
           address: wallet.address,
           name: accountName,
           extra: json
