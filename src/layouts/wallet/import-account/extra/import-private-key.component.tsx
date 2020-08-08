@@ -2,7 +2,12 @@
  * @format
  */
 import React from 'react';
-import { Keyboard, Platform, View } from 'react-native';
+import {
+  InteractionManager,
+  Keyboard,
+  Platform,
+  View
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import { Action } from 'redux';
@@ -40,16 +45,16 @@ export const ImportPrivateKey = () => {
 
   const getImportDisabled = () => {
     const name = accountName.trim();
-    return name.length === 0 || importing;
+    return name.length === 0;
   };
 
   const handleImportAccount = () => {
     Keyboard.dismiss();
-    if (getImportDisabled()) {
+    if (getImportDisabled() || importing) {
       return;
     }
     setImporting(true);
-    setTimeout(async () => {
+    InteractionManager.runAfterInteractions(async () => {
       const result = await dispatch(importPrivateKey(privateKey, accountName));
       if (!result) {
         setImporting(false);
@@ -61,7 +66,7 @@ export const ImportPrivateKey = () => {
       } else {
         navigation.goBack();
       }
-    }, 1000);
+    });
   };
 
   return (

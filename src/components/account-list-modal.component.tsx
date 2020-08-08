@@ -5,6 +5,7 @@ import React from 'react';
 import {
   Alert,
   ImageProps,
+  InteractionManager,
   ListRenderItemInfo,
   View,
   ViewProps
@@ -40,12 +41,20 @@ interface AccountListModalProps {
 }
 
 export const AccountListModal = (props: AccountListModalProps): React.ReactElement => {
+  const listRef = React.useRef<List>(null);
   const visible = useSelector((state: RootState) => state.ui.accountListModalVisible);
   const dispatch = useDispatch();
   const allAccounts = useAllAccounts();
   const currentAccount = useCurrentAccount();
   const i18n = useI18n();
   const styles = useStyleSheet(themedStyles);
+
+  React.useEffect(() => {
+    InteractionManager.runAfterInteractions(() => {
+      const index = allAccounts.findIndex((account) => account.address === currentAccount.address);
+			listRef.current?.scrollToIndex({ index, animated: true });
+		});
+  });
 
   const renderItem = (info?: ListRenderItemInfo<Account>) => {
     const renderTitle = (props?: TextProps) => {
@@ -140,11 +149,13 @@ export const AccountListModal = (props: AccountListModalProps): React.ReactEleme
         </View>
         <Divider/>
         <List
+          ref={listRef}
           style={styles.list}
           data={allAccounts}
           ItemSeparatorComponent={Divider}
           renderItem={renderItem}
           overScrollMode="never"
+          getItemLayout={(_, index) => ({ length: 64, offset: 64 * index, index })}
         />
         <Divider/>
         <Button
@@ -198,6 +209,7 @@ const themedStyles = StyleService.create({
     flex: 1,
   },
   listItem: {
+    height: 64,
     paddingHorizontal: spacingX(1),
   },
   accessoryLeft: {

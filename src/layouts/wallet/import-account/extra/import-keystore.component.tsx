@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import {
+  InteractionManager,
   Keyboard,
   Platform,
   TouchableWithoutFeedback
@@ -61,16 +62,16 @@ export const ImportKeystore = () => {
 
   const getImportDisabled = () => {
     const name = accountName.trim();
-    return name.length === 0 || importing;
+    return name.length === 0;
   };
 
   const handleImportAccount = () => {
     Keyboard.dismiss();
-    if (getImportDisabled()) {
+    if (getImportDisabled() || importing) {
       return;
     }
     setImporting(true);
-    setTimeout(async () => {
+    InteractionManager.runAfterInteractions(async () => {
       const result = await dispatch(importKeystore(keystore, password, accountName));
       if (!result) {
         setImporting(false);
@@ -82,7 +83,7 @@ export const ImportKeystore = () => {
       } else {
         navigation.goBack();
       }
-    }, 1000);
+    });
   };
 
   return (

@@ -4,6 +4,7 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
 import {
+  InteractionManager,
   Keyboard,
   TouchableOpacity,
   TouchableWithoutFeedback,
@@ -68,7 +69,7 @@ export default ({ navigation }: any): React.ReactElement => {
   };
 
   const getCreateDisabled = () => {
-    return !((newPassword.length >= 8) && (newPassword === confirmPassword)) || creating;
+    return !((newPassword.length >= 8) && (newPassword === confirmPassword));
   };
 
   const onNewPasswordIconPress = (): void => {
@@ -121,14 +122,14 @@ export default ({ navigation }: any): React.ReactElement => {
 
   const handleCreateWallet = () => {
     Keyboard.dismiss();
-    if (getCreateDisabled()) {
+    if (getCreateDisabled() || creating) {
       return;
     }
     setCreating(true);
-    setTimeout(async () => {
+    InteractionManager.runAfterInteractions(async () => {
       await SecureKeychain.setGenericPassword('zmwallet-user', newPassword);
       await dispatch(initWallet(i18n));
-    }, 1000);
+    });
   };
 
   return (

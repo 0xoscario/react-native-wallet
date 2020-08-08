@@ -4,6 +4,7 @@
 import { ethers } from 'ethers';
 import React from 'react';
 import {
+  InteractionManager,
   Keyboard,
   Platform,
   TouchableOpacity,
@@ -113,7 +114,7 @@ export default ({ navigation }: any): React.ReactElement => {
   };
 
   const getImportDisabled = () => {
-    return !((newPassword.length >= 8) && (newPassword === confirmPassword)) || importing;
+    return !((newPassword.length >= 8) && (newPassword === confirmPassword));
   };
 
   const onNewPasswordIconPress = (): void => {
@@ -170,11 +171,11 @@ export default ({ navigation }: any): React.ReactElement => {
 
   const handleImportWallet = () => {
     Keyboard.dismiss();
-    if (getImportDisabled()) {
+    if (getImportDisabled() || importing) {
       return;
     }
     setImporting(true);
-    setTimeout(async () => {
+    InteractionManager.runAfterInteractions(async () => {
       await SecureKeychain.setGenericPassword('zmwallet-user', newPassword);
       const enWordlists = ethers.wordlists.en;
       const words = enWordlists.split(seed).filter((val) => !!val);
@@ -187,7 +188,7 @@ export default ({ navigation }: any): React.ReactElement => {
           status: 'info'
         }));
       }
-    }, 1000);
+    });
   };
 
   return (
