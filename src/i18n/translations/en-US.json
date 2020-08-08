@@ -62,7 +62,11 @@
   "accounts": {
     "create_new_account": "Create New Account",
     "import_account": "Import an Account",
-    "imported": "IMPORTED"
+    "imported": "IMPORTED",
+    "remove_account_title": "Account removal",
+    "remove_account_message": "Do you really want to remove this account?",
+    "no": "No",
+    "yes": "Yes"
   },
   "account_overview": {
     "account_copied_to_clipboard": "Address copied to clipboard!"

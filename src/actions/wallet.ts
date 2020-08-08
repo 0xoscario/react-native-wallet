@@ -246,3 +246,32 @@ export function importKeystore(json: string, password: string, accountName: stri
     }
   };
 }
+
+export function removeAccount(address: string) {
+  return async (dispatch: Dispatch<any>) => {
+    const credentials = await SecureKeychain.getGenericPassword();
+    if (!credentials) {
+      return false;
+    }
+    const encryptedVault = await AppStorage.getVault();
+    if (!encryptedVault) {
+      return false;
+    }
+
+    try {
+      const vault: Vault = await Encryptor.decrypt(credentials.password, encryptedVault);
+      vault.accounts = vault.accounts.filter(account => {
+        return (account.type === 'HD') || (account.address !== address);
+      });
+      const newEncryptedVault = await Encryptor.encrypt(credentials.password, vault);
+      await AppStorage.setVault(newEncryptedVault);
+      dispatch({
+        type: INIT_WALLET,
+        payload: vault
+      });
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
+}

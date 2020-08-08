@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import {
+  Alert,
   ImageProps,
   ListRenderItemInfo,
   View,
@@ -22,6 +23,7 @@ import {
   TextProps
 } from '@ui-kitten/components';
 import { showAccountListModal } from 'src/actions/ui';
+import { removeAccount } from 'src/actions/wallet';
 import { CheckIcon, DeleteIcon } from 'src/components/icons';
 import { useAllAccounts, useCurrentAccount } from 'src/hooks/useAccount';
 import { useI18n } from 'src/i18n';
@@ -85,6 +87,26 @@ export const AccountListModal = (props: AccountListModalProps): React.ReactEleme
             <Button
               accessoryLeft={DeleteIcon}
               {...props}
+              onPress={() => {
+                Alert.alert(
+                  i18n.t('accounts.remove_account_title'),
+                  i18n.t('accounts.remove_account_message'),
+                  [
+                    {
+                      text: i18n.t('accounts.no'),
+                      onPress: () => false,
+                      style: 'cancel'
+                    },
+                    {
+                      text: i18n.t('accounts.yes'),
+                      onPress: () => {
+                        dispatch(removeAccount(info!.item.address));
+                      }
+                    }
+                  ],
+                  { cancelable: false }
+                );
+              }}
             />
           ) : (<></>);
         }}

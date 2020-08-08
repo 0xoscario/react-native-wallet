@@ -62,7 +62,11 @@
   "accounts": {
     "create_new_account": "創建帳戶",
 		"import_account": "匯入帳戶",
-    "imported": "匯入"
+    "imported": "匯入",
+    "remove_account_title": "移除帳戶",
+    "remove_account_message": "真的要移除此賬戶嗎？",
+    "no": "否",
+    "yes": "是"
   },
   "account_overview": {
     "account_copied_to_clipboard": "地址已複製！"
