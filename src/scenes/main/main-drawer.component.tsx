@@ -23,6 +23,7 @@ import {
   NightIcon,
   SettingsIcon
 } from 'src/components/icons';
+import { SafeAreaLayout } from 'src/components/safe-area-layout.component';
 import { Identicon } from 'src/components/identicon.component';
 import { useCurrentAccount } from 'src/hooks/useAccount';
 import { useI18n } from 'src/i18n';
@@ -122,39 +123,46 @@ export const MainDrawer = ({ navigation }: any): React.ReactElement => {
   };
 
   return (
-    <Drawer
-      appearance="noDivider"
-      header={renderHeader}
-      footer={renderFooter}
+    <SafeAreaLayout
+      style={styles.safeArea}
     >
-      <Divider/>
-      <DrawerItem
-        title={i18n.t('drawer.create_new_account')}
-        accessoryLeft={AddIcon}
-        onPress={handleCreateAccount}
-      />
-      <DrawerItem
-        title={i18n.t('drawer.import_account')}
-        accessoryLeft={ImportIcon}
-        onPress={handleImportAccount}
-      />
-      <Divider/>
-      <DrawerItem
-        title={i18n.t('drawer.dark_mode')}
-        accessoryLeft={NightIcon}
-        accessoryRight={renderDarkModeToggle}
-        onPress={toggleDarkMode}
-      />
-      <DrawerItem
-        title={i18n.t('drawer.settings')}
-        accessoryLeft={SettingsIcon}
-        onPress={handleSettings}
-      />
-    </Drawer>
+      <Drawer
+        appearance="noDivider"
+        header={renderHeader}
+        footer={renderFooter}
+      >
+        <Divider/>
+        <DrawerItem
+          title={i18n.t('drawer.create_new_account')}
+          accessoryLeft={AddIcon}
+          onPress={handleCreateAccount}
+        />
+        <DrawerItem
+          title={i18n.t('drawer.import_account')}
+          accessoryLeft={ImportIcon}
+          onPress={handleImportAccount}
+        />
+        <Divider/>
+        <DrawerItem
+          title={i18n.t('drawer.dark_mode')}
+          accessoryLeft={NightIcon}
+          accessoryRight={renderDarkModeToggle}
+          onPress={toggleDarkMode}
+        />
+        <DrawerItem
+          title={i18n.t('drawer.settings')}
+          accessoryLeft={SettingsIcon}
+          onPress={handleSettings}
+        />
+      </Drawer>
+    </SafeAreaLayout>
   );
 };
 
 const themedStyles = StyleService.create({
+  safeArea: {
+    flex: 1,
+  },
   header: {
     paddingHorizontal: spacingX(2),
     paddingVertical: spacingY(2),

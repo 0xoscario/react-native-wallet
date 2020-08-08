@@ -61,15 +61,19 @@ const MainTabsNavigator = ({ navigation }: any): React.ReactElement => {
 
   return (
     <>
-      <BottomTab.Navigator
-        backBehavior='none'
-        screenOptions={getTabBarVisibleOnRootScreenOptions}
-        tabBar={props => <MainBottomNavigation {...props}/>}
+      <SafeAreaLayout
+        style={styles.safeArea}
       >
-        <BottomTab.Screen name='Wallet' component={WalletNavigator}/>
-        <BottomTab.Screen name='Market' component={MarketNavigator}/>
-        <BottomTab.Screen name='Browser' component={BrowserNavigator}/>
-      </BottomTab.Navigator>
+        <BottomTab.Navigator
+          backBehavior='none'
+          screenOptions={getTabBarVisibleOnRootScreenOptions}
+          tabBar={props => <MainBottomNavigation {...props}/>}
+        >
+          <BottomTab.Screen name='Wallet' component={WalletNavigator}/>
+          <BottomTab.Screen name='Market' component={MarketNavigator}/>
+          <BottomTab.Screen name='Browser' component={BrowserNavigator}/>
+        </BottomTab.Navigator>
+      </SafeAreaLayout>
       <NetworkListModal onNetworkChange={handleNetworkChange}/>
       <AccountListModal
         onAccountChange={handleAccountChange}
@@ -81,16 +85,12 @@ const MainTabsNavigator = ({ navigation }: any): React.ReactElement => {
 };
 
 const MainNavigator= (): React.ReactElement => (
-  <SafeAreaLayout
-    style={styles.safeArea}
+  <Drawer.Navigator
+    screenOptions={{ swipeEnabled: false }}
+    drawerContent={props => <MainDrawer {...props}/>}
   >
-    <Drawer.Navigator
-      screenOptions={{ swipeEnabled: false }}
-      drawerContent={props => <MainDrawer {...props}/>}
-    >
-      <Drawer.Screen name='MainTabs' component={MainTabsNavigator}/>
-    </Drawer.Navigator>
-  </SafeAreaLayout>
+    <Drawer.Screen name='MainTabs' component={MainTabsNavigator}/>
+  </Drawer.Navigator>
 );
 
 export const RootNavigator = (): React.ReactElement => {
