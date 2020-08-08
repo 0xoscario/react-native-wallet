@@ -17,7 +17,7 @@ export const BrowserIcon = (style?: any): IconElement => (
 );
 
 export const CheckIcon = (style?: any): IconElement => (
-  <Icon {...style} name="checkcircle" pack="ant-design"/>
+  <Icon {...style} name="checkmark-outline"/>
 );
 
 export const DeleteIcon = (style?: any): IconElement => (
@@ -50,6 +50,10 @@ export const MenuIcon = (style: any): IconElement => (
 
 export const NightIcon = (style: any): IconElement => (
   <Icon {...style} name="moon-outline"/>
+);
+
+export const SelectIcon = (style?: any): IconElement => (
+  <Icon {...style} name="checkcircle" pack="ant-design"/>
 );
 
 export const SettingsIcon = (style: any): IconElement => (

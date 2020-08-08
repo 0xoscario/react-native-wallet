@@ -24,7 +24,7 @@ import {
 } from '@ui-kitten/components';
 import { showAccountListModal } from 'src/actions/ui';
 import { removeAccount } from 'src/actions/wallet';
-import { CheckIcon, DeleteIcon } from 'src/components/icons';
+import { SelectIcon, DeleteIcon } from 'src/components/icons';
 import { SafeAreaLayout } from 'src/components/safe-area-layout.component';
 import { useAllAccounts, useCurrentAccount } from 'src/hooks/useAccount';
 import { useI18n } from 'src/i18n';
@@ -77,7 +77,7 @@ export const AccountListModal = (props: AccountListModalProps): React.ReactEleme
             <View style={styles.accessoryLeft}>
               <Avatar source={{ uri: toDataUrl(info!.item.address) }}/>
               {(currentAccount.address === info!.item.address) && (
-                <CheckIcon style={styles.checkIcon}/>
+                <SelectIcon style={styles.selectIcon}/>
               )}
             </View>
           );
@@ -204,7 +204,7 @@ const themedStyles = StyleService.create({
     flexDirection: 'row',
     marginRight: spacingX(1),
   },
-  checkIcon: {
+  selectIcon: {
     position: 'absolute',
     right: -12,
     top: -8,
