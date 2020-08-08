@@ -25,6 +25,7 @@ import {
 import { showAccountListModal } from 'src/actions/ui';
 import { removeAccount } from 'src/actions/wallet';
 import { CheckIcon, DeleteIcon } from 'src/components/icons';
+import { SafeAreaLayout } from 'src/components/safe-area-layout.component';
 import { useAllAccounts, useCurrentAccount } from 'src/hooks/useAccount';
 import { useI18n } from 'src/i18n';
 import { RootState } from 'src/reducers';
@@ -129,7 +130,10 @@ export const AccountListModal = (props: AccountListModalProps): React.ReactEleme
       onBackButtonPress={() => dispatch(showAccountListModal(false))}
       onSwipeComplete={() => dispatch(showAccountListModal(false))}
     >
-      <View style={styles.container}>
+      <SafeAreaLayout
+        style={styles.safeArea}
+        edges={['right', 'bottom', 'left']}
+      >
         <View style={styles.header}>
           <View style={styles.dragger}></View>
         </View>
@@ -161,8 +165,7 @@ export const AccountListModal = (props: AccountListModalProps): React.ReactEleme
         >
           {i18n.t('accounts.import_account')}
         </Button>
-        <Divider/>
-      </View>
+      </SafeAreaLayout>
     </Modal>
   );
 };
@@ -172,7 +175,7 @@ const themedStyles = StyleService.create({
     justifyContent: 'flex-end',
     margin: 0,
   },
-  container: {
+  safeArea: {
     borderTopLeftRadius: 6,
     borderTopRightRadius: 6,
     minHeight: 400,
