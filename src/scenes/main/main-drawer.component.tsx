@@ -2,13 +2,15 @@
  * @format
  */
 import React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  useStyleSheet,
   Divider,
   Drawer,
   DrawerItem,
   Layout,
+  StyleService,
   Text,
   Toggle
 } from '@ui-kitten/components';
@@ -34,6 +36,8 @@ export const MainDrawer = ({ navigation }: any): React.ReactElement => {
   const currentAccount = useCurrentAccount();
   const themeName = useSelector((state: RootState) => state.settings.themeName);
   const i18n = useI18n();
+  const styles = useStyleSheet(themedStyles);
+  const imported = (currentAccount.type !== 'HD');
 
   const renderHeader = (): React.ReactElement => (
     <Layout
@@ -57,12 +61,19 @@ export const MainDrawer = ({ navigation }: any): React.ReactElement => {
           address={currentAccount.address}
           size="large"
         />
-        <Text
-          style={styles.group}
-          category="h6"
-        >
-          {currentAccount.name}
-        </Text>
+        <View style={[styles.titleContainer, styles.group]}>
+          <Text category="h6">
+            {currentAccount.name}
+          </Text>
+          {imported && (
+            <Text
+              style={styles.imported}
+              status="primary"
+            >
+              {i18n.t('drawer.imported')}
+            </Text>
+          )}
+        </View>
         <Text
           style={styles.field}
           category="label"
@@ -143,7 +154,7 @@ export const MainDrawer = ({ navigation }: any): React.ReactElement => {
   );
 };
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
   header: {
     paddingHorizontal: spacingX(2),
     paddingVertical: spacingY(2),
@@ -153,6 +164,18 @@ const styles = StyleSheet.create({
   },
   group: {
     marginTop: spacingY(2),
+  },
+  titleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  imported: {
+    borderRadius: 10,
+		borderWidth: 1,
+    borderColor: 'color-primary-default',
+    fontSize: 10,
+    marginLeft: spacingX(1),
+    paddingHorizontal: 6,
   },
   field: {
     marginTop: spacingY(1),

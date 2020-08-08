@@ -81,7 +81,7 @@ export const ImportPrivateKey = () => {
           style={styles.privateKeyInput}
           textStyle={Platform.OS === 'ios' ? styles.privateKeyTextInput : {}}
           multiline={true}
-          numberOfLines={3}
+          numberOfLines={4}
           autoCapitalize="none"
           label={i18n.t('import_account.paste_private_key')}
           placeholder={i18n.t('import_account.private_key_placeholder')}
@@ -116,7 +116,7 @@ const themedStyles = StyleService.create({
     marginTop: spacingY(2),
   },
   privateKeyTextInput: {
-    height: 51,
+    height: 68,
   },
   button: {
     marginTop: spacingY(3),

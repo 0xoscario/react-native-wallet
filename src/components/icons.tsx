@@ -17,7 +17,11 @@ export const BrowserIcon = (style?: any): IconElement => (
 );
 
 export const CheckIcon = (style?: any): IconElement => (
-  <Icon {...style} name="checkmark-outline"/>
+  <Icon {...style} name="checkcircle" pack="ant-design"/>
+);
+
+export const DeleteIcon = (style?: any): IconElement => (
+  <Icon {...style} name="trash-2-outline"/>
 );
 
 export const EyeIcon = (style?: any): IconElement => (

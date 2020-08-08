@@ -2,20 +2,27 @@
  * @format
  */
 import React from 'react';
-import { ImageProps, ListRenderItemInfo, View } from 'react-native';
+import {
+  ImageProps,
+  ListRenderItemInfo,
+  View,
+  ViewProps
+} from 'react-native';
 import Modal from 'react-native-modal';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   useStyleSheet,
   Avatar,
+  Button,
   Divider,
   List,
   ListItem,
-  Button,
   StyleService,
+  Text,
+  TextProps
 } from '@ui-kitten/components';
 import { showAccountListModal } from 'src/actions/ui';
-import { CheckIcon } from 'src/components/icons';
+import { CheckIcon, DeleteIcon } from 'src/components/icons';
 import { useAllAccounts, useCurrentAccount } from 'src/hooks/useAccount';
 import { useI18n } from 'src/i18n';
 import { RootState } from 'src/reducers';
@@ -37,21 +44,57 @@ export const AccountListModal = (props: AccountListModalProps): React.ReactEleme
   const i18n = useI18n();
   const styles = useStyleSheet(themedStyles);
 
-  const renderItem = (info?: ListRenderItemInfo<Account>) => (
-    <ListItem
-      style={styles.listItem}
-      title={info!.item.name}
-      description="0 ETH"
-      accessoryLeft={(props?: Partial<ImageProps>) => {
-        return <Avatar source={{ uri: toDataUrl(info!.item.address) }}/>;
-      }}
-      accessoryRight={currentAccount.address === info!.item.address ? CheckIcon : undefined}
-      onPress={() => {
-        dispatch(showAccountListModal(false));
-        props.onAccountChange(info!.item.address);
-      }}
-    />
-  );
+  const renderItem = (info?: ListRenderItemInfo<Account>) => {
+    const renderTitle = (props?: TextProps) => {
+      const imported = (info!.item.type !== 'HD');
+      return (
+        <View style={styles.titleContainer}>
+          <Text {...props}>
+            {info!.item.name}
+          </Text>
+          {imported && (
+            <Text
+              style={styles.imported}
+              status="primary"
+            >
+              {i18n.t('accounts.imported')}
+            </Text>
+          )}
+        </View>
+      );
+    };
+
+    return (
+      <ListItem
+        style={styles.listItem}
+        title={renderTitle}
+        description="0 ETH"
+        accessoryLeft={(props?: Partial<ImageProps>) => {
+          return (
+            <View style={styles.accessoryLeft}>
+              <Avatar source={{ uri: toDataUrl(info!.item.address) }}/>
+              {(currentAccount.address === info!.item.address) && (
+                <CheckIcon style={styles.checkIcon}/>
+              )}
+            </View>
+          );
+        }}
+        accessoryRight={(props?: ViewProps) => {
+          const imported = (info!.item.type !== 'HD');
+          return imported ? (
+            <Button
+              accessoryLeft={DeleteIcon}
+              {...props}
+            />
+          ) : (<></>);
+        }}
+        onPress={() => {
+          dispatch(showAccountListModal(false));
+          props.onAccountChange(info!.item.address);
+        }}
+      />
+    );
+  };
 
   return (
     <Modal
@@ -132,4 +175,27 @@ const themedStyles = StyleService.create({
   listItem: {
     paddingHorizontal: spacingX(1),
   },
+  accessoryLeft: {
+    flexDirection: 'row',
+    marginRight: spacingX(1),
+  },
+  checkIcon: {
+    position: 'absolute',
+    right: -12,
+    top: -8,
+    width: 16,
+    height: 16,
+    tintColor: 'color-primary-default',
+  },
+  titleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  imported: {
+    borderRadius: 10,
+		borderWidth: 1,
+    borderColor: 'color-primary-default',
+    fontSize: 10,
+    paddingHorizontal: spacingX(1),
+  }
 });

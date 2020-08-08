@@ -44,6 +44,7 @@
     "must_be_at_least": "Must be at least {{number}} characters"
   },
   "drawer": {
+    "imported": "IMPORTED",
     "create_new_account": "Create New Account",
 		"import_account": "Import an Account",
     "dark_mode": "Dark mode",
@@ -60,7 +61,8 @@
   },
   "accounts": {
     "create_new_account": "Create New Account",
-		"import_account": "Import an Account"
+    "import_account": "Import an Account",
+    "imported": "IMPORTED"
   },
   "account_overview": {
     "account_copied_to_clipboard": "Address copied to clipboard!"

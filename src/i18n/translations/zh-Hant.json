@@ -44,6 +44,7 @@
     "must_be_at_least": "至少 {{number}} 個字符"
   },
   "drawer": {
+    "imported": "匯入",
     "create_new_account": "創建帳戶",
 		"import_account": "匯入帳戶",
     "dark_mode": "深色模式",
@@ -60,7 +61,8 @@
   },
   "accounts": {
     "create_new_account": "創建帳戶",
-		"import_account": "匯入帳戶"
+		"import_account": "匯入帳戶",
+    "imported": "匯入"
   },
   "account_overview": {
     "account_copied_to_clipboard": "地址已複製！"
