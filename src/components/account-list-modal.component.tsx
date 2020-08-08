@@ -124,6 +124,7 @@ export const AccountListModal = (props: AccountListModalProps): React.ReactEleme
       isVisible={visible}
       style={styles.modal}
       backdropOpacity={0.5}
+      coverScreen={false}
       swipeDirection="down"
       propagateSwipe
       onBackdropPress={() => dispatch(showAccountListModal(false))}
