@@ -61,7 +61,6 @@ export const NetworkListModal = (props: NetworkListModalProps): React.ReactEleme
       isVisible={visible}
       backdropOpacity={0.5}
       swipeDirection="down"
-      coverScreen={false}
       propagateSwipe
       onBackdropPress={() => dispatch(showNetworkListModal(false))}
       onBackButtonPress={() => dispatch(showNetworkListModal(false))}
