@@ -37,7 +37,7 @@ export const ImportIcon = (style?: any): IconElement => (
 );
 
 export const InfoIcon = (style: any): IconElement => (
-  <Icon {...style} name="info-outline"/>
+  <Icon {...style} name="alert-circle"/>
 );
 
 export const LogOutIcon = (style: any): IconElement => (
@@ -57,7 +57,7 @@ export const NightIcon = (style: any): IconElement => (
 );
 
 export const SelectIcon = (style?: any): IconElement => (
-  <Icon {...style} name="checkcircle" pack="ant-design"/>
+  <Icon {...style} name="checkmark-circle-2"/>
 );
 
 export const SettingsIcon = (style: any): IconElement => (
@@ -65,7 +65,7 @@ export const SettingsIcon = (style: any): IconElement => (
 );
 
 export const SuccessIcon = (style: any): IconElement => (
-  <Icon {...style} name="checkmark-circle-2-outline"/>
+  <Icon {...style} name="checkmark-circle-2"/>
 );
 
 export const WalletIcon = (style?: any): IconElement => (

@@ -218,7 +218,7 @@ const themedStyles = StyleService.create({
   },
   selectIcon: {
     position: 'absolute',
-    right: -12,
+    right: -10,
     top: -8,
     width: 16,
     height: 16,
