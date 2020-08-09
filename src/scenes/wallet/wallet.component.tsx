@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
 import {
   Divider,
@@ -22,6 +23,7 @@ import ContentView from 'src/layouts/wallet/home';
 export const WalletScreen = (props: any): React.ReactElement => {
   const [menuVisible, setMenuVisible] = React.useState(false);
   const dispatch = useDispatch();
+  const insets = useSafeAreaInsets();
   const ethereumNetwork = useEthereumNetwork();
   const i18n = useI18n();
 
@@ -32,7 +34,7 @@ export const WalletScreen = (props: any): React.ReactElement => {
     />
   );
 
-  const renderAddAction = () => (
+  const renderMoreAction = () => (
     <TopNavigationAction
       icon={AddIcon}
       onPress={() => setMenuVisible(true)}
@@ -41,8 +43,9 @@ export const WalletScreen = (props: any): React.ReactElement => {
 
   const renderOverflowMenu = () => (
     <OverflowMenu
+      style={{ marginTop: insets.top }} // hack SafeArea insets
       visible={menuVisible}
-      anchor={renderAddAction}
+      anchor={renderMoreAction}
       placement="bottom end"
       onBackdropPress={() => setMenuVisible(false)}
     >
