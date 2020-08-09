@@ -2,7 +2,12 @@
  * @format
  */
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import {
+  Platform,
+  StyleSheet,
+  TouchableOpacity,
+  View
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
 import {
@@ -43,7 +48,8 @@ export const WalletScreen = (props: any): React.ReactElement => {
 
   const renderOverflowMenu = () => (
     <OverflowMenu
-      style={{ marginTop: insets.top }} // hack SafeArea insets
+      // hack UI Kitten BUG while using Android translucent StatusBar
+      style={Platform.OS === 'android' ? { marginTop: insets.top } : {}}
       visible={menuVisible}
       anchor={renderMoreAction}
       placement="bottom end"
