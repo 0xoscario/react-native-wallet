@@ -40,6 +40,10 @@ export const InfoIcon = (style: any): IconElement => (
   <Icon {...style} name="info-outline"/>
 );
 
+export const LogOutIcon = (style: any): IconElement => (
+  <Icon {...style} name="log-out-outline"/>
+);
+
 export const MarketIcon = (style?: any): IconElement => (
   <Icon {...style} name="linechart" pack="ant-design"/>
 );

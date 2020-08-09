@@ -20,6 +20,7 @@ import { showAccountListModal } from 'src/actions/ui';
 import {
   AddIcon,
   ImportIcon,
+  LogOutIcon,
   NightIcon,
   SettingsIcon
 } from 'src/components/icons';
@@ -118,6 +119,10 @@ export const MainDrawer = ({ navigation }: any): React.ReactElement => {
   };
 
   const handleSettings = async () => {
+    navigation.navigate('Settings');
+  };
+
+  const handleLogOut = async () => {
     await SecureKeychain.resetGenericPassword();
     dispatch(logout());
   };
@@ -154,6 +159,13 @@ export const MainDrawer = ({ navigation }: any): React.ReactElement => {
           accessoryLeft={SettingsIcon}
           onPress={handleSettings}
         />
+        {__DEV__ ? (
+          <DrawerItem
+            title={i18n.t('drawer.log_out')}
+            accessoryLeft={LogOutIcon}
+            onPress={handleLogOut}
+          />
+        ) : <></>}
       </Drawer>
     </SafeAreaLayout>
   );
