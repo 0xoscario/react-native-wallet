@@ -29,7 +29,7 @@ export default ({ navigation }: any): React.ReactElement => {
 
   const getCreateDisabled = () => {
     const name = accountName.trim();
-    return name.length === 0 || creating;
+    return name.length === 0;
   };
 
   const handleAddAccount = () => {
