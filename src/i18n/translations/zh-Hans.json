@@ -29,7 +29,7 @@
 		"strength_good": "强",
     "strength_strong": "极强",
     "must_be_at_least": "至少 {{number}} 个字符",
-    "import_error": "助记词不合法."
+    "import_error": "助记词不合法。"
   },
   "choose_password": {
 		"title": "创建钱包",
@@ -89,7 +89,7 @@
     "paste_keystore": "请粘贴你的 keystore 文件内容",
     "input_keystore_password": "请输入 keystore 密码",
     "import": "导入",
-    "invalid_private_key": "私钥不合法.",
-    "invalid_keystore": "Keystore 不合法或密码错误."
+    "invalid_private_key": "私钥不合法。",
+    "invalid_keystore": "Keystore 不合法或密码错误。"
   }
 }
