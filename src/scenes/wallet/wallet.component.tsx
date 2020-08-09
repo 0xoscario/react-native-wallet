@@ -46,19 +46,23 @@ export const WalletScreen = (props: any): React.ReactElement => {
     />
   );
 
-  const renderOverflowMenu = () => (
-    <OverflowMenu
-      // hack UI Kitten BUG while using Android translucent StatusBar
-      style={Platform.OS === 'android' ? { marginTop: insets.top } : {}}
-      visible={menuVisible}
-      anchor={renderMoreAction}
-      placement="bottom end"
-      onBackdropPress={() => setMenuVisible(false)}
-    >
-      <MenuItem title='ADD TOKENS'/>
-      <MenuItem title='ADD COLLECTIBLES'/>
-    </OverflowMenu>
-  );
+  const renderOverflowMenu = () => {
+    const hackStyle = Platform.OS === 'android' ? { marginTop: insets.top } : {};
+
+    return (
+      <OverflowMenu
+        // hack UI Kitten BUG while using Android translucent StatusBar
+        style={[styles.menu, hackStyle]}
+        visible={menuVisible}
+        anchor={renderMoreAction}
+        placement="bottom end"
+        onBackdropPress={() => setMenuVisible(false)}
+      >
+        <MenuItem title='ADD TOKENS'/>
+        <MenuItem title='ADD COLLECTIBLES'/>
+      </OverflowMenu>
+    );
+  };
 
   const renderSubtitle = (props?: TextProps) => {
     return (
@@ -92,6 +96,9 @@ export const WalletScreen = (props: any): React.ReactElement => {
 };
 
 const styles = StyleSheet.create({
+  menu: {
+    minWidth: 180,
+  },
   title: {
     textAlign: 'center',
   },
