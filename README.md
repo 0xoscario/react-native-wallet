@@ -1,9 +1,6 @@
-# ZMWallet
+# React Native Mobile Wallet
 
-ZMWallet is a mobile web browser that provides easy access to websites that use the [Ethereum](https://ethereum.org/) blockchain.
-
-## ZMWallet Mobile
-
+This is a mobile web browser that provides easy access to websites that use the [Ethereum](https://ethereum.org/) blockchain.
 ### Building Locally
 
 The code is built using React-Native and running code locally requires a Mac or Linux OS.
@@ -21,8 +18,8 @@ sudo gem install cocoapods
 - Clone this repo and install our dependencies:
 
 ```bash
-git clone ...
-cd zmwallet-mobile
+git clone https://github.com/0xBlockchain/react-native-wallet.git
+cd react-native-wallet
 yarn install # this will run a lengthy postinstall flow
 cd ios && pod install && cd .. # install pods for iOS
 ```
@@ -39,10 +36,9 @@ cd ios && pod install && cd .. # install pods for iOS
 ```bash
 yarn run android
 ```
-
 #### iOS
 
-- Fix ***Copy Pods Resources*** error. Select [zhimakaimen]->[TARGETS]->[zhimakaimen]->[Build Phases] in XCode, and remove *.ttf from [Input Files] & [Output Files] of [Copy Pods Resources] section.
+- Fix ***Copy Pods Resources*** error. Select [TARGETS]->[Build Phases] in XCode, and remove *.ttf from [Input Files] & [Output Files] of [Copy Pods Resources] section.
 
 - Fix ***duplicate symbols*** error. Select [Pods]->[TARGETS]->[react-native-udp]->[Build Phases] in XCode, and remove GCDAsyncUdpSocket.m from [Compile Sources] section. Select [Pods]->[TARGETS]->[TcpSockets]->[Build Phases] in XCode, and remove GCDAsyncUdpSocket.m from [Compile Sources] section.
 

@@ -29,7 +29,7 @@
 		"strength_good": "強",
     "strength_strong": "極強",
     "must_be_at_least": "至少 {{number}} 個字符",
-    "import_error": "助記詞錯誤."
+    "import_error": "助記詞錯誤。"
   },
   "choose_password": {
 		"title": "創建錢包",
@@ -89,7 +89,7 @@
     "paste_keystore": "請貼上 keystore 文件內容",
     "input_keystore_password": "請輸入 keystore 密碼",
     "import": "匯入",
-    "invalid_private_key": "私鑰錯誤.",
-    "invalid_keystore": "Keystore 或密碼錯誤."
+    "invalid_private_key": "私鑰錯誤。",
+    "invalid_keystore": "Keystore 或密碼錯誤。"
   }
 }
